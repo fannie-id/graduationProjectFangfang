@@ -19,8 +19,6 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
-
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -36,6 +34,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
