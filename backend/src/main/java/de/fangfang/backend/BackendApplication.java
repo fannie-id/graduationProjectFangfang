@@ -1,4 +1,4 @@
-package de.neuefische.backend;
+package de.fangfang.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
