@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96504a76-565f-4afe-a705-587b6ae83db1" name="Changes" comment="add fly toml">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/model/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/model/Deed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/repository/DeedRepo.java" afterDir="false" />
+    <list default="true" id="96504a76-565f-4afe-a705-587b6ae83db1" name="Changes" comment="Add getAllDeep backend, Add unit &amp; integration test">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/controller/DeedController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/service/DeedService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/de/fangfang/backend/controller/DeedControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/de/fangfang/backend/service/DeedServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/de/neuefische/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/BackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/de/neuefische/backend/BackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/de/fangfang/backend/BackendApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/model/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/model/Deed.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/model/Deed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/repository/DeedRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/de/fangfang/backend/repository/DeedRepo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +25,17 @@
       <list>
         <option value="Record" />
         <option value="Enum" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
@@ -64,6 +73,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "jdk.selected.JAVA_MODULE": "19",
     "last_opened_file_path": "/Users/fangfangwang/Desktop/JAVA/graduationProjectFangfang/backend/src/main/resources/static",
     "node.js.detected.package.eslint": "true",
@@ -73,6 +84,7 @@
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "spring.configuration.checksum": "b43fdd98b1fd705ae4c3a10cf25aad8a",
     "ts.external.directory.path": "/Users/fangfangwang/Desktop/JAVA/graduationProjectFangfang/frontend/node_modules/typescript/lib"
   }
 }]]></component>
@@ -80,10 +92,56 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/src/main/resources/static" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="de.fangfang.backend.service" />
+      <recent name="de.fangfang.backend.controller" />
+    </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BackendApplication">
+  <component name="RunManager" selected="JUnit.DeedServiceTest.listAllDeeds_except_emptyList">
+    <configuration name="DeedControllerTest.getAllDeeds_expect_empty_list" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.fangfang.backend.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.fangfang.backend.controller" />
+      <option name="MAIN_CLASS_NAME" value="de.fangfang.backend.controller.DeedControllerTest" />
+      <option name="METHOD_NAME" value="getAllDeeds_expect_empty_list" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeedServiceTest.listAllDeeds_except_emptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.fangfang.backend.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.fangfang.backend.service" />
+      <option name="MAIN_CLASS_NAME" value="de.fangfang.backend.service.DeedServiceTest" />
+      <option name="METHOD_NAME" value="listAllDeeds_except_emptyList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
+    </configuration>
+    <configuration name="BackendApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="de.fangfang.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="backend" />
@@ -114,6 +172,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DeedServiceTest.listAllDeeds_except_emptyList" />
+        <item itemvalue="JUnit.DeedControllerTest.getAllDeeds_expect_empty_list" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
       </list>
@@ -129,6 +189,7 @@
       <updated>1670928861348</updated>
       <workItem from="1670928863133" duration="5641000" />
       <workItem from="1670951786891" duration="6578000" />
+      <workItem from="1671112192924" duration="4031000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1670930388041</created>
@@ -179,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671047176574</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add Model Deep, Adresse">
+      <created>1671102562658</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671102562658</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +274,8 @@
     <MESSAGE value="set docker" />
     <MESSAGE value="add fly CD" />
     <MESSAGE value="add fly toml" />
-    <option name="LAST_COMMIT_MESSAGE" value="add fly toml" />
+    <MESSAGE value="Add Model Deep, Adresse" />
+    <MESSAGE value="Add getAllDeep backend, Add unit &amp; integration test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add getAllDeep backend, Add unit &amp; integration test" />
   </component>
 </project>
