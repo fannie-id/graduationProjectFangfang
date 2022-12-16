@@ -6,9 +6,3 @@ export type Deed = {
     address: Address,
     karmaPoint: number,
 }
-
-export type NewDeed = {
-    description: string,
-    address: Address,
-    karmaPoint: number,
-}

@@ -1,4 +1,5 @@
 import React from 'react';
+import DeedsList from "./components/DeedsList";
 
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
+        <DeedsList/>
     </div>
   );
 }
