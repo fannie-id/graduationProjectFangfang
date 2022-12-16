@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96504a76-565f-4afe-a705-587b6ae83db1" name="Changes" comment="Add getAllDeep backend, Add unit &amp; integration test">
-      <change afterPath="$PROJECT_DIR$/frontend/src/api/api.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/DeedCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/DeedsList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useDeeds.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/model/Address.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/model/Deed.ts" afterDir="false" />
+    <list default="true" id="96504a76-565f-4afe-a705-587b6ae83db1" name="Changes" comment="Add mongodb und flapdoodl">
+      <change afterPath="$PROJECT_DIR$/backend/src/test/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/model/Deed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/model/Deed.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +144,9 @@
     </configuration>
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
+      <envs>
+        <env name="MONGO_URL" value="mongodb://localhost:27017" />
+      </envs>
       <module name="backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="de.fangfang.backend.BackendApplication" />
       <method v="2">
@@ -161,11 +163,18 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Debug Application" />
+      <item itemvalue="JUnit.DeedControllerTest.getAllDeeds_expect_empty_list" />
+      <item itemvalue="JUnit.DeedServiceTest.listAllDeeds_except_emptyList" />
+      <item itemvalue="npm.start" />
+      <item itemvalue="Spring Boot.BackendApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
-        <item itemvalue="JUnit.DeedServiceTest.listAllDeeds_except_emptyList" />
         <item itemvalue="JUnit.DeedControllerTest.getAllDeeds_expect_empty_list" />
+        <item itemvalue="JUnit.DeedServiceTest.listAllDeeds_except_emptyList" />
       </list>
     </recent_temporary>
   </component>
@@ -182,6 +191,7 @@
       <workItem from="1671112192924" duration="6908000" />
       <workItem from="1671140994162" duration="148000" />
       <workItem from="1671141150393" duration="898000" />
+      <workItem from="1671178022193" duration="6966000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1670930388041</created>
@@ -246,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671117911854</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add frontend">
+      <created>1671178391614</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671178391614</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,6 +292,20 @@
     <MESSAGE value="add fly toml" />
     <MESSAGE value="Add Model Deep, Adresse" />
     <MESSAGE value="Add getAllDeep backend, Add unit &amp; integration test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add getAllDeep backend, Add unit &amp; integration test" />
+    <MESSAGE value="Add frontend" />
+    <MESSAGE value="Add mongodb und flapdoodl" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add mongodb und flapdoodl" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/api/api.tsx</url>
+          <line>3</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
