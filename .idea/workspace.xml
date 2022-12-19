@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96504a76-565f-4afe-a705-587b6ae83db1" name="Changes" comment="Add mongodb und flapdoodl">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/resources/application.properties" afterDir="false" />
+    <list default="true" id="96504a76-565f-4afe-a705-587b6ae83db1" name="Changes" comment="Add Deed-details">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/model/Deed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/model/Deed.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +99,7 @@
       <recent name="de.fangfang.backend.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Spring Boot.BackendApplication">
     <configuration name="DeedControllerTest.getAllDeeds_expect_empty_list" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend" />
       <extension name="coverage">
@@ -191,7 +184,7 @@
       <workItem from="1671112192924" duration="6908000" />
       <workItem from="1671140994162" duration="148000" />
       <workItem from="1671141150393" duration="898000" />
-      <workItem from="1671178022193" duration="6966000" />
+      <workItem from="1671178022193" duration="12717000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1670930388041</created>
@@ -263,7 +256,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671178391614</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add mongodb und flapdoodl">
+      <created>1671195303074</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671195303074</updated>
+    </task>
+    <task id="LOCAL-00012" summary="dix local-datenbank verbindung">
+      <created>1671200840240</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671200840240</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add Deed-details">
+      <created>1671201615929</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671201615929</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +308,9 @@
     <MESSAGE value="Add getAllDeep backend, Add unit &amp; integration test" />
     <MESSAGE value="Add frontend" />
     <MESSAGE value="Add mongodb und flapdoodl" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add mongodb und flapdoodl" />
+    <MESSAGE value="dix local-datenbank verbindung" />
+    <MESSAGE value="Add Deed-details" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Deed-details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
