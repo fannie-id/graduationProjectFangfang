@@ -12,8 +12,9 @@ import static org.mockito.Mockito.mock;
 
 class DeedServiceTest {
     DeedRepo deedRepo = mock(DeedRepo.class);
+    UuidGeneratorService uuidGeneratorService = mock(UuidGeneratorService.class);
+    DeedService deedService = new DeedService(deedRepo, uuidGeneratorService);
 
-    DeedService deedService = new DeedService(deedRepo);
     @Test
     void listAllDeeds_except_emptyList() {
         List<Deed> expected = new ArrayList<>();
