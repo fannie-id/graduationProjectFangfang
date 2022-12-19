@@ -4,5 +4,5 @@ export type Deed = {
     id:string,
     description: string,
     address: Address,
-    karmaPoint: number,
+    karmaPoints: number,
 }
