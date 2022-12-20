@@ -1,11 +1,9 @@
 package de.fangfang.backend.controller;
 
 import de.fangfang.backend.model.Deed;
+import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.service.DeedService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +22,8 @@ public class DeedController {
     }
 
     @PostMapping
-    public Deed addDeed(Deed newDeed){
-
-        return deedService.addDeed(newDeed);
+    public Deed addDeed(@RequestBody DeedDTO newDeed){
+        Deed deedToSave = new Deed(newDeed);
+        return deedService.addDeed(deedToSave);
     }
 }

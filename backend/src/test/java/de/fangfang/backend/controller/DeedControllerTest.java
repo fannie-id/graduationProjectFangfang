@@ -40,12 +40,11 @@ class DeedControllerTest {
     }
     @Test
     @DirtiesContext
-    void addDeed_expect_Deed() throws Exception {
+    void addDeed_expect_correct_Deed() throws Exception {
         MvcResult response = mvc.perform(post(DeepEndPoint)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
-                        "id":"0",
                         "description":"max",
                         "address":{},
                         "karmaPoints":2
