@@ -11,12 +11,8 @@ public record Deed(
         Address address,
         int karmaPoints
 ) {
-        Deed(
-                String description,
-                Address address,
-                int karmaPoints
-        ) {
-                this(null, description, address, karmaPoints);
+        public Deed(DeedDTO deedDTO){
+                this(null, deedDTO.description(), deedDTO.address(), deedDTO.karmaPoints());
         }
 
 
