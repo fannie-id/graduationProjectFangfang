@@ -1,5 +1,5 @@
 import React from 'react';
-import DeedsList from "./components/DeedsList";
+import DeedApp from "./components/DeedApp";
 
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-        <DeedsList/>
+        <DeedApp/>
     </div>
   );
 }

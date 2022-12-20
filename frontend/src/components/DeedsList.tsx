@@ -1,13 +1,16 @@
 import DeedCard from "./DeedCard";
-import useDeeds from "../hooks/useDeeds";
+import {Deed} from "../model/Deed";
+type DeedsListProps ={
+    deeds: Deed[]
+}
+export default function DeedsList(props:DeedsListProps){
 
-export default function DeedsList(){
-    const{deeds} = useDeeds()
+    const allDeeds = props.deeds.map(deed=><DeedCard key={deed.id} deed={deed}/>)
 
 
     return(
       <div>
-          {deeds.map(deed=><DeedCard key={deed.id} deed={deed}/>)}
+          {allDeeds}
       </div>
     )
 }

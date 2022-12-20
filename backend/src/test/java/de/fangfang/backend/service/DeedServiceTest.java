@@ -28,12 +28,13 @@ class DeedServiceTest {
 
     @Test
     void addDeed_except_validDeed(){
-        DeedDTO deedToSave = new DeedDTO("description",null,4);
-        Deed expected = new Deed(deedToSave);
+        DeedDTO deedDTO = new DeedDTO("description",null,4);
+        String id = uuidGeneratorService.generateUuid();
+        Deed expected = deedDTO.withId(id);
         when(deedRepo.save(expected)).thenReturn(expected);
 
 
-        Deed result = deedService.addDeed(expected);
+        Deed result = deedService.addDeed(deedDTO);
 
         assertThat(result,is(expected));
         verify(deedRepo).save(expected);

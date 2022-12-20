@@ -11,14 +11,6 @@ public record Deed(
         Address address,
         int karmaPoints
 ) {
-        public Deed(DeedDTO deedDTO){
-                this(null, deedDTO.description(), deedDTO.address(), deedDTO.karmaPoints());
-        }
-
-
-        public Deed withId(String id) {
-                return new Deed(id, description, address, karmaPoints);
-        }
 
 }
 
