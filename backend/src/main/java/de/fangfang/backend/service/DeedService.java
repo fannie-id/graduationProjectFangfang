@@ -1,6 +1,7 @@
 package de.fangfang.backend.service;
 
 import de.fangfang.backend.model.Deed;
+import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.repository.DeedRepo;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,8 @@ public class DeedService {
         return deedRepo.findAll();
     }
 
-    public Deed addDeed(Deed newDeed){
+    public Deed addDeed(DeedDTO newDeed){
+
         String id = uuidGeneratorService.generateUuid();
         Deed deedToSave = newDeed.withId(id);
 

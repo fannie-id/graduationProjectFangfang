@@ -23,7 +23,6 @@ public class DeedController {
 
     @PostMapping
     public Deed addDeed(@RequestBody DeedDTO newDeed){
-        Deed deedToSave = new Deed(newDeed);
-        return deedService.addDeed(deedToSave);
+        return deedService.addDeed(newDeed);
     }
 }
