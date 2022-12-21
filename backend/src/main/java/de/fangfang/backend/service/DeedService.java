@@ -6,6 +6,7 @@ import de.fangfang.backend.repository.DeedRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeedService {
@@ -22,10 +23,18 @@ public class DeedService {
         return deedRepo.findAll();
     }
 
+
+    public Optional<Deed> getDeedById(String id){
+        return deedRepo.findById(id);
+
+    }
+
     public Deed addDeed(DeedDTO newDeed){
         String id = idGeneratorService.generateUuid();
         Deed deedToSave = newDeed.withId(id);
 
         return deedRepo.save(deedToSave);
     }
+
+
 }
