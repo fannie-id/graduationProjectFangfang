@@ -42,7 +42,6 @@ export default function AddDeed(props: AddDeedProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        console.log("deed: ", deed)
         props.addDeed(deed)
 
     }
