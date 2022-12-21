@@ -12,14 +12,13 @@ export default function useDeeds(){
 
     function addNewDeed(newDeed:NewDeed){
         addDeed(newDeed)
-            .then((response=>{
-                setDeeds(prevState => {
-                    return[...prevState,response.data]
+            .then((savedDeed=>{
+                setDeeds(prevDeeds => {
+                    return[...prevDeeds,savedDeed]
                 })
             }))
-
+            .catch(console.error)
     }
-
 
     return{deeds,addNewDeed}
 }

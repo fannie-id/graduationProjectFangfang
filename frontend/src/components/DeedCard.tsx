@@ -5,6 +5,7 @@ type DeedCardProps = {
 }
 
 export default function DeedCard(props: DeedCardProps) {
+
 return(
     <div>
         {"description: "+ props.deed.description +" karmaPoints: "+props.deed.karmaPoints+" Address: "+props.deed.address}

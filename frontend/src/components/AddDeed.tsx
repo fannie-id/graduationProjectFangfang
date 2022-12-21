@@ -9,7 +9,7 @@ type AddDeedProps = {
 export default function AddDeed(props: AddDeedProps) {
     const address:Address ={
         "street": "",
-        "id": "",
+        "houseNumber": "",
         "zip": "",
         "city": "",
         "name": "",
@@ -42,6 +42,7 @@ export default function AddDeed(props: AddDeedProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        console.log("deed: ", deed)
         props.addDeed(deed)
 
     }
@@ -51,7 +52,7 @@ export default function AddDeed(props: AddDeedProps) {
             <form onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
-                    required={true}
+
                     name={"description"}
                     value={deed.description}
                     label="Description"
@@ -64,7 +65,7 @@ export default function AddDeed(props: AddDeedProps) {
 
                 <TextField
                     fullWidth
-                    required={true}
+
                     name={"street"}
                     value={deed.address.street}
                     label="Street"
@@ -73,16 +74,16 @@ export default function AddDeed(props: AddDeedProps) {
                 />
                 <TextField
                     fullWidth
-                    required={true}
-                    name={"id"}
-                    value={deed.address.id}
-                    label="ID"
-                    placeholder="ID"
+
+                    name={"houseNumber"}
+                    value={deed.address.houseNumber}
+                    label="house number"
+                    placeholder="house number"
                     onChange={handleTextChangeAddress}
                 />
                 <TextField
                     fullWidth
-                    required={true}
+
                     name={"zip"}
                     value={deed.address.zip}
                     label="ZIP"
@@ -91,7 +92,7 @@ export default function AddDeed(props: AddDeedProps) {
                 />
                 <TextField
                     fullWidth
-                    required={true}
+
                     name={"city"}
                     value={deed.address.city}
                     label="City"
@@ -101,7 +102,7 @@ export default function AddDeed(props: AddDeedProps) {
 
                 <TextField
                     fullWidth
-                    required={true}
+
                     name={"name"}
                     value={deed.address.name}
                     label="Name"
@@ -111,7 +112,7 @@ export default function AddDeed(props: AddDeedProps) {
 
                 <TextField
                     fullWidth
-                    required={true}
+
                     name={"karmaPoints"}
                     value={deed.karmaPoints}
                     label="Karma Points"
