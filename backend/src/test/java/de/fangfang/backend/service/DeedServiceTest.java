@@ -1,5 +1,6 @@
 package de.fangfang.backend.service;
 
+import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.repository.DeedRepo;
@@ -28,7 +29,8 @@ class DeedServiceTest {
 
     @Test
     void addDeed_except_validDeed(){
-        DeedDTO deedDTO = new DeedDTO("description",null,4);
+        Address address = new Address("wallstreet","2","48939","newyork","Fangfang");
+        DeedDTO deedDTO = new DeedDTO("description",address,4);
         String id = uuidGeneratorService.generateUuid();
         Deed expected = deedDTO.withId(id);
         when(deedRepo.save(expected)).thenReturn(expected);
