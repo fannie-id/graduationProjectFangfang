@@ -21,18 +21,18 @@ export default function AddDeed(props: AddDeedProps) {
     }
     const [deed, setDeed] = useState<NewDeed>(emptyDeed)
 
-    function handleTextChange(event: ChangeEvent<HTMLInputElement>) {
+    function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
         setDeed((prevState) => ({...prevState, [nameOfInput]: inputValue}))
     }
 
-    function handleTextChangeAddress(event: ChangeEvent<HTMLInputElement>) {
+    function handleFormAddressChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
         setDeed((prevState) => {
             const newState = { ...prevState }
-            // @ts-ignore
+                // @ts-ignore nested object
                 newState.address[nameOfInput]= inputValue
             return newState
         }
@@ -57,7 +57,7 @@ export default function AddDeed(props: AddDeedProps) {
                     value={deed.description}
                     label="Description"
                     placeholder="Description"
-                    onChange={handleTextChange}
+                    onChange={handleFormChange}
                     multiline
                     rows={4}
                 />
@@ -65,12 +65,11 @@ export default function AddDeed(props: AddDeedProps) {
 
                 <TextField
                     fullWidth
-
                     name={"street"}
                     value={deed.address.street}
                     label="Street"
                     placeholder="Street"
-                    onChange={handleTextChangeAddress}
+                    onChange={handleFormAddressChange}
                 />
                 <TextField
                     fullWidth
@@ -79,7 +78,7 @@ export default function AddDeed(props: AddDeedProps) {
                     value={deed.address.houseNumber}
                     label="house number"
                     placeholder="house number"
-                    onChange={handleTextChangeAddress}
+                    onChange={handleFormAddressChange}
                 />
                 <TextField
                     fullWidth
@@ -88,7 +87,7 @@ export default function AddDeed(props: AddDeedProps) {
                     value={deed.address.zip}
                     label="ZIP"
                     placeholder="ZIP"
-                    onChange={handleTextChangeAddress}
+                    onChange={handleFormAddressChange}
                 />
                 <TextField
                     fullWidth
@@ -97,7 +96,7 @@ export default function AddDeed(props: AddDeedProps) {
                     value={deed.address.city}
                     label="City"
                     placeholder="City"
-                    onChange={handleTextChangeAddress}
+                    onChange={handleFormAddressChange}
                 />
 
                 <TextField
@@ -107,7 +106,7 @@ export default function AddDeed(props: AddDeedProps) {
                     value={deed.address.name}
                     label="Name"
                     placeholder="Name"
-                    onChange={handleTextChangeAddress}
+                    onChange={handleFormAddressChange}
                 />
 
                 <TextField
@@ -117,7 +116,7 @@ export default function AddDeed(props: AddDeedProps) {
                     value={deed.karmaPoints}
                     label="Karma Points"
                     placeholder="Karma Points"
-                    onChange={handleTextChange}
+                    onChange={handleFormChange}
                 />
 
                 <Button type="submit">
