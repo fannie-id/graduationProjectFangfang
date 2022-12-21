@@ -20,7 +20,7 @@ class DeedServiceTest {
     DeedService deedService = new DeedService(deedRepo, uuidGeneratorService);
 
     @Test
-    void listAllDeeds_except_emptyList() {
+    void listAllDeeds_expect_emptyList() {
         List<Deed> expected = new ArrayList<>();
         List<Deed> result = deedService.listAllDeeds();
         assertEquals(expected,result);
