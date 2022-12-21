@@ -23,7 +23,6 @@ public class DeedService {
     }
 
     public Deed addDeed(DeedDTO newDeed){
-
         String id = uuidGeneratorService.generateUuid();
         Deed deedToSave = newDeed.withId(id);
 
