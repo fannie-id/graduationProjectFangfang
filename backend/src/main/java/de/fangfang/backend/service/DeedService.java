@@ -10,12 +10,12 @@ import java.util.List;
 @Service
 public class DeedService {
     private final DeedRepo deedRepo;
-    private final UuidGeneratorService uuidGeneratorService;
+    private final IdGeneratorService idGeneratorService;
 
 
-    public DeedService(DeedRepo deedRepo, UuidGeneratorService uuidGeneratorService) {
+    public DeedService(DeedRepo deedRepo, IdGeneratorService idGeneratorService) {
         this.deedRepo = deedRepo;
-        this.uuidGeneratorService = uuidGeneratorService;
+        this.idGeneratorService = idGeneratorService;
     }
 
     public List<Deed> listAllDeeds(){
@@ -23,7 +23,7 @@ public class DeedService {
     }
 
     public Deed addDeed(DeedDTO newDeed){
-        String id = uuidGeneratorService.generateUuid();
+        String id = idGeneratorService.generateUuid();
         Deed deedToSave = newDeed.withId(id);
 
         return deedRepo.save(deedToSave);

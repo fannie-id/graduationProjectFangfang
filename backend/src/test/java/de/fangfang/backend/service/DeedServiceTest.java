@@ -9,36 +9,35 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class DeedServiceTest {
     DeedRepo deedRepo = mock(DeedRepo.class);
-    UuidGeneratorService uuidGeneratorService = mock(UuidGeneratorService.class);
-    DeedService deedService = new DeedService(deedRepo, uuidGeneratorService);
+    IdGeneratorService idGeneratorService = mock(IdGeneratorService.class);
+    DeedService deedService = new DeedService(deedRepo, idGeneratorService);
 
     @Test
     void listAllDeeds_expect_emptyList() {
         List<Deed> expected = new ArrayList<>();
         List<Deed> result = deedService.listAllDeeds();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
-    void addDeed_except_validDeed(){
-        Address address = new Address("wallstreet","2","48939","newyork","Fangfang");
-        DeedDTO deedDTO = new DeedDTO("description",address,4);
-        String id = uuidGeneratorService.generateUuid();
-        Deed expected = deedDTO.withId(id);
+    void addDeed_expect_validDeed() {
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        DeedDTO deedDTO = new DeedDTO("description", address, 4);
+        when(idGeneratorService.generateUuid()).thenReturn("123");
+        Deed expected = new Deed(idGeneratorService.generateUuid(), "description", address, 4);
         when(deedRepo.save(expected)).thenReturn(expected);
 
 
         Deed result = deedService.addDeed(deedDTO);
 
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
         verify(deedRepo).save(expected);
     }
 }

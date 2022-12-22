@@ -2,6 +2,7 @@ import {Box, Button, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {NewDeed} from "../model/Deed";
 import {Address} from "../model/Address";
+
 type AddDeedProps = {
     addDeed: (deedToAdd: NewDeed) => void
 }
@@ -51,7 +52,6 @@ export default function AddDeed(props: AddDeedProps) {
             <form onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
-
                     name={"description"}
                     value={deed.description}
                     label="Description"
@@ -60,7 +60,6 @@ export default function AddDeed(props: AddDeedProps) {
                     multiline
                     rows={4}
                 />
-
 
                 <TextField
                     fullWidth
@@ -72,16 +71,14 @@ export default function AddDeed(props: AddDeedProps) {
                 />
                 <TextField
                     fullWidth
-
                     name={"houseNumber"}
                     value={deed.address.houseNumber}
-                    label="house number"
-                    placeholder="house number"
+                    label="House Number"
+                    placeholder="House Number"
                     onChange={handleFormAddressChange}
                 />
                 <TextField
                     fullWidth
-
                     name={"zip"}
                     value={deed.address.zip}
                     label="ZIP"
@@ -90,7 +87,6 @@ export default function AddDeed(props: AddDeedProps) {
                 />
                 <TextField
                     fullWidth
-
                     name={"city"}
                     value={deed.address.city}
                     label="City"
@@ -100,7 +96,6 @@ export default function AddDeed(props: AddDeedProps) {
 
                 <TextField
                     fullWidth
-
                     name={"name"}
                     value={deed.address.name}
                     label="Name"
@@ -110,7 +105,6 @@ export default function AddDeed(props: AddDeedProps) {
 
                 <TextField
                     fullWidth
-
                     name={"karmaPoints"}
                     value={deed.karmaPoints}
                     label="Karma Points"
