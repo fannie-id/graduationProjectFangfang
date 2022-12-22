@@ -8,6 +8,10 @@ export function getDeeds():Promise<Deed[]>{
         .then(response=>response.data)
 }
 
+export function getDeedById(id: string): Promise<Deed> {
+    return axios.get(deedEndPoint + id)
+        .then(response => response.data)
+}
 
 export function addDeed(newDeed:NewDeed):Promise<Deed>{
     return axios.post(deedEndPoint,newDeed)
