@@ -11,10 +11,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,32 +30,39 @@ class DeedControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    void getAllDeeds_expect_empty_list() throws Exception{
+    void getAllDeeds_expect_empty_list() throws Exception {
         mvc.perform(get(DeepEndPoint))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         []
                         """));
     }
+
     @Test
     @DirtiesContext
     void addDeed_expect_correct_Deed() throws Exception {
         MvcResult response = mvc.perform(post(DeepEndPoint)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("""
-                        {
-                        "description":"max",
-                        "address":{},
-                        "karmaPoints":2
-                        }
-                        """)
-        )
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "description":"max",
+                                "address":{
+                                    "street": "wallstreet",
+                                    "houseNumber": "2",
+                                    "zip": "48939",
+                                    "city": "New York City",
+                                    "name": "Fangfang"
+                                },
+                                "karmaPoints":2
+                                }
+                                """)
+                )
                 .andExpect(status().isOk())
                 .andReturn();
         String content = response.getResponse().getContentAsString();
-        Deed result = objectMapper.readValue(content,Deed.class);
-        Deed expected = new Deed(result.id(), result.description(),result.address(),result.karmaPoints());
-        assertEquals(result,expected);
+        Deed result = objectMapper.readValue(content, Deed.class);
+
+        assertFalse(result.id().isEmpty());
 
     }
 
