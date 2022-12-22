@@ -19,17 +19,21 @@ public class DeedService {
         this.idGeneratorService = idGeneratorService;
     }
 
-    public List<Deed> listAllDeeds(){
+    public List<Deed> listAllDeeds() {
         return deedRepo.findAll();
     }
 
 
-    public Optional<Deed> getDeedById(String id){
-        return deedRepo.findById(id);
+    public Deed getDeedById(String id) {
+        Optional<Deed> optionalDeed = deedRepo.findById(id);
+        if (optionalDeed.isPresent()) {
+            return optionalDeed.get();
+        }
+        throw new IllegalArgumentException("Id not found");
 
     }
 
-    public Deed addDeed(DeedDTO newDeed){
+    public Deed addDeed(DeedDTO newDeed) {
         String id = idGeneratorService.generateUuid();
         Deed deedToSave = newDeed.withId(id);
 

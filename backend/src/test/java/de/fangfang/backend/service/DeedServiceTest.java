@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -24,6 +25,19 @@ class DeedServiceTest {
         List<Deed> expected = new ArrayList<>();
         List<Deed> result = deedService.listAllDeeds();
         assertEquals(expected, result);
+    }
+
+    @Test
+    void getDeedById_expect_validDeed() {
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        when(idGeneratorService.generateUuid()).thenReturn("123");
+        Deed expected = new Deed(idGeneratorService.generateUuid(), "description", address, 4);
+        when(deedRepo.findById("123")).thenReturn(Optional.of(expected));
+
+
+        Deed result = deedService.getDeedById("123");
+
+        assertThat(result, is(expected));
     }
 
     @Test
