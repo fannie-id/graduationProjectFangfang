@@ -6,7 +6,6 @@ import de.fangfang.backend.service.DeedService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deeds")
@@ -18,11 +17,14 @@ public class DeedController {
     }
 
     @GetMapping
-    public List<Deed> getAllDeeds(){
+    public List<Deed> getAllDeeds() {
         return deedService.listAllDeeds();
     }
+
     @GetMapping("/{id}")
-    public Optional<Deed> getDeedById(@PathVariable String id){return deedService.getDeedById(id);}
+    public Deed getDeedById(@PathVariable String id) {
+        return deedService.getDeedById(id);
+    }
 
     @PostMapping
     public Deed addDeed(@RequestBody DeedDTO newDeed){
