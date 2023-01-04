@@ -1,4 +1,4 @@
-import {Deed} from "../model/Deed";
+import {Deed, NewDeed} from "../model/Deed";
 import {useEffect, useState} from "react";
 import {getDeedById} from "../api/api-calls";
 
@@ -34,6 +34,11 @@ export default function useDeed(id: string | undefined) {
             .catch(console.error)
     }
 
-    return {getDeed}
+
+    function editDeed(deed: Deed | NewDeed) {
+
+    }
+
+    return {getDeed, editDeed}
 
 }

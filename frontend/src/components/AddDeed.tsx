@@ -1,63 +1,36 @@
-import {Box, Button} from "@mui/material";
-import {ChangeEvent, FormEvent, useState} from "react";
+import {Box} from "@mui/material";
 import {NewDeed} from "../model/Deed";
 import {Address} from "../model/Address";
-import EditForm from "./EditForm";
+import DeedForm from "./DeedForm";
+import useDeeds from "../hooks/useDeeds";
 
-type AddDeedProps = {
-    addDeed: (deedToAdd: NewDeed) => void
-}
 
-export default function AddDeed(props: AddDeedProps) {
+export default function AddDeed() {
+
+    const {addNewDeed} = useDeeds()
     const address: Address = {
         "street": "",
         "houseNumber": "",
         "zip": "",
         "city": "",
-        "name": "",
+        "name": ""
     }
     const emptyDeed: NewDeed = {
         "description": "",
         "address": address,
         "karmaPoints": 0
     }
-    const [deed, setDeed] = useState<NewDeed>(emptyDeed)
-
-    function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
-        const inputValue = event.target.value
-        const nameOfInput = event.target.name
-        setDeed((prevState) => ({...prevState, [nameOfInput]: inputValue}))
-    }
-
-    function handleFormAddressChange(event: ChangeEvent<HTMLInputElement>) {
-        const inputValue = event.target.value
-        const nameOfInput = event.target.name
-        setDeed((prevState) => {
-                const newState = {...prevState}
-                // @ts-ignore nested object
-                newState.address[nameOfInput] = inputValue
-                return newState
-            }
-        )
-    }
 
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        props.addDeed(deed)
-
+    function submitDeed(deed: NewDeed) {
+        addNewDeed(deed)
     }
 
     return (
         <Box>
-            <form onSubmit={handleSubmit}>
-                <EditForm deed={deed}
-                          handleFormChange={handleFormChange}
-                          handleFormAddressChange={handleFormAddressChange}/>
-                <Button type="submit">
-                    Add
-                </Button>
-            </form>
+            <DeedForm deed={emptyDeed}
+                      submitDeed={submitDeed}/>
+
 
         </Box>
 
