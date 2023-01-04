@@ -11,7 +11,7 @@ export default function DeedDetail() {
 
     return (
         <div>
-            <p>{getDeed.description}</p>
+            <p>{getDeed.karmaPoints}</p>
         </div>
     )
 

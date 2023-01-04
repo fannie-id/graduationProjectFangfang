@@ -18,6 +18,7 @@ export default function useDeed(id: string | undefined) {
     }
 
     const [getDeed, setGetDeed] = useState<Deed>(emptyDeed)
+
     useEffect(() => {
         if (id) {
             getDeedViaId(id)
@@ -28,6 +29,7 @@ export default function useDeed(id: string | undefined) {
         getDeedById(id)
             .then(data => {
                 setGetDeed(data)
+
             })
             .catch(console.error)
     }

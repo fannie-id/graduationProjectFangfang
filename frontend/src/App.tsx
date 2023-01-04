@@ -15,7 +15,6 @@ function App() {
                     <Route path="/allDeeds/:id" element={<DeedDetail/>}></Route>
                 </Routes>
             </BrowserRouter>
-            <DeedApp/>
         </div>
   );
 }

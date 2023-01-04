@@ -9,7 +9,7 @@ export function getDeeds():Promise<Deed[]>{
 }
 
 export function getDeedById(id: string): Promise<Deed> {
-    return axios.get(deedEndPoint + id)
+    return axios.get(deedEndPoint + "/" + id)
         .then(response => response.data)
 }
 
