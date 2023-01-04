@@ -10,7 +10,7 @@ export default function DeedSpot(props: DeedSpotProps) {
     const navigate = useNavigate()
 
     function handleDeedDetail() {
-        navigate("/deeds/" + props.deed.id)
+        navigate("/allDeeds/" + props.deed.id)
     }
 
     return (
@@ -18,7 +18,7 @@ export default function DeedSpot(props: DeedSpotProps) {
             <Button onClick={handleDeedDetail}>
                 {props.deed.karmaPoints}
             </Button>
-            {"Address: " + props.deed.address}
+            {"Address: " + props.deed.address.street}
         </div>
     )
 
