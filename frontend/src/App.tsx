@@ -1,7 +1,9 @@
 import React from 'react';
 import DeedApp from "./components/DeedApp";
-import DeedDetail from "./components/DeedDetail";
+import ViewDeed from "./components/ViewDeed";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import EditDeed from "./components/EditDeed";
+import AddDeed from "./components/AddDeed";
 
 
 function App() {
@@ -11,8 +13,10 @@ function App() {
             </header>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/allDeeds" element={<DeedApp/>}></Route>
-                    <Route path="/allDeeds/:id" element={<DeedDetail/>}></Route>
+                    <Route path="/deeds" element={<DeedApp/>}></Route>
+                    <Route path="/deeds/add" element={<AddDeed/>}></Route>
+                    <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
+                    <Route path="/deeds/:id/edite" element={<EditDeed/>}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

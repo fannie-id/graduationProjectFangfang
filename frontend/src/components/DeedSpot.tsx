@@ -10,7 +10,7 @@ export default function DeedSpot(props: DeedSpotProps) {
     const navigate = useNavigate()
 
     function handleDeedDetail() {
-        navigate("/allDeeds/" + props.deed.id)
+        navigate("/deeds/" + props.deed.id)
     }
 
     return (

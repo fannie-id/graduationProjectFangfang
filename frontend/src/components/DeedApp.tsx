@@ -1,12 +1,24 @@
 import DeedsList from "./DeedsList";
-import AddDeed from "./AddDeed";
 import useDeeds from "../hooks/useDeeds";
+import {Button} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 export default function DeedApp() {
-    const {deeds, addNewDeed} = useDeeds()
+    const {deeds} = useDeeds()
+    const navigate = useNavigate()
+
+    function handleDeedDetail() {
+        navigate("/deeds/add")
+    }
+
+
     return (<div>
             <DeedsList deeds={deeds}/>
-            <AddDeed addDeed={addNewDeed}/>
+
+            <Button onClick={handleDeedDetail}>
+                Add
+            </Button>
+
         </div>
     )
 }
