@@ -1,14 +1,15 @@
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {NewDeed} from "../model/Deed";
 import {Address} from "../model/Address";
+import EditForm from "./EditForm";
 
 type AddDeedProps = {
     addDeed: (deedToAdd: NewDeed) => void
 }
 
 export default function AddDeed(props: AddDeedProps) {
-    const address:Address ={
+    const address: Address = {
         "street": "",
         "houseNumber": "",
         "zip": "",
@@ -32,11 +33,11 @@ export default function AddDeed(props: AddDeedProps) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
         setDeed((prevState) => {
-            const newState = { ...prevState }
+                const newState = {...prevState}
                 // @ts-ignore nested object
-                newState.address[nameOfInput]= inputValue
-            return newState
-        }
+                newState.address[nameOfInput] = inputValue
+                return newState
+            }
         )
     }
 
@@ -50,68 +51,9 @@ export default function AddDeed(props: AddDeedProps) {
     return (
         <Box>
             <form onSubmit={handleSubmit}>
-                <TextField
-                    fullWidth
-                    name={"description"}
-                    value={deed.description}
-                    label="Description"
-                    placeholder="Description"
-                    onChange={handleFormChange}
-                    multiline
-                    rows={4}
-                />
-
-                <TextField
-                    fullWidth
-                    name={"street"}
-                    value={deed.address.street}
-                    label="Street"
-                    placeholder="Street"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    fullWidth
-                    name={"houseNumber"}
-                    value={deed.address.houseNumber}
-                    label="House Number"
-                    placeholder="House Number"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    fullWidth
-                    name={"zip"}
-                    value={deed.address.zip}
-                    label="ZIP"
-                    placeholder="ZIP"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    fullWidth
-                    name={"city"}
-                    value={deed.address.city}
-                    label="City"
-                    placeholder="City"
-                    onChange={handleFormAddressChange}
-                />
-
-                <TextField
-                    fullWidth
-                    name={"name"}
-                    value={deed.address.name}
-                    label="Name"
-                    placeholder="Name"
-                    onChange={handleFormAddressChange}
-                />
-
-                <TextField
-                    fullWidth
-                    name={"karmaPoints"}
-                    value={deed.karmaPoints}
-                    label="Karma Points"
-                    placeholder="Karma Points"
-                    onChange={handleFormChange}
-                />
-
+                <EditForm deed={deed}
+                          handleFormChange={handleFormChange}
+                          handleFormAddressChange={handleFormAddressChange}/>
                 <Button type="submit">
                     Add
                 </Button>
