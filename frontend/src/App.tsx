@@ -16,7 +16,7 @@ function App() {
                     <Route path="/deeds" element={<DeedApp/>}></Route>
                     <Route path="/deeds/add" element={<AddDeed/>}></Route>
                     <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
-                    <Route path="/deeds/:id/edite" element={<EditDeed/>}></Route>
+                    <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

@@ -3,16 +3,25 @@ import useDeed from "../hooks/useDeed";
 import {Button} from "@mui/material";
 
 export default function ViewDeed() {
+
     const {id} = useParams()
+
+    if (!id) {
+        return <p>id not found</p>
+    }
     const {getDeed} = useDeed(id)
+
+
+    const navigate = useNavigate()
+
     if (!getDeed) {
         return <p>loading</p>
     }
 
-    const navigate = useNavigate()
-
-    function handleDeedDetail() {
-        navigate("/deeds/" + getDeed.id + "/edit/")
+    function handleEditDeed() {
+        if (getDeed) {
+            navigate("/deeds/" + getDeed.id + "/edit")
+        }
     }
 
     return (
@@ -21,7 +30,7 @@ export default function ViewDeed() {
             <p>{getDeed.address.street}</p>
             <p>{getDeed.karmaPoints}</p>
 
-            <Button onClick={handleDeedDetail}>edit</Button>
+            <Button onClick={handleEditDeed}>edit</Button>
         </div>
     )
 

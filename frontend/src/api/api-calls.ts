@@ -13,7 +13,12 @@ export function getDeedById(id: string): Promise<Deed> {
         .then(response => response.data)
 }
 
-export function addDeed(newDeed:NewDeed):Promise<Deed>{
-    return axios.post(deedEndPoint,newDeed)
-        .then(response=>response.data)
+export function addDeed(newDeed: NewDeed): Promise<Deed> {
+    return axios.post(deedEndPoint, newDeed)
+        .then(response => response.data)
+}
+
+export function editDeed(deed: Deed): Promise<Deed> {
+    return axios.put(deedEndPoint + "/" + deed.id, deed)
+        .then(response => response.data)
 }

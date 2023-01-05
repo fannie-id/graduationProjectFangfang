@@ -4,17 +4,20 @@ import DeedForm from "./DeedForm";
 import {Deed, NewDeed} from "../model/Deed";
 
 export default function EditDeed() {
+
     const {id} = useParams()
     const {getDeed, editDeed} = useDeed(id)
     if (!getDeed) {
         return <p>loading</p>
     }
 
+
     function submitDeed(deed: Deed | NewDeed) {
-        editDeed(deed)
+        if (deed.id) {
+            editDeed(deed)
+        }
 
     }
-
 
     return (
         <div>
@@ -22,5 +25,4 @@ export default function EditDeed() {
                       submitDeed={submitDeed}/>
         </div>
     )
-
 }
