@@ -13,6 +13,7 @@ import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 class DeedServiceTest {
@@ -25,6 +26,20 @@ class DeedServiceTest {
         List<Deed> expected = new ArrayList<>();
         List<Deed> result = deedService.listAllDeeds();
         assertEquals(expected, result);
+    }
+
+    @Test
+    void getDeedById_throw_exception() {
+        when(deedRepo.findById("9")).thenReturn(Optional.empty());
+
+        try {
+            deedService.getDeedById("2");
+            fail();
+        } catch (IllegalArgumentException e) {
+            //THEN
+            assertEquals("Id not found", e.getMessage());
+        }
+
     }
 
     @Test
@@ -68,5 +83,20 @@ class DeedServiceTest {
 
         assertThat(result, is(expected));
 
+    }
+
+    @Test
+    void editDeed_throw_exception() {
+        when(deedRepo.findById("9")).thenReturn(Optional.empty());
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        DeedDTO deedDTO = new DeedDTO("new description", address, 4);
+
+        try {
+            deedService.editDeed("2", deedDTO);
+            fail();
+        } catch (IllegalArgumentException e) {
+            //THEN
+            assertEquals("Id not found", e.getMessage());
+        }
     }
 }
