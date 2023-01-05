@@ -5,7 +5,6 @@ import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.repository.DeedRepo;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,14 +58,15 @@ class DeedServiceTest {
     @Test
     void editDeed_expect_validDeed() {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        DeedDTO deedDTO = new DeedDTO("description", address, 4);
-        Deed expected = new Deed("1", "description", address, 4);
-        when(deedRepo.save(Mockito.any(Deed.class))).thenReturn(expected);
+        DeedDTO deedDTO = new DeedDTO("new description", address, 4);
+        Deed old = new Deed("1", "old description", address, 2);
+        Deed expected = new Deed("1", "new description", address, 4);
+        when(deedRepo.findById("1")).thenReturn(Optional.of(old));
+        when(deedRepo.save(expected)).thenReturn(expected);
 
         Deed result = deedService.editDeed("1", deedDTO);
 
         assertThat(result, is(expected));
-        verify(deedRepo).save(expected);
 
     }
 }
