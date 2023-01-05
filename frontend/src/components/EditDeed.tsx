@@ -6,14 +6,20 @@ import {Deed, NewDeed} from "../model/Deed";
 export default function EditDeed() {
 
     const {id} = useParams()
+    if (!id) {
+        return <p>id not found</p>
+    }
     const {getDeed, editDeed} = useDeed(id)
+
+
     if (!getDeed) {
         return <p>loading</p>
     }
 
 
     function submitDeed(deed: Deed | NewDeed) {
-        if (deed.id) {
+
+        if ("id" in deed) {
             editDeed(deed)
         }
 
