@@ -6,9 +6,6 @@ export default function ViewDeed() {
 
     const {id} = useParams()
 
-    if (!id) {
-        return <p>id not found</p>
-    }
     const {getDeed} = useDeed(id)
 
 
