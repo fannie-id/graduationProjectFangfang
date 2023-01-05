@@ -5,12 +5,13 @@ import {ChangeEvent, FormEvent, useState} from "react";
 type DeedFormProps = {
     deed: Deed | NewDeed
     submitDeed: (deed: Deed | NewDeed) => void
-
-
 }
 
 export default function DeedForm(props: DeedFormProps) {
-    const [deed, setDeed] = useState<NewDeed>(props.deed)
+    console.log("props: ", props.deed.address.street)
+    const [deed, setDeed] = useState<Deed | NewDeed>(props.deed)
+
+    console.log("editeDeed: ", deed.address.street)
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
@@ -41,7 +42,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"description"}
-                    value={props.deed.description}
+                    value={deed.description}
                     label="Description"
                     placeholder="Description"
                     onChange={handleFormChange}
@@ -52,7 +53,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"street"}
-                    value={props.deed.address.street}
+                    value={deed.address.street}
                     label="Street"
                     placeholder="Street"
                     onChange={handleFormAddressChange}
@@ -60,7 +61,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"houseNumber"}
-                    value={props.deed.address.houseNumber}
+                    value={deed.address.houseNumber}
                     label="House Number"
                     placeholder="House Number"
                     onChange={handleFormAddressChange}
@@ -68,7 +69,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"zip"}
-                    value={props.deed.address.zip}
+                    value={deed.address.zip}
                     label="ZIP"
                     placeholder="ZIP"
                     onChange={handleFormAddressChange}
@@ -76,7 +77,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"city"}
-                    value={props.deed.address.city}
+                    value={deed.address.city}
                     label="City"
                     placeholder="City"
                     onChange={handleFormAddressChange}
@@ -85,7 +86,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"name"}
-                    value={props.deed.address.name}
+                    value={deed.address.name}
                     label="Name"
                     placeholder="Name"
                     onChange={handleFormAddressChange}
@@ -94,7 +95,7 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     fullWidth
                     name={"karmaPoints"}
-                    value={props.deed.karmaPoints}
+                    value={deed.karmaPoints}
                     label="Karma Points"
                     placeholder="Karma Points"
                     onChange={handleFormChange}

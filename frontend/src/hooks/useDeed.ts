@@ -1,23 +1,10 @@
-import {Deed, NewDeed} from "../model/Deed";
+import {Deed} from "../model/Deed";
 import {useEffect, useState} from "react";
-import {getDeedById} from "../api/api-calls";
+import {editDeed, getDeedById} from "../api/api-calls";
 
-export default function useDeed(id: string | undefined) {
+export default function useDeed(id: string) {
 
-    const emptyDeed: Deed = {
-        id: "",
-        description: "",
-        address: {
-            street: "",
-            houseNumber: "",
-            zip: "",
-            city: "",
-            name: ""
-        },
-        karmaPoints: 0
-    }
-
-    const [getDeed, setGetDeed] = useState<Deed>(emptyDeed)
+    const [getDeed, setGetDeed] = useState<Deed>()
 
     useEffect(() => {
         if (id) {
@@ -35,10 +22,14 @@ export default function useDeed(id: string | undefined) {
     }
 
 
-    function editDeed(deed: Deed | NewDeed) {
-
+    function editDeedViaId(deed: Deed) {
+        editDeed(deed)
+            .then(data => {
+                setGetDeed(data)
+            })
+            .catch(console.error)
     }
 
-    return {getDeed, editDeed}
+    return {getDeed, editDeed: editDeedViaId}
 
 }
