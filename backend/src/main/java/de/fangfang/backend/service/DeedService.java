@@ -41,4 +41,12 @@ public class DeedService {
     }
 
 
+    public Deed editDeed(String id, DeedDTO deed) {
+        Optional<Deed> optionalDeed = deedRepo.findById(id);
+        if (optionalDeed.isPresent()) {
+            Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.karmaPoints());
+            return deedRepo.save(deedToChange);
+        }
+        throw new IllegalArgumentException("Id not found");
+    }
 }
