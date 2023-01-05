@@ -2,7 +2,7 @@ import {Deed} from "../model/Deed";
 import {useEffect, useState} from "react";
 import {editDeed, getDeedById} from "../api/api-calls";
 
-export default function useDeed(id: string) {
+export default function useDeed(id: string | undefined) {
 
     const [getDeed, setGetDeed] = useState<Deed>()
 

@@ -6,9 +6,6 @@ import {Deed, NewDeed} from "../model/Deed";
 export default function EditDeed() {
     const navigate = useNavigate()
     const {id} = useParams()
-    if (!id) {
-        return <p>id not found</p>
-    }
 
     const {getDeed, editDeed} = useDeed(id)
 
