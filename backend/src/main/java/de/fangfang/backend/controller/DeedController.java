@@ -27,7 +27,12 @@ public class DeedController {
     }
 
     @PostMapping
-    public Deed addDeed(@RequestBody DeedDTO newDeed){
+    public Deed addDeed(@RequestBody DeedDTO newDeed) {
         return deedService.addDeed(newDeed);
+    }
+
+    @PutMapping("/{id}")
+    public Deed editDeed(@PathVariable String id, @RequestBody DeedDTO deed) {
+        return deedService.editDeed(id, deed);
     }
 }
