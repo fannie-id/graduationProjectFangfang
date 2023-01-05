@@ -34,7 +34,6 @@ export default function DeedForm(props: DeedFormProps) {
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.submitDeed(deed)
-
     }
 
     return (<Box>
