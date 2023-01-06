@@ -61,7 +61,7 @@ class DeedControllerTest {
                                 }
                                 """)
                 )
-                .andExpect(status().isOk())
+                .andExpect(status().isAccepted())
                 .andReturn();
         String content = response.getResponse().getContentAsString();
         Deed result = objectMapper.readValue(content, Deed.class);

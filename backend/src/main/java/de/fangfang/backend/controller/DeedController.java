@@ -3,6 +3,8 @@ package de.fangfang.backend.controller;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.service.DeedService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,22 +19,31 @@ public class DeedController {
     }
 
     @GetMapping
-    public List<Deed> getAllDeeds() {
-        return deedService.listAllDeeds();
+    public ResponseEntity<List<Deed>> getAllDeeds() {
+        return new ResponseEntity<>(deedService.listAllDeeds(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Deed getDeedById(@PathVariable String id) {
-        return deedService.getDeedById(id);
+    public ResponseEntity<Deed> getDeedById(@PathVariable String id) {
+        try {
+            return new ResponseEntity<>(deedService.getDeedById(id), HttpStatus.OK);
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
-    public Deed addDeed(@RequestBody DeedDTO newDeed) {
-        return deedService.addDeed(newDeed);
+    public ResponseEntity<Deed> addDeed(@RequestBody DeedDTO newDeed) {
+        return new ResponseEntity<>(deedService.addDeed(newDeed), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
-    public Deed editDeed(@PathVariable String id, @RequestBody DeedDTO deed) {
-        return deedService.editDeed(id, deed);
+    public ResponseEntity<Deed> editDeed(@PathVariable String id, @RequestBody DeedDTO deed) {
+        try {
+            return new ResponseEntity<>(deedService.editDeed(id, deed), HttpStatus.OK);
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }
