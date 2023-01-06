@@ -8,10 +8,7 @@ type DeedFormProps = {
 }
 
 export default function DeedForm(props: DeedFormProps) {
-    console.log("props: ", props.deed.address.street)
     const [deed, setDeed] = useState<Deed | NewDeed>(props.deed)
-
-    console.log("editeDeed: ", deed.address.street)
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
