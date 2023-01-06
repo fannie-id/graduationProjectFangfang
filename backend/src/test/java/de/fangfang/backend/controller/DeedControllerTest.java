@@ -140,5 +140,32 @@ class DeedControllerTest {
                         """));
     }
 
+    @Test
+    @DirtiesContext
+    void findDeed_throws_404() throws Exception {
+        mvc.perform(get(DeepEndPoint + "/10"))
+                .andExpect(status().isNotFound());
+    }
 
+    @Test
+    @DirtiesContext
+    void editDeed_throws_404() throws Exception {
+        mvc.perform(put(DeepEndPoint + "/10")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "description":"max",
+                                "address":{
+                                    "street": "wallstreet",
+                                    "houseNumber": "2",
+                                    "zip": "48939",
+                                    "city": "New York City",
+                                    "name": "Fangfang"
+                                },
+                                "karmaPoints":2
+                                }
+                                """)
+                )
+                .andExpect(status().isNotFound());
+    }
 }
