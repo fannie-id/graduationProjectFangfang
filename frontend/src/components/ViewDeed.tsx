@@ -6,7 +6,7 @@ export default function ViewDeed() {
 
     const {id} = useParams()
 
-    const {getDeed} = useDeed(id)
+    const {getDeed, deleteDeedById} = useDeed(id)
 
 
     const navigate = useNavigate()
@@ -21,6 +21,13 @@ export default function ViewDeed() {
         }
     }
 
+    function handleDeleteDeed() {
+        if (getDeed) {
+            deleteDeedById(getDeed.id)
+            navigate("/deeds")
+        }
+    }
+
     return (
         <div>
             <p>{getDeed.description}</p>
@@ -28,6 +35,7 @@ export default function ViewDeed() {
             <p>{getDeed.karmaPoints}</p>
 
             <Button onClick={handleEditDeed}>edit</Button>
+            <Button onClick={handleDeleteDeed}>delete</Button>
         </div>
     )
 

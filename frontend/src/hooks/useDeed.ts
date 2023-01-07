@@ -1,6 +1,6 @@
 import {Deed} from "../model/Deed";
 import {useEffect, useState} from "react";
-import {editDeed, getDeedById} from "../api/api-calls";
+import {deleteById, editDeed, getDeedById} from "../api/api-calls";
 
 export default function useDeed(id: string | undefined) {
 
@@ -30,6 +30,10 @@ export default function useDeed(id: string | undefined) {
             .catch(console.error)
     }
 
-    return {getDeed, editDeed: editDeedViaId}
+    function deleteDeedById(id: string) {
+        deleteById(id)
+    }
+
+    return {getDeed, deleteDeedById, editDeed: editDeedViaId}
 
 }
