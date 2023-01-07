@@ -3,9 +3,9 @@ import {Deed, NewDeed} from "../model/Deed";
 
 const deedEndPoint: string = "/api/deeds"
 
-export function getDeeds():Promise<Deed[]>{
+export function getDeeds(): Promise<Deed[]> {
     return axios.get(deedEndPoint)
-        .then(response=>response.data)
+        .then(response => response.data)
 }
 
 export function getDeedById(id: string): Promise<Deed> {
@@ -20,5 +20,10 @@ export function addDeed(newDeed: NewDeed): Promise<Deed> {
 
 export function editDeed(deed: Deed): Promise<Deed> {
     return axios.put(deedEndPoint + "/" + deed.id, deed)
+        .then(response => response.data)
+}
+
+export function deleteById(id: string) {
+    axios.delete(deedEndPoint + "/" + id)
         .then(response => response.data)
 }
