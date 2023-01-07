@@ -13,6 +13,8 @@ public class DeedService {
     private final DeedRepo deedRepo;
     private final IdGeneratorService idGeneratorService;
 
+    private static final IllegalArgumentException ID_NOT_FOUND = new IllegalArgumentException("Id not found");
+
 
     public DeedService(DeedRepo deedRepo, IdGeneratorService idGeneratorService) {
         this.deedRepo = deedRepo;
@@ -29,7 +31,7 @@ public class DeedService {
         if (optionalDeed.isPresent()) {
             return optionalDeed.get();
         }
-        throw new IllegalArgumentException("Id not found");
+        throw ID_NOT_FOUND;
 
     }
 
@@ -47,6 +49,15 @@ public class DeedService {
             Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.karmaPoints());
             return deedRepo.save(deedToChange);
         }
-        throw new IllegalArgumentException("Id not found");
+        throw ID_NOT_FOUND;
+    }
+
+    public void deleteDeedById(String id) {
+        Optional<Deed> optionalDeed = deedRepo.findById(id);
+        if (optionalDeed.isPresent()) {
+            deedRepo.deleteById(id);
+        } else {
+            throw ID_NOT_FOUND;
+        }
     }
 }

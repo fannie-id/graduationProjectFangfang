@@ -142,7 +142,7 @@ class DeedControllerTest {
 
     @Test
     @DirtiesContext
-    void findDeed_throws_404() throws Exception {
+    void search_incorrect_Deed_throws_404() throws Exception {
         mvc.perform(get(DeepEndPoint + "/10"))
                 .andExpect(status().isNotFound());
     }
@@ -166,6 +166,26 @@ class DeedControllerTest {
                                 }
                                 """)
                 )
+                .andExpect(status().isNotFound());
+    }
+
+
+    @Test
+    @DirtiesContext
+    void deleteDeed_expect_correct_status() throws Exception {
+
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        Deed deed = new Deed("10", "description", address, 4);
+
+        deedRepo.save(deed);
+        mvc.perform(delete(DeepEndPoint + "/10"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DirtiesContext
+    void delete_incorrect_Deed_throws_404() throws Exception {
+        mvc.perform(delete(DeepEndPoint + "/10"))
                 .andExpect(status().isNotFound());
     }
 }

@@ -46,4 +46,14 @@ public class DeedController {
         }
 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteDeedById(@PathVariable String id) {
+        try {
+            deedService.deleteDeedById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
