@@ -1,5 +1,6 @@
 import DeedSpot from "./DeedSpot";
 import {Deed} from "../model/Deed";
+import {Box} from "@mui/material";
 
 type DeedsListProps ={
     deeds: Deed[]
@@ -10,8 +11,8 @@ export default function DeedsList(props:DeedsListProps){
 
 
     return(
-      <div>
-          {allDeeds}
-      </div>
+        <Box flexDirection={"row"}>
+            {allDeeds}
+        </Box>
     )
 }

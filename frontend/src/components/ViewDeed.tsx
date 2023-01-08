@@ -37,9 +37,9 @@ export default function ViewDeed() {
              flexWrap={"wrap"}
              justifyContent={"center"}>
 
-            <p>description: {getDeed.description}</p>
-            <p>street: {getDeed.address.street}</p>
-            <p>karmaPoints: {getDeed.karmaPoints}</p>
+            <p>Deed: {getDeed.description}</p>
+            <p>Ort: {getDeed.address.street} {getDeed.address.houseNumber}</p>
+            <p>KarmaPoints: {getDeed.karmaPoints}</p>
 
             <Button onClick={handleEditDeed}>
                 <EditLocationAltIcon color="success"/>
