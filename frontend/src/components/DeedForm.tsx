@@ -33,9 +33,15 @@ export default function DeedForm(props: DeedFormProps) {
         props.submitDeed(deed)
     }
 
-    return (<Box>
+    return (<Box
+            margin={"8px"}
+            flexDirection={"column"}
+            display={"grid"}
+            flexWrap={"wrap"}
+            justifyContent={"center"}>
             <form onSubmit={handleSubmit}>
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"description"}
                     value={deed.description}
@@ -47,6 +53,7 @@ export default function DeedForm(props: DeedFormProps) {
                 />
 
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"street"}
                     value={deed.address.street}
@@ -55,6 +62,7 @@ export default function DeedForm(props: DeedFormProps) {
                     onChange={handleFormAddressChange}
                 />
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"houseNumber"}
                     value={deed.address.houseNumber}
@@ -63,6 +71,7 @@ export default function DeedForm(props: DeedFormProps) {
                     onChange={handleFormAddressChange}
                 />
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"zip"}
                     value={deed.address.zip}
@@ -71,6 +80,7 @@ export default function DeedForm(props: DeedFormProps) {
                     onChange={handleFormAddressChange}
                 />
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"city"}
                     value={deed.address.city}
@@ -80,6 +90,7 @@ export default function DeedForm(props: DeedFormProps) {
                 />
 
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"name"}
                     value={deed.address.name}
@@ -89,6 +100,7 @@ export default function DeedForm(props: DeedFormProps) {
                 />
 
                 <TextField
+                    margin="normal"
                     fullWidth
                     name={"karmaPoints"}
                     value={deed.karmaPoints}

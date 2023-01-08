@@ -1,7 +1,8 @@
 import DeedsList from "./DeedsList";
 import useDeeds from "../hooks/useDeeds";
-import {Button} from "@mui/material";
+import {Box, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import {AddCircle} from "@mui/icons-material";
 
 export default function DeedApp() {
     const {deeds} = useDeeds()
@@ -12,13 +13,18 @@ export default function DeedApp() {
     }
 
 
-    return (<div>
+    return (<Box margin={"5px"}
+                 flexDirection={"column"}
+                 display={"grid"}
+                 flexWrap={"wrap"}
+                 justifyContent={"center"}>
             <DeedsList deeds={deeds}/>
 
-            <Button onClick={handleDeedDetail}>
-                Add
-            </Button>
 
-        </div>
+            <IconButton onClick={handleDeedDetail} type={"submit"}>
+                <AddCircle color="success" fontSize="large"/>
+            </IconButton>
+
+        </Box>
     )
 }

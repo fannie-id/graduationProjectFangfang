@@ -1,6 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
 import useDeed from "../hooks/useDeed";
-import {Button} from "@mui/material";
+import {Box, Button} from "@mui/material";
+import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 
 export default function ViewDeed() {
 
@@ -29,14 +31,23 @@ export default function ViewDeed() {
     }
 
     return (
-        <div>
-            <p>{getDeed.description}</p>
-            <p>{getDeed.address.street}</p>
-            <p>{getDeed.karmaPoints}</p>
+        <Box margin={"5px"}
+             flexDirection={"column"}
+             display={"grid"}
+             flexWrap={"wrap"}
+             justifyContent={"center"}>
 
-            <Button onClick={handleEditDeed}>edit</Button>
-            <Button onClick={handleDeleteDeed}>delete</Button>
-        </div>
+            <p>description: {getDeed.description}</p>
+            <p>street: {getDeed.address.street}</p>
+            <p>karmaPoints: {getDeed.karmaPoints}</p>
+
+            <Button onClick={handleEditDeed}>
+                <EditLocationAltIcon color="success"/>
+            </Button>
+            <Button onClick={handleDeleteDeed}>
+                <DeleteSweepIcon color="success"/>
+            </Button>
+        </Box>
     )
 
 }
