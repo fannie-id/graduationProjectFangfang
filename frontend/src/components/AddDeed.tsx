@@ -19,7 +19,7 @@ export default function AddDeed() {
     const emptyDeed: NewDeed = {
         "description": "",
         "address": address,
-        "karmaPoints": 0
+        "karmaPoints": 0,
     }
 
 
@@ -32,8 +32,6 @@ export default function AddDeed() {
         <Box>
             <DeedForm deed={emptyDeed}
                       submitDeed={submitDeed}/>
-
-
         </Box>
 
 
