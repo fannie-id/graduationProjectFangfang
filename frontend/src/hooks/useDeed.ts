@@ -10,7 +10,7 @@ export default function useDeed(id: string | undefined) {
         if (id) {
             getDeedViaId(id)
         }
-    }, [])
+    }, [id])
 
     function getDeedViaId(id: string) {
         getDeedById(id)
