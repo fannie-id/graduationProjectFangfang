@@ -1,5 +1,5 @@
 import {Box, IconButton, TextField} from "@mui/material";
-import {Deed, NewDeed} from "../model/Deed";
+import {Deed, DeedStatus, NewDeed} from "../model/Deed";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
@@ -15,6 +15,32 @@ export default function DeedForm(props: DeedFormProps) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
         setDeed((prevState) => ({...prevState, [nameOfInput]: inputValue}))
+    }
+
+
+    function handleStatusChange() {
+        const castDeed = deed as Deed
+        console.log(deed)
+        setDeed((prevState) => ({...prevState, [castDeed.deedStatus]: nextStatus(castDeed.deedStatus)}))
+    }
+
+    function nextStatus(status: DeedStatus) {
+        if (status === null) {
+            return DeedStatus.CREATED
+        }
+
+        switch (status) {
+            case DeedStatus.CREATED:
+                return DeedStatus.ASSIGNED
+            case DeedStatus.ASSIGNED:
+                return DeedStatus.IN_PROGRESS
+            case DeedStatus.IN_PROGRESS:
+                return DeedStatus.DONE
+            case DeedStatus.DONE:
+                return DeedStatus.ACCEPTED
+            case DeedStatus.ACCEPTED:
+                return DeedStatus.ACCEPTED
+        }
     }
 
     function handleFormAddressChange(event: ChangeEvent<HTMLInputElement>) {
@@ -110,10 +136,21 @@ export default function DeedForm(props: DeedFormProps) {
                     placeholder="Karma Points"
                     onChange={handleFormChange}
                 />
+                {deed as Deed &&
+                    <Button onClick={handleStatusChange}>
+                        next
+                    </Button>}
+
 
                 <IconButton type="submit">
                     <PublishedWithChangesIcon color="success" fontSize={"large"}/>
                 </IconButton>
+
+                {(deed as Deed).deedStatus === DeedStatus.ASSIGNED && <p>assigned</p>}
+                {(deed as Deed).deedStatus === DeedStatus.CREATED && <p>created</p>}
+                {(deed as Deed).deedStatus === DeedStatus.ACCEPTED && <p>accepted</p>}
+                {(deed as Deed).deedStatus === DeedStatus.IN_PROGRESS && <p>in progress</p>}
+                {(deed as Deed).deedStatus === DeedStatus.DONE && <p>done</p>}
             </form>
         </Box>
     )

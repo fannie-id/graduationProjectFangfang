@@ -9,7 +9,8 @@ public record Deed(
         String id,
         String description,
         Address address,
-        int karmaPoints
+        int karmaPoints,
+        Status status
 ) {
 
 }
