@@ -22,7 +22,7 @@ export default function EditDeed() {
 
     return (
         <div>
-            <DeedForm deed={getDeed} isNew={false}
+            <DeedForm deed={getDeed}
                       submitDeed={submitDeed}/>
         </div>
     )

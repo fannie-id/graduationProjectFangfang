@@ -37,8 +37,10 @@ export default function ViewDeed() {
     }
 
     function handleStatusChange() {
+        console.log("handleStatusChanged", getDeed)
         if (getDeed) {
             const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus)}
+            console.log(deedToSave)
             editDeed(deedToSave)
         }
 
@@ -46,18 +48,16 @@ export default function ViewDeed() {
 
     function nextStatus(status: DeedStatus) {
         switch (status) {
-            case 0:
-                return 1;
-            case 1:
-                return 2;
-            case 2:
-                return 3;
-            case 3:
-                return 4;
-            case 4:
-                return 4;
-            default:
-                return 1;
+            case DeedStatus.CREATED:
+                return DeedStatus.ASSIGNED;
+            case DeedStatus.ASSIGNED:
+                return DeedStatus.IN_PROGRESS;
+            case DeedStatus.IN_PROGRESS:
+                return DeedStatus.DONE;
+            case DeedStatus.DONE:
+                return DeedStatus.ACCEPTED;
+            case DeedStatus.ACCEPTED:
+                return DeedStatus.ACCEPTED;
         }
     }
 

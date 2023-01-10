@@ -4,7 +4,6 @@ import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
 type DeedFormProps = {
-    isNew: boolean
     deed: Deed
     submitDeed: (deed: Deed) => void
 }
