@@ -34,6 +34,14 @@ export default function useDeed(id: string | undefined) {
         deleteById(id)
     }
 
-    return {getDeed, deleteDeedById, editDeed: editDeedViaId}
+    function nextStatusDeed(deed: Deed) {
+        editDeed(deed)
+            .then(data => {
+                setGetDeed(data)
+            })
+            .catch(console.error)
+    }
+
+    return {getDeed, deleteDeedById, nextStatusDeed, editDeed: editDeedViaId}
 
 }
