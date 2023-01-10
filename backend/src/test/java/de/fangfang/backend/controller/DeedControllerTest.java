@@ -3,6 +3,7 @@ package de.fangfang.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.Deed;
+import de.fangfang.backend.model.DeedStatus;
 import de.fangfang.backend.repository.DeedRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ class DeedControllerTest {
     @DirtiesContext
     void editDeed_expect_correct_Deed() throws Exception {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4);
+        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
         deedRepo.save(deed);
         mvc.perform(put(DeepEndPoint + "/10")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -119,7 +120,7 @@ class DeedControllerTest {
     void findDeed_expect_correct_Deed() throws Exception {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4);
+        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
 
         deedRepo.save(deed);
         mvc.perform(get(DeepEndPoint + "/10"))
@@ -175,7 +176,7 @@ class DeedControllerTest {
     void deleteDeed_expect_correct_status() throws Exception {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4);
+        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
 
         deedRepo.save(deed);
         mvc.perform(delete(DeepEndPoint + "/10"))

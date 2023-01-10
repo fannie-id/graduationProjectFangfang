@@ -3,6 +3,7 @@ package de.fangfang.backend.service;
 import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
+import de.fangfang.backend.model.DeedStatus;
 import de.fangfang.backend.repository.DeedRepo;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +47,7 @@ class DeedServiceTest {
     void getDeedById_expect_validDeed() {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         when(idGeneratorService.generateUuid()).thenReturn("123");
-        Deed expected = new Deed(idGeneratorService.generateUuid(), "description", address, 4);
+        Deed expected = new Deed(idGeneratorService.generateUuid(), "description", address, 4, DeedStatus.CREATED);
         when(deedRepo.findById("123")).thenReturn(Optional.of(expected));
 
 
@@ -58,9 +59,9 @@ class DeedServiceTest {
     @Test
     void addDeed_expect_validDeed() {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        DeedDTO deedDTO = new DeedDTO("description", address, 4);
+        DeedDTO deedDTO = new DeedDTO("description", address, 4, DeedStatus.CREATED);
         when(idGeneratorService.generateUuid()).thenReturn("123");
-        Deed expected = new Deed(idGeneratorService.generateUuid(), "description", address, 4);
+        Deed expected = new Deed(idGeneratorService.generateUuid(), "description", address, 4, DeedStatus.CREATED);
         when(deedRepo.save(expected)).thenReturn(expected);
 
 
@@ -73,9 +74,9 @@ class DeedServiceTest {
     @Test
     void editDeed_expect_validDeed() {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        DeedDTO deedDTO = new DeedDTO("new description", address, 4);
-        Deed old = new Deed("1", "old description", address, 2);
-        Deed expected = new Deed("1", "new description", address, 4);
+        DeedDTO deedDTO = new DeedDTO("new description", address, 4, DeedStatus.ASSIGNED);
+        Deed old = new Deed("1", "old description", address, 2, DeedStatus.CREATED);
+        Deed expected = new Deed("1", "new description", address, 4, DeedStatus.ASSIGNED);
         when(deedRepo.findById("1")).thenReturn(Optional.of(old));
         when(deedRepo.save(expected)).thenReturn(expected);
 
@@ -89,7 +90,7 @@ class DeedServiceTest {
     void editDeed_throw_exception() {
         when(deedRepo.findById("9")).thenReturn(Optional.empty());
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        DeedDTO deedDTO = new DeedDTO("new description", address, 4);
+        DeedDTO deedDTO = new DeedDTO("new description", address, 4, DeedStatus.CREATED);
 
         try {
             deedService.editDeed("2", deedDTO);
