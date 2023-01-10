@@ -17,6 +17,10 @@ export default function ViewDeed() {
         return <p>loading</p>
     }
 
+    if (!getDeed.id) {
+        return <p>invalid Id</p>
+    }
+
     function handleEditDeed() {
         if (getDeed) {
             navigate("/deeds/" + getDeed.id + "/edit")
@@ -24,7 +28,7 @@ export default function ViewDeed() {
     }
 
     function handleDeleteDeed() {
-        if (getDeed) {
+        if (getDeed && getDeed.id) {
             deleteDeedById(getDeed.id)
             navigate("/deeds")
         }

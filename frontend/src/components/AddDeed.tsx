@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import {NewDeed} from "../model/Deed";
+import {Deed, DeedStatus} from "../model/Deed";
 import {Address} from "../model/Address";
 import DeedForm from "./DeedForm";
 import useDeeds from "../hooks/useDeeds";
@@ -16,21 +16,22 @@ export default function AddDeed() {
         "city": "",
         "name": ""
     }
-    const emptyDeed: NewDeed = {
+    const emptyDeed: Deed = {
         "description": "",
         "address": address,
         "karmaPoints": 0,
+        "deedStatus": DeedStatus.CREATED
     }
 
 
-    function submitDeed(deed: NewDeed) {
+    function submitDeed(deed: Deed) {
         addNewDeed(deed)
         navigate("/deeds")
     }
 
     return (
         <Box>
-            <DeedForm deed={emptyDeed}
+            <DeedForm deed={emptyDeed} isNew={true}
                       submitDeed={submitDeed}/>
         </Box>
 

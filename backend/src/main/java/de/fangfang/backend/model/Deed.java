@@ -10,7 +10,7 @@ public record Deed(
         String description,
         Address address,
         int karmaPoints,
-        Status status
+        DeedStatus deedStatus
 ) {
 
 }
