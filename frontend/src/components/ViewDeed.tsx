@@ -9,7 +9,7 @@ export default function ViewDeed() {
 
     const {id} = useParams()
 
-    const {getDeed, deleteDeedById, nextStatusDeed} = useDeed(id)
+    const {getDeed, deleteDeedById, editDeed} = useDeed(id)
 
 
     const navigate = useNavigate()
@@ -38,32 +38,29 @@ export default function ViewDeed() {
 
     function handleStatusChange() {
         if (getDeed) {
-
+            console.log(nextStatus(getDeed.deedStatus))
             const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus)}
             console.log(nextStatus(getDeed.deedStatus))
             console.log(deedToSave)
-            nextStatusDeed(deedToSave)
-
+            editDeed(deedToSave)
         }
 
     }
 
-    function nextStatus(status: DeedStatus): DeedStatus {
-        if (status === null) {
-            return DeedStatus.CREATED
-        }
-
+    function nextStatus(status: DeedStatus) {
         switch (status) {
-            case DeedStatus.CREATED:
-                return DeedStatus.ASSIGNED
-            case DeedStatus.ASSIGNED:
-                return DeedStatus.IN_PROGRESS
-            case DeedStatus.IN_PROGRESS:
-                return DeedStatus.DONE
-            case DeedStatus.DONE:
-                return DeedStatus.ACCEPTED
-            case DeedStatus.ACCEPTED:
-                return DeedStatus.ACCEPTED
+            case 0:
+                return 1;
+            case 1:
+                return 2;
+            case 2:
+                return 3;
+            case 3:
+                return 4;
+            case 4:
+                return 4;
+            default:
+                return 1;
         }
     }
 
