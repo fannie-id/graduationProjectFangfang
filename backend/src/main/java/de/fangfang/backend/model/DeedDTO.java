@@ -4,7 +4,7 @@ public record DeedDTO(
         String description,
         Address address,
         int karmaPoints,
-        DeedStatus status
+        DeedStatus deedStatus
 ) {
 
     public Deed withId(String id) {

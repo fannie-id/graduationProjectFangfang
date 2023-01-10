@@ -38,10 +38,7 @@ export default function ViewDeed() {
 
     function handleStatusChange() {
         if (getDeed) {
-            console.log(nextStatus(getDeed.deedStatus))
             const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus)}
-            console.log(nextStatus(getDeed.deedStatus))
-            console.log(deedToSave)
             editDeed(deedToSave)
         }
 
