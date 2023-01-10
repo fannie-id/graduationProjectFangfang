@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import useDeed from "../hooks/useDeed";
 import DeedForm from "./DeedForm";
-import {Deed, NewDeed} from "../model/Deed";
+import {Deed} from "../model/Deed";
 
 export default function EditDeed() {
     const navigate = useNavigate()
@@ -13,16 +13,16 @@ export default function EditDeed() {
         return <p>loading</p>
     }
 
-    function submitDeed(deed: Deed | NewDeed) {
-        if ("id" in deed) {
-            editDeed(deed)
-            navigate("/deeds")
-        }
+    function submitDeed(deed: Deed) {
+
+        editDeed(deed)
+        navigate("/deeds")
+
     }
 
     return (
         <div>
-            <DeedForm deed={getDeed}
+            <DeedForm deed={getDeed} isNew={false}
                       submitDeed={submitDeed}/>
         </div>
     )

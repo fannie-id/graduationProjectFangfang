@@ -4,10 +4,10 @@ public record DeedDTO(
         String description,
         Address address,
         int karmaPoints,
-        Status status
+        DeedStatus status
 ) {
 
     public Deed withId(String id) {
-        return new Deed(id, description, address, karmaPoints, Status.CREATED);
+        return new Deed(id, description, address, karmaPoints, DeedStatus.CREATED);
     }
 }
