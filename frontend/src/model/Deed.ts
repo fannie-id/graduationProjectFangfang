@@ -9,9 +9,9 @@ export type Deed = {
 }
 
 export enum DeedStatus {
-    CREATED,
-    ASSIGNED,
-    IN_PROGRESS,
-    DONE,
-    ACCEPTED
+    CREATED = "CREATED",
+    ASSIGNED = "ASSIGNED",
+    IN_PROGRESS = "IN_PROGRESS",
+    DONE = "DONE",
+    ACCEPTED = "ACCEPTED"
 }

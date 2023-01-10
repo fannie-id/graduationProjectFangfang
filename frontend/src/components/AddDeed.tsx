@@ -31,7 +31,7 @@ export default function AddDeed() {
 
     return (
         <Box>
-            <DeedForm deed={emptyDeed} isNew={true}
+            <DeedForm deed={emptyDeed}
                       submitDeed={submitDeed}/>
         </Box>
 
