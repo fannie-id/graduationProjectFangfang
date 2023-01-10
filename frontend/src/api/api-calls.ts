@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Deed, NewDeed} from "../model/Deed";
+import {Deed} from "../model/Deed";
 
 const deedEndPoint: string = "/api/deeds"
 
@@ -13,7 +13,7 @@ export function getDeedById(id: string): Promise<Deed> {
         .then(response => response.data)
 }
 
-export function addDeed(newDeed: NewDeed): Promise<Deed> {
+export function addDeed(newDeed: Deed): Promise<Deed> {
     return axios.post(deedEndPoint, newDeed)
         .then(response => response.data)
 }

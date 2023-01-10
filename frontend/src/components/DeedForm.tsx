@@ -1,5 +1,5 @@
-import {Box, Button, IconButton, TextField} from "@mui/material";
-import {Deed, DeedStatus} from "../model/Deed";
+import {Box, IconButton, TextField} from "@mui/material";
+import {Deed} from "../model/Deed";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
@@ -19,30 +19,6 @@ export default function DeedForm(props: DeedFormProps) {
         setDeed((prevState) => ({...prevState, [nameOfInput]: inputValue}))
     }
 
-
-    function handleStatusChange() {
-        setDeed((prevState) => ({...prevState, [deed.deedStatus]: nextStatus(deed.deedStatus)}))
-
-    }
-
-    function nextStatus(status: DeedStatus) {
-        if (status === null) {
-            return DeedStatus.CREATED
-        }
-
-        switch (status) {
-            case DeedStatus.CREATED:
-                return DeedStatus.ASSIGNED
-            case DeedStatus.ASSIGNED:
-                return DeedStatus.IN_PROGRESS
-            case DeedStatus.IN_PROGRESS:
-                return DeedStatus.DONE
-            case DeedStatus.DONE:
-                return DeedStatus.ACCEPTED
-            case DeedStatus.ACCEPTED:
-                return DeedStatus.ACCEPTED
-        }
-    }
 
     function handleFormAddressChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
@@ -137,18 +113,11 @@ export default function DeedForm(props: DeedFormProps) {
                     placeholder="Karma Points"
                     onChange={handleFormChange}
                 />
-                {!props.isNew &&
-                    <Button onClick={handleStatusChange}>
-                        next
-                    </Button>}
-
 
                 <IconButton type="submit">
                     <PublishedWithChangesIcon color="success" fontSize={"large"}/>
                 </IconButton>
 
-                {!props.isNew && <p>{props.deed.deedStatus}</p>
-                }
             </form>
         </Box>
     )
