@@ -15,7 +15,7 @@ function App() {
             <BrowserRouter>
 
                 <Routes>
-                    <Route path="" element={<p>wellcome</p>}></Route>
+                    <Route path="" element={<p>Welcome!</p>}></Route>
                     <Route path="/deeds" element={<DeedApp/>}></Route>
                     <Route path="/deeds/add" element={<AddDeed/>}></Route>
                     <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
