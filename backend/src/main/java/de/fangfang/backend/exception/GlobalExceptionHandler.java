@@ -11,8 +11,9 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(IdNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleIdNotFoundException(IdNotFoundException exception) {
+
+    @ExceptionHandler(DeedIdNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleIdNotFoundException(DeedIdNotFoundException exception) {
         Map<String, Object> responseBody = new LinkedHashMap<>();
         responseBody.put("timestamp", LocalDateTime.now());
         responseBody.put("message", exception.getMessage());

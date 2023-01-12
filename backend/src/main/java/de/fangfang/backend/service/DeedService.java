@@ -1,6 +1,6 @@
 package de.fangfang.backend.service;
 
-import de.fangfang.backend.exception.IdNotFoundException;
+import de.fangfang.backend.exception.DeedIdNotFoundException;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.repository.DeedRepo;
@@ -26,7 +26,7 @@ public class DeedService {
 
 
     public Deed getDeedById(String id) {
-        return deedRepo.findById(id).orElseThrow(IdNotFoundException::new);
+        return deedRepo.findById(id).orElseThrow(DeedIdNotFoundException::new);
     }
 
     public Deed addDeed(DeedDTO newDeed) {
@@ -39,7 +39,7 @@ public class DeedService {
 
     public Deed editDeed(String id, DeedDTO deed) {
         if (deedRepo.findById(id).isEmpty()) {
-            throw new IdNotFoundException();
+            throw new DeedIdNotFoundException();
         }
         Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.karmaPoints(), deed.deedStatus());
         return deedRepo.save(deedToChange);
@@ -47,7 +47,7 @@ public class DeedService {
 
     public void deleteDeedById(String id) {
         if (deedRepo.findById(id).isEmpty()) {
-            throw new IdNotFoundException();
+            throw new DeedIdNotFoundException();
         }
         deedRepo.deleteById(id);
     }

@@ -1,6 +1,6 @@
 package de.fangfang.backend.service;
 
-import de.fangfang.backend.exception.IdNotFoundException;
+import de.fangfang.backend.exception.DeedIdNotFoundException;
 import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
@@ -32,9 +32,9 @@ class DeedServiceTest {
 
     @Test
     void getDeedById_throw_exception() {
-        when(deedRepo.findById("9")).thenThrow(new IdNotFoundException());
+        when(deedRepo.findById("9")).thenReturn(Optional.empty());
 
-        assertThrows(IdNotFoundException.class, () -> deedService.getDeedById("9"));
+        assertThrows(DeedIdNotFoundException.class, () -> deedService.getDeedById("9"));
 
 
     }
@@ -84,11 +84,11 @@ class DeedServiceTest {
 
     @Test
     void editDeed_throw_id_not_found() {
-        when(deedRepo.findById("9")).thenThrow(new IdNotFoundException());
+        when(deedRepo.findById("9")).thenReturn(Optional.empty());
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         DeedDTO deedDTO = new DeedDTO("new description", address, 4, DeedStatus.CREATED);
-        assertThrows(IdNotFoundException.class, () -> deedService.editDeed("9", deedDTO));
+        assertThrows(DeedIdNotFoundException.class, () -> deedService.editDeed("9", deedDTO));
     }
 
 
