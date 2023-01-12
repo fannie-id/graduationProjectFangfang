@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
-import AppsIcon from '@mui/icons-material/Apps';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import {useState} from "react";
 
 export default function NavigationBar() {
@@ -17,7 +17,7 @@ export default function NavigationBar() {
                         setPath(newValue);
                     }}
                 >
-                    <BottomNavigationAction component={Link} label="overview" to={"/deeds"} icon={< AppsIcon/>}
+                    <BottomNavigationAction component={Link} label="overview" to={"/deeds"} icon={< AllInclusiveIcon/>}
                                             value={"/deeds"}/>
                 </BottomNavigation>
             </Paper>
