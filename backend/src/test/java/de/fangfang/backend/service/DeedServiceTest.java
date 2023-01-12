@@ -1,5 +1,6 @@
 package de.fangfang.backend.service;
 
+import de.fangfang.backend.exception.IdNotFoundException;
 import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class DeedServiceTest {
@@ -31,15 +32,10 @@ class DeedServiceTest {
 
     @Test
     void getDeedById_throw_exception() {
-        when(deedRepo.findById("9")).thenReturn(Optional.empty());
+        when(deedRepo.findById("9")).thenThrow(new IdNotFoundException());
 
-        try {
-            deedService.getDeedById("2");
-            fail();
-        } catch (RuntimeException e) {
-            //THEN
-            assertEquals("Id not found", e.getMessage());
-        }
+        assertThrows(IdNotFoundException.class, () -> deedService.getDeedById("9"));
+
 
     }
 
@@ -89,15 +85,10 @@ class DeedServiceTest {
     @Test
     void editDeed_throw_exception() {
         when(deedRepo.findById("9")).thenReturn(Optional.empty());
+        when(deedRepo.findById("9")).thenThrow(new IdNotFoundException());
+
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         DeedDTO deedDTO = new DeedDTO("new description", address, 4, DeedStatus.CREATED);
-
-        try {
-            deedService.editDeed("2", deedDTO);
-            fail();
-        } catch (RuntimeException e) {
-            //THEN
-            assertEquals("Id not found", e.getMessage());
-        }
+        assertThrows(IdNotFoundException.class, () -> deedService.editDeed("2", deedDTO));
     }
 }
