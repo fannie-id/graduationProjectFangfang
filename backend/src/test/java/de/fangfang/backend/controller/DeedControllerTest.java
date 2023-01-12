@@ -145,7 +145,7 @@ class DeedControllerTest {
     @DirtiesContext
     void search_incorrect_Deed_throws_404() throws Exception {
         mvc.perform(get(DeepEndPoint + "/10"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().is(404));
     }
 
     @Test
@@ -167,7 +167,7 @@ class DeedControllerTest {
                                 }
                                 """)
                 )
-                .andExpect(status().isNotFound());
+                .andExpect(status().is(404));
     }
 
 
@@ -187,6 +187,6 @@ class DeedControllerTest {
     @DirtiesContext
     void delete_incorrect_Deed_throws_404() throws Exception {
         mvc.perform(delete(DeepEndPoint + "/10"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().is(404));
     }
 }
