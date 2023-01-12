@@ -173,6 +173,14 @@ class DeedControllerTest {
 
     @Test
     @DirtiesContext
+    void editDeed_throws_400() throws Exception {
+        mvc.perform(put(DeepEndPoint + "/10"))
+                .andExpect(status().is(400));
+    }
+
+
+    @Test
+    @DirtiesContext
     void deleteDeed_expect_correct_status() throws Exception {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
