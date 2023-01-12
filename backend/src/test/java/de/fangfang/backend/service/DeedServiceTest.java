@@ -83,12 +83,13 @@ class DeedServiceTest {
     }
 
     @Test
-    void editDeed_throw_exception() {
-        when(deedRepo.findById("9")).thenReturn(Optional.empty());
+    void editDeed_throw_id_not_found() {
         when(deedRepo.findById("9")).thenThrow(new IdNotFoundException());
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         DeedDTO deedDTO = new DeedDTO("new description", address, 4, DeedStatus.CREATED);
-        assertThrows(IdNotFoundException.class, () -> deedService.editDeed("2", deedDTO));
+        assertThrows(IdNotFoundException.class, () -> deedService.editDeed("9", deedDTO));
     }
+
+
 }
