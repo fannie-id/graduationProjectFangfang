@@ -88,6 +88,8 @@ class DeedServiceTest {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         DeedDTO deedDTO = new DeedDTO("new description", address, 4, DeedStatus.CREATED);
-        assertThrows(IdNotFoundException.class, () -> deedService.editDeed("2", deedDTO));
+        assertThrows(IdNotFoundException.class, () -> deedService.editDeed("9", deedDTO));
     }
+
+
 }
