@@ -25,11 +25,7 @@ public class DeedController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Deed> getDeedById(@PathVariable String id) {
-        try {
-            return new ResponseEntity<>(deedService.getDeedById(id), HttpStatus.OK);
-        } catch (IllegalArgumentException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(deedService.getDeedById(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -39,21 +35,12 @@ public class DeedController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Deed> editDeed(@PathVariable String id, @RequestBody DeedDTO deed) {
-        try {
-            return new ResponseEntity<>(deedService.editDeed(id, deed), HttpStatus.OK);
-        } catch (IllegalArgumentException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
+        return new ResponseEntity<>(deedService.editDeed(id, deed), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteDeedById(@PathVariable String id) {
-        try {
-            deedService.deleteDeedById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (IllegalArgumentException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        deedService.deleteDeedById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

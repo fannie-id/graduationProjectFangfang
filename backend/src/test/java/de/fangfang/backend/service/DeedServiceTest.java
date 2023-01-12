@@ -36,7 +36,7 @@ class DeedServiceTest {
         try {
             deedService.getDeedById("2");
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             //THEN
             assertEquals("Id not found", e.getMessage());
         }
@@ -95,7 +95,7 @@ class DeedServiceTest {
         try {
             deedService.editDeed("2", deedDTO);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             //THEN
             assertEquals("Id not found", e.getMessage());
         }

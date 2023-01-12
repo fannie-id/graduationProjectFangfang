@@ -1,19 +1,18 @@
 package de.fangfang.backend.service;
 
+import de.fangfang.backend.exception.IdNotFoundException;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedDTO;
 import de.fangfang.backend.repository.DeedRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DeedService {
     private final DeedRepo deedRepo;
     private final IdGeneratorService idGeneratorService;
 
-    private static final IllegalArgumentException ID_NOT_FOUND = new IllegalArgumentException("Id not found");
 
 
     public DeedService(DeedRepo deedRepo, IdGeneratorService idGeneratorService) {
@@ -27,12 +26,7 @@ public class DeedService {
 
 
     public Deed getDeedById(String id) {
-        Optional<Deed> optionalDeed = deedRepo.findById(id);
-        if (optionalDeed.isPresent()) {
-            return optionalDeed.get();
-        }
-        throw ID_NOT_FOUND;
-
+        return deedRepo.findById(id).orElseThrow(IdNotFoundException::new);
     }
 
     public Deed addDeed(DeedDTO newDeed) {
@@ -44,20 +38,17 @@ public class DeedService {
 
 
     public Deed editDeed(String id, DeedDTO deed) {
-        Optional<Deed> optionalDeed = deedRepo.findById(id);
-        if (optionalDeed.isPresent()) {
-            Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.karmaPoints(), deed.deedStatus());
-            return deedRepo.save(deedToChange);
+        if (deedRepo.findById(id).isEmpty()) {
+            throw new IdNotFoundException();
         }
-        throw ID_NOT_FOUND;
+        Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.karmaPoints(), deed.deedStatus());
+        return deedRepo.save(deedToChange);
     }
 
     public void deleteDeedById(String id) {
-        Optional<Deed> optionalDeed = deedRepo.findById(id);
-        if (optionalDeed.isPresent()) {
-            deedRepo.deleteById(id);
-        } else {
-            throw ID_NOT_FOUND;
+        if (deedRepo.findById(id).isEmpty()) {
+            throw new IdNotFoundException();
         }
+        deedRepo.deleteById(id);
     }
 }
