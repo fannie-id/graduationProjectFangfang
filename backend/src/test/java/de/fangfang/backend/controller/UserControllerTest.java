@@ -15,8 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DirtiesContext
-class UseControllerTest {
-    private final String DeepEndPoint = "/api/users";
+class UserControllerTest {
+    private final String userEndPoint = "/api/users";
 
     @Autowired
     private MockMvc mvc;
@@ -24,14 +24,14 @@ class UseControllerTest {
     @Test
     @WithMockUser
     void hello_me_test() throws Exception {
-        mvc.perform(get(DeepEndPoint + "/me"))
+        mvc.perform(get(userEndPoint + "/me"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello user"));
     }
 
     @Test
     void hello_me_test_400() throws Exception {
-        mvc.perform(get(DeepEndPoint + "/me"))
+        mvc.perform(get(userEndPoint + "/me"))
                 .andExpect(status().is(400));
     }
 }
