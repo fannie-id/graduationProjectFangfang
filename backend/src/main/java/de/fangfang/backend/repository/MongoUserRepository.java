@@ -1,5 +1,6 @@
-package de.fangfang.backend.security;
+package de.fangfang.backend.repository;
 
+import de.fangfang.backend.model.MongoUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
