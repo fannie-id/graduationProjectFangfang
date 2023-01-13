@@ -11,7 +11,7 @@ export default function DeedsList(props:DeedsListProps){
 
 
     return(
-        <Box flexDirection={"row"}>
+        <Box flexDirection={"row"} sx={{pb: 7}}>
             {allDeeds}
         </Box>
     )
