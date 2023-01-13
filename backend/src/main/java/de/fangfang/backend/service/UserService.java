@@ -1,9 +1,9 @@
 package de.fangfang.backend.service;
 
 
-import de.fangfang.backend.model.MongoUser;
-import de.fangfang.backend.repository.MongoUserRepository;
-import org.springframework.security.core.userdetails.User;
+import de.fangfang.backend.model.User;
+import de.fangfang.backend.model.UserDTO;
+import de.fangfang.backend.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,20 +14,28 @@ import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final MongoUserRepository mongoUserRepository;
+    private final UserRepository userRepository;
+    private final IdGeneratorService idGeneratorService;
 
 
-    public UserService(MongoUserRepository mongoUserRepository) {
-        this.mongoUserRepository = mongoUserRepository;
+    public UserService(UserRepository userRepository, IdGeneratorService idGeneratorService) {
+        this.userRepository = userRepository;
+        this.idGeneratorService = idGeneratorService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MongoUser mongoUser = mongoUserRepository.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(username)
                 );
-        return new User(mongoUser.username(), mongoUser.password(), List.of());
+        return new org.springframework.security.core.userdetails.User(user.username(), user.password(), List.of());
+    }
+
+    public User registerNewUser(UserDTO newUser) {
+        String id = idGeneratorService.generateUuid();
+        User userToSave = newUser.withIdWithEncode(id);
+        return userRepository.save(userToSave);
     }
 
 }

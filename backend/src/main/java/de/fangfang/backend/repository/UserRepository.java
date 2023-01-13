@@ -1,13 +1,13 @@
 package de.fangfang.backend.repository;
 
-import de.fangfang.backend.model.MongoUser;
+import de.fangfang.backend.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface MongoUserRepository extends MongoRepository<MongoUser, String> {
+public interface UserRepository extends MongoRepository<User, String> {
 
-    Optional<MongoUser> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 }
