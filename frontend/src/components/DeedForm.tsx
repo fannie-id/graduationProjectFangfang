@@ -37,6 +37,7 @@ export default function DeedForm(props: DeedFormProps) {
     }
 
     return (<Box
+            sx={{pb: 7}}
             margin={"8px"}
             flexDirection={"column"}
             display={"grid"}
