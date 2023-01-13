@@ -2,13 +2,15 @@ import {Box} from "@mui/material";
 import {Deed, DeedStatus} from "../model/Deed";
 import {Address} from "../model/Address";
 import DeedForm from "./DeedForm";
-import useDeeds from "../hooks/useDeeds";
 import {useNavigate} from "react-router-dom";
 
+type AddDeedProps = {
+    addNewDeed: (deed: Deed) => void
+}
 
-export default function AddDeed() {
+export default function AddDeed(props: AddDeedProps) {
     const navigate = useNavigate()
-    const {addNewDeed} = useDeeds()
+
     const address: Address = {
         "street": "",
         "houseNumber": "",
@@ -25,7 +27,7 @@ export default function AddDeed() {
 
 
     function submitDeed(deed: Deed) {
-        addNewDeed(deed)
+        props.addNewDeed(deed)
         navigate("/deeds")
     }
 
