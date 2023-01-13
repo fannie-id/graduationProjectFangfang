@@ -5,9 +5,12 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import EditDeed from "./components/EditDeed";
 import AddDeed from "./components/AddDeed";
 import NavigationBar from "./components/NavigationBar";
+import useDeeds from "./hooks/useDeeds";
 
 
 function App() {
+    const {deeds, addNewDeed} = useDeeds()
+
     return (
         <div className="App">
             <header className="App-header">
@@ -16,8 +19,8 @@ function App() {
 
                 <Routes>
                     <Route path="" element={<p>Welcome!</p>}></Route>
-                    <Route path="/deeds" element={<DeedApp/>}></Route>
-                    <Route path="/deeds/add" element={<AddDeed/>}></Route>
+                    <Route path="/deeds" element={<DeedApp deeds={deeds}/>}></Route>
+                    <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
                     <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
                     <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
                 </Routes>
