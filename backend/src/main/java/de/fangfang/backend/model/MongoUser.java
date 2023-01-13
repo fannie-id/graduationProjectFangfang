@@ -1,4 +1,4 @@
-package de.fangfang.backend.security;
+package de.fangfang.backend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

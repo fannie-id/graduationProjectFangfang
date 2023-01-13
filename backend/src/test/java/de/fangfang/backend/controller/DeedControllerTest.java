@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,6 +46,7 @@ class DeedControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void addDeed_expect_correct_Deed() throws Exception {
         MvcResult response = mvc.perform(post(DeepEndPoint)
@@ -60,7 +63,7 @@ class DeedControllerTest {
                                 },
                                 "karmaPoints":2
                                 }
-                                """)
+                                """).with(csrf())
                 )
                 .andExpect(status().is(200))
                 .andReturn();
@@ -73,6 +76,7 @@ class DeedControllerTest {
 
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void editDeed_expect_correct_Deed() throws Exception {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
@@ -92,7 +96,7 @@ class DeedControllerTest {
                                 },
                                 "karmaPoints":2
                                 }
-                                """)
+                                """).with(csrf())
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -149,6 +153,7 @@ class DeedControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void editDeed_throws_404() throws Exception {
         mvc.perform(put(DeepEndPoint + "/10")
@@ -165,21 +170,23 @@ class DeedControllerTest {
                                 },
                                 "karmaPoints":2
                                 }
-                                """)
+                                """).with(csrf())
                 )
                 .andExpect(status().is(404));
     }
 
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void editDeed_throws_400() throws Exception {
-        mvc.perform(put(DeepEndPoint + "/10"))
+        mvc.perform(put(DeepEndPoint + "/10").with(csrf()))
                 .andExpect(status().is(400));
     }
 
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void deleteDeed_expect_correct_status() throws Exception {
 
@@ -187,14 +194,15 @@ class DeedControllerTest {
         Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
 
         deedRepo.save(deed);
-        mvc.perform(delete(DeepEndPoint + "/10"))
+        mvc.perform(delete(DeepEndPoint + "/10").with(csrf()))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void delete_incorrect_Deed_throws_404() throws Exception {
-        mvc.perform(delete(DeepEndPoint + "/10"))
+        mvc.perform(delete(DeepEndPoint + "/10").with(csrf()))
                 .andExpect(status().is(404));
     }
 }

@@ -1,6 +1,8 @@
-package de.fangfang.backend.security;
+package de.fangfang.backend.service;
 
 
+import de.fangfang.backend.model.MongoUser;
+import de.fangfang.backend.repository.MongoUserRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
