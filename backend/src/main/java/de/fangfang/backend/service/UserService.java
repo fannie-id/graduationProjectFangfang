@@ -2,11 +2,12 @@ package de.fangfang.backend.service;
 
 
 import de.fangfang.backend.model.User;
-import de.fangfang.backend.model.UserDTO;
-import de.fangfang.backend.repository.UserRepository;
+import de.fangfang.backend.model.UserRegistration;
+import de.fangfang.backend.repository.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,28 +15,40 @@ import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserRepo userRepo;
     private final IdGeneratorService idGeneratorService;
+    private final Argon2PasswordEncoder passwordEncoder;
 
 
-    public UserService(UserRepository userRepository, IdGeneratorService idGeneratorService) {
-        this.userRepository = userRepository;
+    public UserService(UserRepo userRepo, IdGeneratorService idGeneratorService, Argon2PasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
         this.idGeneratorService = idGeneratorService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        User user = userRepo.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(username)
                 );
         return new org.springframework.security.core.userdetails.User(user.username(), user.password(), List.of());
     }
 
-    public User registerNewUser(UserDTO newUser) {
+    public void registerNewUser(UserRegistration newUser) {
+        String encodedPassword = passwordEncoder.encode(newUser.password());
+        UserRegistration userEncode = new UserRegistration(
+                newUser.username(),
+                encodedPassword,
+                newUser.email(),
+                newUser.givenDeeds(),
+                newUser.takenDeeds(),
+                newUser.address(),
+                newUser.karmaPoints());
+
         String id = idGeneratorService.generateUuid();
-        User userToSave = newUser.withIdWithEncode(id);
-        return userRepository.save(userToSave);
+        User userToSave = userEncode.createUserWithId(id);
+        userRepo.save(userToSave);
     }
 
 }
