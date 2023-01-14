@@ -1,6 +1,6 @@
 import {Deed} from "../model/Deed";
 import {useEffect, useState} from "react";
-import {deleteById, editDeed, getDeedById} from "../api/api-calls";
+import {deleteById, editDeed, getDeedById} from "../api/deed-api-calls";
 
 export default function useDeed(id: string | undefined) {
 
