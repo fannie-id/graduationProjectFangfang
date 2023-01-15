@@ -1,4 +1,3 @@
-import {Deed} from "../model/Deed";
 import axios from "axios";
 import {RegisterUser} from "../model/User";
 
