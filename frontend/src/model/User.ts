@@ -3,3 +3,8 @@ export type RegisterUser = {
     email: string,
     password: string
 }
+
+export type LoginUser = {
+    username: string,
+    password: string
+}

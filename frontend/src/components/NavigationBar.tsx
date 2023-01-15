@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import {useState} from "react";
+import FaceIcon from '@mui/icons-material/Face';
 
 export default function NavigationBar() {
 
@@ -19,6 +20,8 @@ export default function NavigationBar() {
                 >
                     <BottomNavigationAction component={Link} label="overview" to={"/deeds"} icon={< AllInclusiveIcon/>}
                                             value={"/deeds"}/>
+                    <BottomNavigationAction component={Link} label="login" to={"/login"} icon={< FaceIcon/>}
+                                            value={"/login"}/>
                 </BottomNavigation>
             </Paper>
         </div>
