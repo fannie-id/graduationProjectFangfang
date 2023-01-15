@@ -26,4 +26,9 @@ public class UserController {
     public void registerUser(@RequestBody UserRegistration newUser) {
         userService.registerNewUser(newUser);
     }
+
+    @PostMapping
+    public String login() {
+        return "ok";
+    }
 }
