@@ -38,7 +38,7 @@ export default function Register() {
 
         <form onSubmit={handleSubmit}>
             <TextField
-
+                required
                 name={"username"}
                 value={registerUser.username}
                 label="Username"
@@ -48,7 +48,7 @@ export default function Register() {
 
             <TextField
                 margin="normal"
-
+                required
                 name={"email"}
                 value={registerUser.email}
                 label="E-Mail"
@@ -57,7 +57,7 @@ export default function Register() {
             />
             <TextField
                 margin="normal"
-
+                required
                 name={"password"}
                 value={registerUser.password}
                 label="Password"
