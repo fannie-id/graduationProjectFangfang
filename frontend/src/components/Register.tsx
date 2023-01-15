@@ -1,6 +1,6 @@
 import {Box, IconButton, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
-import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import {RegisterUser} from "../model/User";
 import useUsers from "../hooks/useUsers";
 
@@ -27,11 +27,18 @@ export default function Register() {
     }
 
 
-    return (<Box>
+    return (<Box
+        sx={{pb: 7}}
+        margin={"8px"}
+        flexDirection={"column"}
+        display={"flex"}
+        flexWrap={"wrap"}
+        alignItems="center"
+        justifyContent={"center"}>
+
         <form onSubmit={handleSubmit}>
             <TextField
-                margin="normal"
-                fullWidth
+
                 name={"username"}
                 value={registerUser.username}
                 label="Username"
@@ -41,7 +48,7 @@ export default function Register() {
 
             <TextField
                 margin="normal"
-                fullWidth
+
                 name={"email"}
                 value={registerUser.email}
                 label="E-Mail"
@@ -50,7 +57,7 @@ export default function Register() {
             />
             <TextField
                 margin="normal"
-                fullWidth
+
                 name={"password"}
                 value={registerUser.password}
                 label="Password"
@@ -58,7 +65,7 @@ export default function Register() {
                 onChange={handleFormChange}
             />
             <IconButton type="submit">
-                <PublishedWithChangesIcon color="success" fontSize={"large"}/>
+                <PersonAddAlt1Icon color="success"/>
             </IconButton>
 
         </form>
