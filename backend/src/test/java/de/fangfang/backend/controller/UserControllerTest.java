@@ -9,7 +9,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -33,9 +32,9 @@ class UserControllerTest {
     }
 
     @Test
-    void hello_me_test_400() throws Exception {
+    void hello_me_test_401() throws Exception {
         mvc.perform(get(userEndPoint + "/me"))
-                .andExpect(status().is(400));
+                .andExpect(status().is(401));
     }
 
     @Test
@@ -58,7 +57,7 @@ class UserControllerTest {
                                 },
                                 "karmaPoints":0
                                 }
-                                """).with(csrf())
+                                """)
                 )
                 .andExpect(status().isOk());
     }
