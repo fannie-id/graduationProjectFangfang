@@ -123,6 +123,7 @@ class DeedControllerTest {
     @Test
     @WithMockUser
     @DirtiesContext
+    @WithMockUser
     void findDeed_expect_correct_Deed() throws Exception {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
@@ -150,6 +151,7 @@ class DeedControllerTest {
     @Test
     @WithMockUser
     @DirtiesContext
+    @WithMockUser
     void search_incorrect_Deed_throws_404() throws Exception {
         mvc.perform(get(DeepEndPoint + "/10").with(csrf()))
                 .andExpect(status().is(404));
