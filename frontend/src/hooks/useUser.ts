@@ -1,10 +1,21 @@
-import {createUser, loginUser} from "../api/user-api-calls";
+import {createUser, getMe, loginUser} from "../api/user-api-calls";
 import {LoginUser, RegisterUser} from "../model/User";
+import {useEffect, useState} from "react";
 
 export default function useUser() {
+    const [username, setUsername] = useState<string>("")
+    useEffect(() => {
+            getMe()
+                .then(setUsername)
+        }, []
+    )
 
     function getLoginUser(user: LoginUser) {
         loginUser(user)
+            .then(data => {
+                setUsername(data)
+                return data
+            })
     }
 
     function addUser(newUser: RegisterUser) {
@@ -12,5 +23,5 @@ export default function useUser() {
             .catch(console.error)
     }
 
-    return {getLoginUser, addUser}
+    return {getLoginUser, addUser, username}
 }

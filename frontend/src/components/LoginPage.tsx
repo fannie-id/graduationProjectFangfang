@@ -2,6 +2,7 @@ import {Box, IconButton, TextField} from "@mui/material";
 import FaceIcon from '@mui/icons-material/Face';
 import {ChangeEvent, FormEvent, useState} from "react";
 import {LoginUser} from "../model/User";
+import {useNavigate} from "react-router-dom";
 
 type LoginPageProps = {
     getLoginUser: (user: LoginUser) => void
@@ -14,7 +15,7 @@ export default function LoginPage(props: LoginPageProps) {
         "password": ""
     }
     const [loginUser, setLoginUser] = useState<LoginUser>(emptyLoginUser)
-
+    const navigate = useNavigate()
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
@@ -25,6 +26,7 @@ export default function LoginPage(props: LoginPageProps) {
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.getLoginUser(loginUser)
+        navigate("/deeds")
     }
 
     return (<Box
