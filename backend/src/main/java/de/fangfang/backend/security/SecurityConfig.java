@@ -48,6 +48,7 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                         response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()))
                 .and()
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/admin-only").hasRole("ADMIN")

@@ -8,10 +8,12 @@ import LoginPage from "./components/LoginPage";
 import Register from "./components/Register"
 import NavigationBar from "./components/NavigationBar";
 import useDeeds from "./hooks/useDeeds";
+import useUser from "./hooks/useUser";
 
 
 function App() {
     const {deeds, addNewDeed} = useDeeds()
+    const {getLoginUser, addUser} = useUser()
 
     return (
         <div className="App">
@@ -21,8 +23,8 @@ function App() {
 
                 <Routes>
                     <Route path="" element={<p>Welcome!</p>}></Route>
-                    <Route path="/register" element={<Register/>}></Route>
-                    <Route path="/login" element={<LoginPage/>}></Route>
+                    <Route path="/register" element={<Register addUser={addUser}/>}></Route>
+                    <Route path="/login" element={<LoginPage getLoginUser={getLoginUser}/>}></Route>
                     <Route path="/deeds" element={<DeedApp deeds={deeds}/>}></Route>
                     <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
                     <Route path="/deeds/:id" element={<ViewDeed/>}></Route>

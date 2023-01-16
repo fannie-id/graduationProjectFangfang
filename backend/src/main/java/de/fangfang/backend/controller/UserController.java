@@ -2,6 +2,7 @@ package de.fangfang.backend.controller;
 
 import de.fangfang.backend.model.UserRegistration;
 import de.fangfang.backend.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -27,8 +28,8 @@ public class UserController {
         userService.registerNewUser(newUser);
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public String login() {
-        return "ok";
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
