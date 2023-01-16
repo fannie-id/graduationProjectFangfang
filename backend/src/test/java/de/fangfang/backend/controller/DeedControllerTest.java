@@ -37,6 +37,7 @@ class DeedControllerTest {
     DeedRepo deedRepo;
 
     @Test
+    @WithMockUser
     void getAllDeeds_expect_empty_list() throws Exception {
         mvc.perform(get(DeepEndPoint))
                 .andExpect(status().isOk())
@@ -63,7 +64,7 @@ class DeedControllerTest {
                                 },
                                 "karmaPoints":2
                                 }
-                                """).with(csrf())
+                                """)
                 )
                 .andExpect(status().is(200))
                 .andReturn();
@@ -120,6 +121,7 @@ class DeedControllerTest {
 
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void findDeed_expect_correct_Deed() throws Exception {
 
@@ -146,6 +148,7 @@ class DeedControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DirtiesContext
     void search_incorrect_Deed_throws_404() throws Exception {
         mvc.perform(get(DeepEndPoint + "/10"))
@@ -170,7 +173,7 @@ class DeedControllerTest {
                                 },
                                 "karmaPoints":2
                                 }
-                                """).with(csrf())
+                                """)
                 )
                 .andExpect(status().is(404));
     }
