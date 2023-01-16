@@ -10,8 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -23,13 +21,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
-        // set the name of the attribute the CsrfToken will be populated on
-        requestHandler.setCsrfRequestAttributeName("_csrf");
 
         return httpSecurity
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .csrfTokenRequestHandler(requestHandler))
+                .csrf().disable()
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .httpBasic()
@@ -38,9 +32,9 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/users/").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/admin-only").hasRole("ADMIN")
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/api/users/logout")
