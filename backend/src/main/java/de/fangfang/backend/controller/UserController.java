@@ -20,7 +20,10 @@ public class UserController {
 
     @GetMapping("me")
     public String helloMe(Principal principal) {
-        return "Hello " + principal.getName();
+        if (principal != null) {
+            return principal.getName();
+        }
+        return "anonymousUser";
     }
 
     @PostMapping
