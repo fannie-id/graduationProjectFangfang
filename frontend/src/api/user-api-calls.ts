@@ -9,10 +9,12 @@ export function createUser(newUser: RegisterUser) {
 
 export function loginUser(loginUser: LoginUser) {
 
-    axios.post(userEndPoint + "login", undefined, {
+    axios.post(userEndPoint + "/login", undefined, {
         auth: {
             username: loginUser.username,
             password: loginUser.password
         },
-    }).then(console.log)
+    })
+        .then((response) => response.data)
+        .then(data => console.log(data))
 }

@@ -1,18 +1,19 @@
 import {Box, IconButton, TextField} from "@mui/material";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import FaceIcon from '@mui/icons-material/Face';
 import {ChangeEvent, FormEvent, useState} from "react";
 import {LoginUser} from "../model/User";
-import useUser from "../hooks/useUser";
 
-export default function LoginPage() {
+type LoginPageProps = {
+    getLoginUser: (user: LoginUser) => void
+}
+
+export default function LoginPage(props: LoginPageProps) {
 
     const emptyLoginUser: LoginUser = {
         "username": "",
         "password": ""
     }
     const [loginUser, setLoginUser] = useState<LoginUser>(emptyLoginUser)
-
-    const {getLoginUser} = useUser()
 
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
@@ -23,7 +24,7 @@ export default function LoginPage() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        getLoginUser(loginUser)
+        props.getLoginUser(loginUser)
     }
 
     return (<Box
@@ -55,7 +56,7 @@ export default function LoginPage() {
                 onChange={handleFormChange}
             />
             <IconButton type="submit">
-                <PersonAddAlt1Icon color="success"/>
+                <FaceIcon color="success"/>
             </IconButton>
 
         </form>

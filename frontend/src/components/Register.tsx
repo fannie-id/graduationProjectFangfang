@@ -2,9 +2,13 @@ import {Box, IconButton, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import {RegisterUser} from "../model/User";
-import useUsers from "../hooks/useUsers";
+import {useNavigate} from "react-router-dom";
 
-export default function Register() {
+type RegisterProps = {
+    addUser: (user: RegisterUser) => void
+}
+
+export default function Register(props: RegisterProps) {
     const emptyUser: RegisterUser = {
         "username": "",
         "email": "",
@@ -12,8 +16,8 @@ export default function Register() {
     }
     const [registerUser, sRegisterUser] = useState<RegisterUser>(emptyUser)
 
-    const {addUser} = useUsers()
 
+    const navigate = useNavigate()
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
@@ -23,7 +27,8 @@ export default function Register() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        addUser(registerUser)
+        props.addUser(registerUser)
+        navigate("/login")
     }
 
 
