@@ -1,5 +1,7 @@
 package de.fangfang.backend.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.fangfang.backend.repository.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,6 +11,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -22,6 +25,12 @@ class UserControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Autowired
+    UserRepo userRepo;
 
     @Test
     @WithMockUser
@@ -59,6 +68,20 @@ class UserControllerTest {
                                 }
                                 """)
                 )
+                .andExpect(status().isOk());
+    }
+
+    @WithMockUser
+    @Test
+    void login_expect_200() throws Exception {
+        mvc.perform(post(userEndPoint + "/login").with(csrf()))
+                .andExpect(status().isOk());
+    }
+
+    @WithMockUser
+    @Test
+    void logout_expect_200() throws Exception {
+        mvc.perform(post(userEndPoint + "/logout").with(csrf()))
                 .andExpect(status().isOk());
     }
 }
