@@ -37,7 +37,9 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
         requestHandler.setCsrfRequestAttributeName(null);
 
         return httpSecurity
-                .csrf().disable()
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRequestHandler(requestHandler))
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .httpBasic()
