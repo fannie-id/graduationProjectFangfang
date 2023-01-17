@@ -22,7 +22,7 @@ export default function Register(props: RegisterProps) {
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
-        sRegisterUser((prevState) => ({...prevState, [nameOfInput]: inputValue}))
+        setRegisterUser((prevState) => ({...prevState, [nameOfInput]: inputValue}))
     }
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
