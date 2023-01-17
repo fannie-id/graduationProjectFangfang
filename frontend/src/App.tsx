@@ -10,6 +10,7 @@ import NavigationBar from "./components/NavigationBar";
 import useDeeds from "./hooks/useDeeds";
 import useUser from "./hooks/useUser";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Profile from "./components/Profile";
 
 
 function App() {
@@ -27,7 +28,9 @@ function App() {
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser}/>}></Route>
                     <Route element={<ProtectedRoutes user={loggedInUser}/>}>
-                        <Route path="/deeds" element={<DeedApp deeds={deeds} username={loggedInUser}/>}></Route>
+                        <Route path="/profile" element={<Profile user={loggedInUser}/>}></Route>
+                        <Route path="/deeds" element={<DeedApp deeds={deeds}
+                                                               username={loggedInUser && loggedInUser.username}/>}></Route>
                         <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
                         <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
                         <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>

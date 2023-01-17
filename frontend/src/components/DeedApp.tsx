@@ -6,7 +6,7 @@ import {Deed} from "../model/Deed";
 
 type DeedAppProps = {
     deeds: Deed[]
-    username: string
+    username: string | undefined
 }
 export default function DeedApp(props: DeedAppProps) {
 
@@ -23,7 +23,7 @@ export default function DeedApp(props: DeedAppProps) {
                  flexWrap={"wrap"}
                  justifyContent={"center"}>
 
-            <h2>Hallo {props.username}!</h2>
+            <h2>Hallo {props.username !== undefined && props.username}!</h2>
             <DeedsList deeds={props.deeds}/>
 
 
