@@ -10,7 +10,7 @@ export default function Register() {
         "email": "",
         "password": ""
     }
-    const [registerUser, sRegisterUser] = useState<RegisterUser>(emptyUser)
+    const [registerUser, setRegisterUser] = useState<RegisterUser>(emptyUser)
 
     const {addUser} = useUsers()
 
