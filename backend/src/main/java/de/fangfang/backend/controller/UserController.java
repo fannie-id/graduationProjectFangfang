@@ -1,5 +1,6 @@
 package de.fangfang.backend.controller;
 
+import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.model.UserRegistration;
 import de.fangfang.backend.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -20,11 +21,11 @@ public class UserController {
 
 
     @GetMapping("me")
-    public String helloMe(Principal principal) {
+    public UserInfo helloMe(Principal principal) {
         if (principal != null) {
-            return principal.getName();
+            return userService.getUserPublic(principal.getName());
         }
-        return "anonymousUser";
+        return null;
     }
 
     @PostMapping
@@ -33,8 +34,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+    public UserInfo login() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userService.getUserPublic(username);
     }
 
     @PostMapping("/logout")

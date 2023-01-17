@@ -2,6 +2,7 @@ package de.fangfang.backend.service;
 
 
 import de.fangfang.backend.model.User;
+import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.model.UserRegistration;
 import de.fangfang.backend.repository.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,6 +34,14 @@ public class UserService implements UserDetailsService {
                         new UsernameNotFoundException(username)
                 );
         return new org.springframework.security.core.userdetails.User(user.username(), user.password(), List.of());
+    }
+
+    public UserInfo getUserPublic(String username) {
+        User user = userRepo.findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(username)
+                );
+        return new UserInfo(user.username(), user.email(), user.givenDeeds(), user.takenDeeds(), user.address(), user.karmaPoints());
     }
 
     public void registerNewUser(UserRegistration newUser) {
