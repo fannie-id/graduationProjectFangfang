@@ -1,26 +1,26 @@
 import {createUser, getMe, loginUser, logoutUser} from "../api/user-api-calls";
-import {UserLogin, UserRegister} from "../model/User";
+import {UserLogin, UserRegister,UserInfo} from "../model/User";
 import {useEffect, useState} from "react";
 
 export default function useUser() {
-    const [username, setUsername] = useState<string>("")
+    const [loggedInUser, setLoggedInUser] = useState<string>("")
     useEffect(() => {
         getMe()
-            .then(setUsername)
+            .then(setLoggedInUser)
     }, [])
 
-    function getLoginUser(user: UserLogin): Promise<string> {
+    function getLoginUser(user: UserLogin): Promise<UserInfo> {
         return loginUser(user)
-            .then(data => {
-                setUsername(data)
-                return data
+            .then(user => {
+                setLoggedInUser(user.username)
+                return user
             })
     }
 
     function logout(): Promise<any> {
         return logoutUser()
             .then((data) => {
-                setUsername(data)
+                setLoggedInUser(data)
             })
     }
 
@@ -29,5 +29,5 @@ export default function useUser() {
             .catch(console.error)
     }
 
-    return {getLoginUser, addUser, username, logout}
+    return {getLoginUser, addUser, loggedInUser, logout}
 }
