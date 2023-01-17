@@ -5,10 +5,9 @@ import {useEffect, useState} from "react";
 export default function useUser() {
     const [username, setUsername] = useState<string>("")
     useEffect(() => {
-            getMe()
-                .then(setUsername)
-        }, []
-    )
+        getMe()
+            .then(setUsername)
+    }, [])
 
     function getLoginUser(user: LoginUser): Promise<string> {
         return loginUser(user)

@@ -1,7 +1,5 @@
 package de.fangfang.backend.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fangfang.backend.repository.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,11 +24,6 @@ class UserControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Autowired
-    ObjectMapper objectMapper;
-
-    @Autowired
-    UserRepo userRepo;
 
     @Test
     @WithMockUser
