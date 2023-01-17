@@ -11,7 +11,7 @@ type NavigationBarProps = {
 }
 export default function NavigationBar(props: NavigationBarProps) {
 
-    const [path, setPath] = useState<String>()
+    const [path, setPath] = useState<string>()
     return (
         <div>
             <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
@@ -29,6 +29,8 @@ export default function NavigationBar(props: NavigationBarProps) {
                                             value={"/register"}/>
                     <BottomNavigationAction component={Link} label="login" to={"/login"} icon={< FaceIcon/>}
                                             value={"/login"}/>
+                    <BottomNavigationAction component={Link} label="profile" to={"/profile"} icon={< FaceIcon/>}
+                                            value={"/profile"}/>
                     <BottomNavigationAction component={Link} onClick={props.logout} label="logout" to={""}
                                             icon={< ExitToAppIcon/>} value={""}/>
 

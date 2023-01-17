@@ -1,9 +1,25 @@
 import {createUser, getMe, loginUser, logoutUser} from "../api/user-api-calls";
 import {UserLogin, UserRegister,UserInfo} from "../model/User";
 import {useEffect, useState} from "react";
+import {Address} from "../model/Address";
 
 export default function useUser() {
-    const [loggedInUser, setLoggedInUser] = useState<string>("")
+    const address: Address = {
+        "street": "",
+        "houseNumber": "",
+        "zip": "",
+        "city": "",
+        "name": ""
+    }
+    const emptyUser: UserInfo = {
+        "username": "anonymousUser",
+        "email": "",
+        "givenDeeds": [],
+        "takenDeeds": [],
+        "address": address,
+        "karmaPoints": 0
+    }
+    const [loggedInUser, setLoggedInUser] = useState<UserInfo>()
     useEffect(() => {
         getMe()
             .then(setLoggedInUser)
@@ -12,7 +28,7 @@ export default function useUser() {
     function getLoginUser(user: UserLogin): Promise<UserInfo> {
         return loginUser(user)
             .then(user => {
-                setLoggedInUser(user.username)
+                setLoggedInUser(user)
                 return user
             })
     }
@@ -20,7 +36,7 @@ export default function useUser() {
     function logout(): Promise<any> {
         return logoutUser()
             .then((data) => {
-                setLoggedInUser(data)
+                setLoggedInUser(emptyUser)
             })
     }
 
