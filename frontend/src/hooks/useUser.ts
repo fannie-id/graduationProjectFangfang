@@ -10,16 +10,16 @@ export default function useUser() {
         }, []
     )
 
-    function getLoginUser(user: LoginUser) {
-        loginUser(user)
+    function getLoginUser(user: LoginUser): Promise<string> {
+        return loginUser(user)
             .then(data => {
                 setUsername(data)
                 return data
             })
     }
 
-    function addUser(newUser: RegisterUser) {
-        createUser(newUser)
+    function addUser(newUser: RegisterUser): Promise<any> {
+        return createUser(newUser)
             .catch(console.error)
     }
 

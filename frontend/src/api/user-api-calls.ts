@@ -12,7 +12,7 @@ export function createUser(newUser: RegisterUser) {
     return axios.post(userEndPoint, newUser)
 }
 
-export function loginUser(loginUser: LoginUser) {
+export function loginUser(loginUser: LoginUser): Promise<string> {
 
     return axios.post(userEndPoint + "/login", undefined, {
         auth: {

@@ -5,7 +5,7 @@ import {RegisterUser} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 type RegisterProps = {
-    addUser: (user: RegisterUser) => void
+    addUser: (user: RegisterUser) => Promise<any>
 }
 
 export default function Register(props: RegisterProps) {
@@ -27,8 +27,9 @@ export default function Register(props: RegisterProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.addUser(registerUser)
-        navigate("/login")
+        props.addUser(registerUser).then(status => {
+            navigate("/login")
+        })
     }
 
 

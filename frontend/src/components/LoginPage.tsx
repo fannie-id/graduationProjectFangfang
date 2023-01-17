@@ -5,7 +5,7 @@ import {LoginUser} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 type LoginPageProps = {
-    getLoginUser: (user: LoginUser) => void
+    getLoginUser: (user: LoginUser) => Promise<string>
 }
 
 export default function LoginPage(props: LoginPageProps) {
@@ -25,8 +25,11 @@ export default function LoginPage(props: LoginPageProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.getLoginUser(loginUser)
-        navigate("/deeds")
+        props.getLoginUser(loginUser).then(
+            user => {
+                navigate("/deeds")
+            }
+        )
     }
 
     return (<Box
