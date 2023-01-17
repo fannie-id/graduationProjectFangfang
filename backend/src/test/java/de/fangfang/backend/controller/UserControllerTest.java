@@ -59,7 +59,7 @@ class UserControllerTest {
                                 },
                                 "karmaPoints":0
                                 }
-                                """)
+                                """).with(csrf())
                 )
                 .andExpect(status().isOk());
     }
