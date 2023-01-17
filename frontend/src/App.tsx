@@ -13,7 +13,7 @@ import useUser from "./hooks/useUser";
 
 function App() {
     const {deeds, addNewDeed} = useDeeds()
-    const {getLoginUser, addUser, username} = useUser()
+    const {getLoginUser, addUser, username, logout} = useUser()
 
     return (
         <div className="App">
@@ -25,12 +25,13 @@ function App() {
                     <Route path="" element={<p>Welcome!</p>}></Route>
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser}/>}></Route>
+
                     <Route path="/deeds" element={<DeedApp deeds={deeds} username={username}/>}></Route>
                     <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
                     <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
                     <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
                 </Routes>
-                <NavigationBar/>
+                <NavigationBar logout={logout}/>
             </BrowserRouter>
         </div>
     );

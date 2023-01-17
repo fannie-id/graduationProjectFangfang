@@ -23,3 +23,8 @@ export function loginUser(loginUser: LoginUser): Promise<string> {
         .then((response) => response.data)
 
 }
+
+export function logoutUser(): Promise<string> {
+    return axios.post(userEndPoint + "/logout")
+        .then((response) => response.data)
+}
