@@ -60,4 +60,21 @@ public class UserService implements UserDetailsService {
         userRepo.save(userToSave);
     }
 
+    public UserInfo editUser(UserInfo user) {
+        User foundUser = userRepo.findByUsername(user.username())
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(user.username())
+                );
+        User userToSave = new User(
+                foundUser.id(),
+                foundUser.username(),
+                foundUser.password(),
+                user.email(),
+                user.givenDeeds(),
+                user.takenDeeds(),
+                user.address(),
+                user.karmaPoints());
+        userRepo.save(userToSave);
+        return user;
+    }
 }

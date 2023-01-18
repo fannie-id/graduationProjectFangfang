@@ -28,3 +28,8 @@ export function logoutUser(): Promise<string> {
     return axios.post(userEndPoint + "/logout")
         .then((response) => response.data)
 }
+
+export function putUser(user: UserInfo): Promise<UserInfo> {
+    return axios.put(userEndPoint + "update", user)
+        .then((response) => response.data)
+}
