@@ -46,4 +46,9 @@ public class UserController {
         return "anonymousUser";
     }
 
+    @PutMapping("/update")
+    public UserInfo editUser(@RequestBody UserInfo user) {
+        return userService.editUser(user);
+    }
+
 }

@@ -11,12 +11,12 @@ import useDeeds from "./hooks/useDeeds";
 import useUser from "./hooks/useUser";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Profile from "./components/Profile";
+import ProfileForm from "./components/FrofileForm";
 
 
 function App() {
-    const {deeds, addNewDeed} = useDeeds()
-    const {getLoginUser, addUser, loggedInUser, logout} = useUser()
-
+    const {getLoginUser, addUser, loggedInUser, logout, editUser} = useUser()
+    const {deeds, addNewDeed} = useDeeds(loggedInUser)
     return (
         <div className="App">
             <header className="App-header">
@@ -29,6 +29,8 @@ function App() {
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser}/>}></Route>
                     <Route element={<ProtectedRoutes user={loggedInUser}/>}>
                         <Route path="/profile" element={<Profile user={loggedInUser}/>}></Route>
+                        <Route path="/profile/edit"
+                               element={<ProfileForm user={loggedInUser} submitUser={editUser}/>}></Route>
                         <Route path="/deeds" element={<DeedApp deeds={deeds}
                                                                username={loggedInUser && loggedInUser.username}/>}></Route>
                         <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
