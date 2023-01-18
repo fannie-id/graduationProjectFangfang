@@ -5,17 +5,20 @@ import {UserInfo} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 type ProfileFormProps = {
-    user: UserInfo | undefined
+    user: UserInfo
     submitUser: (changUser: UserInfo) => Promise<UserInfo>
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
-    if (!props.user) {
-        return (<p>loading</p>)
-    }
-    const [ChangeUser, setChangeUser] = useState<UserInfo>(props.user)
+
+
+    const [changeUser, setChangeUser] = useState<UserInfo>(props.user)
 
     const navigate = useNavigate()
+
+    if (props.user === undefined) {
+        return (<p>loading</p>)
+    }
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
@@ -38,7 +41,7 @@ export default function ProfileForm(props: ProfileFormProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.submitUser(ChangeUser)
+        props.submitUser(changeUser)
             .then(() => {
                 navigate("/profile")
             })
@@ -58,7 +61,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"description"}
-                    value={ChangeUser.username}
+                    value={changeUser.username}
                     label="Description"
                     placeholder="Description"
                     InputProps={{
@@ -70,7 +73,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"email"}
-                    value={ChangeUser.email}
+                    value={changeUser.email}
                     label="Description"
                     placeholder="Description"
                     onChange={handleFormChange}
@@ -80,7 +83,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"street"}
-                    value={ChangeUser.address.street}
+                    value={changeUser.address ? changeUser.address.street : ""}
                     label="Street"
                     placeholder="Street"
                     onChange={handleFormAddressChange}
@@ -89,7 +92,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"houseNumber"}
-                    value={ChangeUser.address.houseNumber}
+                    value={changeUser.address ? changeUser.address.houseNumber : ""}
                     label="House Number"
                     placeholder="House Number"
                     onChange={handleFormAddressChange}
@@ -98,7 +101,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"zip"}
-                    value={ChangeUser.address.zip}
+                    value={changeUser.address ? changeUser.address.zip : ""}
                     label="ZIP"
                     placeholder="ZIP"
                     onChange={handleFormAddressChange}
@@ -107,7 +110,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"city"}
-                    value={ChangeUser.address.city}
+                    value={changeUser.address ? changeUser.address.city : ""}
                     label="City"
                     placeholder="City"
                     onChange={handleFormAddressChange}
@@ -117,7 +120,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"name"}
-                    value={ChangeUser.address.name}
+                    value={changeUser.address ? changeUser.address.name : ""}
                     label="Name"
                     placeholder="Name"
                     onChange={handleFormAddressChange}
@@ -127,7 +130,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"karmaPoints"}
-                    value={ChangeUser.karmaPoints}
+                    value={changeUser.karmaPoints}
                     label="Karma Points"
                     placeholder="Karma Points"
                     InputProps={{

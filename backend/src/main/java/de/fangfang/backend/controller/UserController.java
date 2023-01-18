@@ -51,4 +51,12 @@ public class UserController {
         return userService.editUser(user);
     }
 
+    @DeleteMapping("/{name}")
+    public String deleteUser(@PathVariable String name, HttpSession httpSession) {
+        userService.deleteUser(name);
+        httpSession.invalidate();
+        SecurityContextHolder.clearContext();
+        return "anonymousUser";
+    }
+
 }

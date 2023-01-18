@@ -1,8 +1,7 @@
 import {Box, IconButton, TextField} from "@mui/material";
 import FaceIcon from '@mui/icons-material/Face';
 import {ChangeEvent, FormEvent, useState} from "react";
-import {LoginUser, UserInfo} from "../model/User";
-import {UserLogin} from "../model/User";
+import {UserInfo, UserLogin} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 type LoginPageProps = {

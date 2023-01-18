@@ -16,6 +16,6 @@ export type UserInfo = {
     email: string,
     givenDeeds: string[],
     takenDeeds: string[],
-    address: Address,
+    address?: Address,
     karmaPoints: number
 }
