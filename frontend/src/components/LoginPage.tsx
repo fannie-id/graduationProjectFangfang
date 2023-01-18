@@ -1,20 +1,20 @@
 import {Box, IconButton, TextField} from "@mui/material";
 import FaceIcon from '@mui/icons-material/Face';
 import {ChangeEvent, FormEvent, useState} from "react";
-import {LoginUser} from "../model/User";
+import {UserLogin} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 type LoginPageProps = {
-    getLoginUser: (user: LoginUser) => Promise<string>
+    getLoginUser: (user: UserLogin) => Promise<string>
 }
 
 export default function LoginPage(props: LoginPageProps) {
 
-    const emptyLoginUser: LoginUser = {
+    const emptyLoginUser: UserLogin = {
         "username": "",
         "password": ""
     }
-    const [loginUser, setLoginUser] = useState<LoginUser>(emptyLoginUser)
+    const [loginUser, setLoginUser] = useState<UserLogin>(emptyLoginUser)
     const navigate = useNavigate()
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
@@ -40,7 +40,7 @@ export default function LoginPage(props: LoginPageProps) {
         flexWrap={"wrap"}
         alignItems="center"
         justifyContent={"center"}>
-
+        <h2>Login</h2>
         <form onSubmit={handleSubmit}>
             <TextField
                 required

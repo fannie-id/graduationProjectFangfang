@@ -1,20 +1,20 @@
 import {Box, IconButton, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import {RegisterUser} from "../model/User";
+import {UserRegister} from "../model/User";
 import {useNavigate} from "react-router-dom";
 
 type RegisterProps = {
-    addUser: (user: RegisterUser) => Promise<any>
+    addUser: (user: UserRegister) => Promise<any>
 }
 
 export default function Register(props: RegisterProps) {
-    const emptyUser: RegisterUser = {
+    const emptyUser: UserRegister = {
         "username": "",
         "email": "",
         "password": ""
     }
-    const [registerUser, setRegisterUser] = useState<RegisterUser>(emptyUser)
+    const [registerUser, setRegisterUser] = useState<UserRegister>(emptyUser)
 
 
     const navigate = useNavigate()
@@ -41,7 +41,7 @@ export default function Register(props: RegisterProps) {
         flexWrap={"wrap"}
         alignItems="center"
         justifyContent={"center"}>
-
+        <h2>Register</h2>
         <form onSubmit={handleSubmit}>
             <TextField
                 required

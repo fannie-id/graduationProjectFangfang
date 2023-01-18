@@ -1,5 +1,5 @@
 import axios from "axios";
-import {LoginUser, RegisterUser} from "../model/User";
+import {UserLogin, UserRegister} from "../model/User";
 
 const userEndPoint: string = "/api/users";
 
@@ -8,11 +8,11 @@ export function getMe() {
         .then(response => response.data)
 }
 
-export function createUser(newUser: RegisterUser) {
+export function createUser(newUser: UserRegister) {
     return axios.post(userEndPoint, newUser)
 }
 
-export function loginUser(loginUser: LoginUser): Promise<string> {
+export function loginUser(loginUser: UserLogin): Promise<string> {
 
     return axios.post(userEndPoint + "/login", undefined, {
         auth: {
