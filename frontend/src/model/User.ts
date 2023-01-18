@@ -1,7 +1,6 @@
-export type UserRegister = {
 import {Address} from "./Address";
 
-export type RegisterUser = {
+export type UserRegister = {
     username: string,
     email: string,
     password: string
