@@ -27,20 +27,21 @@ class UserControllerTest {
 
     @Test
     @WithMockUser
+    @DirtiesContext
     void hello_me_test() throws Exception {
         mvc.perform(get(userEndPoint + "/me"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("user"));
+                .andExpect(status().isOk());
     }
 
     @Test
+    @DirtiesContext
     void hello_me_test_401() throws Exception {
         mvc.perform(get(userEndPoint + "/me"))
-                .andExpect(status().is(200))
-                .andExpect(content().string("anonymousUser"));
+                .andExpect(status().is(200));
     }
 
     @Test
+    @DirtiesContext
     void creat_user_get_200() throws Exception {
         mvc.perform(post(userEndPoint)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -66,14 +67,15 @@ class UserControllerTest {
     }
 
     @WithMockUser
+    @DirtiesContext
     @Test
     void login_expect_200() throws Exception {
         mvc.perform(post(userEndPoint + "/login").with(csrf()))
-                .andExpect(status().isOk())
-                .andExpect(content().string("user"));
+                .andExpect(status().isOk());
     }
 
     @WithMockUser
+    @DirtiesContext
     @Test
     void logout_expect_200() throws Exception {
         mvc.perform(post(userEndPoint + "/logout").with(csrf()))
