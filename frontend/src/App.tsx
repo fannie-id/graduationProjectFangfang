@@ -4,13 +4,16 @@ import ViewDeed from "./components/ViewDeed";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import EditDeed from "./components/EditDeed";
 import AddDeed from "./components/AddDeed";
+import LoginPage from "./components/LoginPage";
 import Register from "./components/Register"
 import NavigationBar from "./components/NavigationBar";
 import useDeeds from "./hooks/useDeeds";
+import useUser from "./hooks/useUser";
 
 
 function App() {
     const {deeds, addNewDeed} = useDeeds()
+    const {getLoginUser, addUser, username, logout} = useUser()
 
     return (
         <div className="App">
@@ -20,13 +23,15 @@ function App() {
 
                 <Routes>
                     <Route path="" element={<p>Welcome!</p>}></Route>
-                    <Route path="/register" element={<Register/>}></Route>
-                    <Route path="/deeds" element={<DeedApp deeds={deeds}/>}></Route>
+                    <Route path="/register" element={<Register addUser={addUser}/>}></Route>
+                    <Route path="/login" element={<LoginPage getLoginUser={getLoginUser}/>}></Route>
+
+                    <Route path="/deeds" element={<DeedApp deeds={deeds} username={username}/>}></Route>
                     <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
                     <Route path="/deeds/:id" element={<ViewDeed/>}></Route>
                     <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
                 </Routes>
-                <NavigationBar/>
+                <NavigationBar logout={logout}/>
             </BrowserRouter>
         </div>
     );

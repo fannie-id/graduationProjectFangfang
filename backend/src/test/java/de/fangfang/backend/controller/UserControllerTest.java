@@ -24,18 +24,20 @@ class UserControllerTest {
     @Autowired
     private MockMvc mvc;
 
+
     @Test
     @WithMockUser
     void hello_me_test() throws Exception {
         mvc.perform(get(userEndPoint + "/me"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello user"));
+                .andExpect(content().string("user"));
     }
 
     @Test
     void hello_me_test_401() throws Exception {
         mvc.perform(get(userEndPoint + "/me"))
-                .andExpect(status().is(401));
+                .andExpect(status().is(200))
+                .andExpect(content().string("anonymousUser"));
     }
 
     @Test
@@ -61,5 +63,21 @@ class UserControllerTest {
                                 """).with(csrf())
                 )
                 .andExpect(status().isOk());
+    }
+
+    @WithMockUser
+    @Test
+    void login_expect_200() throws Exception {
+        mvc.perform(post(userEndPoint + "/login").with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("user"));
+    }
+
+    @WithMockUser
+    @Test
+    void logout_expect_200() throws Exception {
+        mvc.perform(post(userEndPoint + "/logout").with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("anonymousUser"));
     }
 }
