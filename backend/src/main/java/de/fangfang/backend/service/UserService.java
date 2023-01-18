@@ -77,4 +77,14 @@ public class UserService implements UserDetailsService {
         userRepo.save(userToSave);
         return user;
     }
+
+
+    public void deleteUser(String name) {
+        User foundUser = userRepo.findByUsername(name)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(name)
+                );
+
+        userRepo.deleteById(foundUser.id());
+    }
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {UserLogin, UserRegister, UserInfo} from "../model/User";
+import {UserInfo, UserLogin, UserRegister} from "../model/User";
 
 const userEndPoint: string = "/api/users";
 
@@ -31,5 +31,10 @@ export function logoutUser(): Promise<string> {
 
 export function putUser(user: UserInfo): Promise<UserInfo> {
     return axios.put(userEndPoint + "update", user)
+        .then((response) => response.data)
+}
+
+export function deletLoggdeInUser(user: UserInfo): Promise<string> {
+    return axios.delete(userEndPoint + "/" + user.username)
         .then((response) => response.data)
 }

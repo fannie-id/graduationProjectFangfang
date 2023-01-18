@@ -15,22 +15,21 @@ import ProfileForm from "./components/FrofileForm";
 
 
 function App() {
-    const {getLoginUser, addUser, loggedInUser, logout, editUser} = useUser()
+    const {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser} = useUser()
     const {deeds, addNewDeed} = useDeeds(loggedInUser)
     return (
         <div className="App">
             <header className="App-header">
             </header>
             <BrowserRouter>
-
                 <Routes>
                     <Route path="" element={<p>Welcome!</p>}></Route>
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser}/>}></Route>
                     <Route element={<ProtectedRoutes user={loggedInUser}/>}>
-                        <Route path="/profile" element={<Profile user={loggedInUser}/>}></Route>
+                        <Route path="/profile" element={<Profile user={loggedInUser} deleteUser={deleteUser}/>}></Route>
                         <Route path="/profile/edit"
-                               element={<ProfileForm user={loggedInUser} submitUser={editUser}/>}></Route>
+                               element={<ProfileForm user={loggedInUser!} submitUser={editUser}/>}></Route>
                         <Route path="/deeds" element={<DeedApp deeds={deeds}
                                                                username={loggedInUser && loggedInUser.username}/>}></Route>
                         <Route path="/deeds/add" element={<AddDeed addNewDeed={addNewDeed}/>}></Route>
