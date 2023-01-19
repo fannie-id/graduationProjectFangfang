@@ -96,4 +96,23 @@ public class UserService implements UserDetailsService {
         Address emptyAddress = new Address("", "", "", "", "");
         return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, emptyAddress, 0);
     }
+
+    public void gainPoints(String username, int points) {
+        User foundUser = userRepo.findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(username)
+                );
+
+        int newKP = foundUser.karmaPoints() + points;
+        User userToSave = new User(
+                foundUser.id(),
+                foundUser.username(),
+                foundUser.password(),
+                foundUser.email(),
+                foundUser.givenDeeds(),
+                foundUser.takenDeeds(),
+                foundUser.address(),
+                newKP);
+        userRepo.save(userToSave);
+    }
 }

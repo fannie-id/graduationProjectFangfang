@@ -4,8 +4,14 @@ import {Box, Button} from "@mui/material";
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import {DeedStatus} from "../../model/Deed";
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import {UserInfo} from "../../model/User";
 
-export default function ViewDeed() {
+type ViewDeedProps = {
+    user: UserInfo
+    userGainKP: (points: number, username: string) => void
+}
+export default function ViewDeed(props: ViewDeedProps) {
 
     const {id} = useParams()
 
@@ -39,8 +45,18 @@ export default function ViewDeed() {
     function handleStatusChange() {
 
         if (getDeed) {
-            const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus)}
-            editDeed(deedToSave)
+            if (getDeed.deedStatus === DeedStatus.CREATED) {
+                const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus), maker: props.user.username}
+                editDeed(deedToSave)
+            } else if (getDeed.deedStatus === DeedStatus.DONE) {
+                const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus)}
+                editDeed(deedToSave)
+
+                props.userGainKP(getDeed.karmaPoints, getDeed.maker)
+            } else {
+                const deedToSave = {...getDeed, deedStatus: nextStatus(getDeed.deedStatus)}
+                editDeed(deedToSave)
+            }
         }
 
     }
@@ -73,17 +89,22 @@ export default function ViewDeed() {
             <p>KarmaPoints: {getDeed.karmaPoints}</p>
             <p>Status: {getDeed.deedStatus}</p>
 
-            <Button onClick={handleEditDeed}>
-                <EditLocationAltIcon color="success"/>
-            </Button>
-            <Button onClick={handleDeleteDeed}>
-                <DeleteSweepIcon color="success"/>
-            </Button>
+            {getDeed.deedStatus === DeedStatus.CREATED && getDeed.author === props.user.username &&
+                <Button onClick={handleEditDeed}>
+                    <EditLocationAltIcon color="success"/>
+                </Button>
+            }
+            {getDeed.deedStatus === DeedStatus.CREATED && getDeed.author === props.user.username &&
+                <Button onClick={handleDeleteDeed}>
+                    <DeleteSweepIcon color="success"/>
+                </Button>
+            }
 
-
-            <Button onClick={handleStatusChange}>
-                next
-            </Button>
+            {((getDeed.deedStatus !== DeedStatus.DONE && getDeed.author !== props.user.username)
+                    || (getDeed.deedStatus === DeedStatus.DONE && getDeed.author === props.user.username)) &&
+                <Button onClick={handleStatusChange}>
+                    <HandshakeIcon color="success"/>
+                </Button>}
         </Box>
     )
 

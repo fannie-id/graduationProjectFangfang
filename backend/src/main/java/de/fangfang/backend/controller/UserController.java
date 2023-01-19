@@ -60,4 +60,9 @@ public class UserController {
         SecurityContextHolder.clearContext();
     }
 
+    @PutMapping("/validate/{username}")
+    public void editUser(@PathVariable String username, @RequestBody int points) {
+        userService.gainPoints(username, points);
+    }
+
 }

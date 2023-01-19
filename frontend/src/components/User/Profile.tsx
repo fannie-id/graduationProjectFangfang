@@ -36,10 +36,14 @@ export default function Profile(props: ProfileProps) {
             justifyContent={"center"}>
 
 
-            {props.user !== undefined && props.user.username}
-
+            <h2>{props.user !== undefined && props.user.username} 's Profile</h2>
+            <p>nice thing other help me:</p>
             <DeedsList
                 deeds={props.deeds.filter((deed: Deed) => deed.author === (!!props.user && props.user.username))}/>
+            <p>nice thing i made:</p>
+            <DeedsList
+                deeds={props.deeds.filter((deed: Deed) => deed.maker === (!!props.user && props.user.username))}/>
+
             <IconButton onClick={toEditPage} type="submit">
                 <FaceRetouchingNaturalIcon color="success" fontSize={"large"}/>
             </IconButton>
