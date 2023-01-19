@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 type LoginPageProps = {
     getLoginUser: (user: UserLogin) => Promise<UserInfo>
+    user: UserInfo
 }
 
 export default function LoginPage(props: LoginPageProps) {
@@ -16,6 +17,10 @@ export default function LoginPage(props: LoginPageProps) {
     }
     const [loginUser, setLoginUser] = useState<UserLogin>(emptyLoginUser)
     const navigate = useNavigate()
+
+    if (!!props.user && props.user.username !== "anonymousUser") {
+        navigate("/deeds")
+    }
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
