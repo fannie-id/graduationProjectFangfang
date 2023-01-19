@@ -16,7 +16,6 @@ export default function NavigationBar(props: NavigationBarProps) {
     const [path, setPath] = useState<string>()
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
     useEffect(() => {
-        console.log(props.user?.username)
         if (props.user?.username !== undefined) {
             setIsLoggedIn(true)
         } else {
