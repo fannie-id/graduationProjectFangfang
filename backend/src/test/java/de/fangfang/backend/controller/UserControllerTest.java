@@ -5,7 +5,6 @@ import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.repository.UserRepo;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -61,8 +61,23 @@ class UserControllerTest {
     @Test
     @DirtiesContext
     void hello_me_test_withoutLogin() throws Exception {
-        mvc.perform(get(userEndPoint + "/me"))
-                .andExpect(status().is(404));
+        Address address = new Address("", "", "", "", "");
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+        UserInfo expected = new UserInfo(
+                "anonymousUser",
+                "",
+                givenDeeds,
+                takenDeeds,
+                address,
+                0
+        );
+
+        MvcResult mvcResult = mvc.perform(get(userEndPoint + "/me"))
+                .andExpect(status().is(200))
+                .andReturn();
+        UserInfo result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), UserInfo.class);
+        assertEquals(result, expected);
     }
 
     @Test
@@ -169,7 +184,7 @@ class UserControllerTest {
                 0
         );
         UserInfo result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), UserInfo.class);
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @WithMockUser

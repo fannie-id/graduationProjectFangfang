@@ -20,7 +20,7 @@ export default function useUser() {
         "address": address,
         "karmaPoints": 0
     }
-    const [loggedInUser, setLoggedInUser] = useState<UserInfo>()
+    const [loggedInUser, setLoggedInUser] = useState<UserInfo>(emptyUser)
     useEffect(() => {
         getMe()
             .then(setLoggedInUser)
@@ -29,6 +29,7 @@ export default function useUser() {
     function getLoginUser(user: UserLogin): Promise<UserInfo> {
         return loginUser(user)
             .then(user => {
+
                 setLoggedInUser(user)
                 return user
             })

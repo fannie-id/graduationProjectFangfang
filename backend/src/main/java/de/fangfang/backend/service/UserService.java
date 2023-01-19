@@ -1,6 +1,7 @@
 package de.fangfang.backend.service;
 
 
+import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.model.UserRegistration;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -86,5 +88,12 @@ public class UserService implements UserDetailsService {
                 );
 
         userRepo.deleteById(foundUser.id());
+    }
+
+    public UserInfo returnAnonymousUser() {
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+        Address emptyAddress = new Address("", "", "", "", "");
+        return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, emptyAddress, 0);
     }
 }
