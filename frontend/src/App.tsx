@@ -11,7 +11,7 @@ import useDeeds from "./hooks/useDeeds";
 import useUser from "./hooks/useUser";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Profile from "./components/User/Profile";
-import ProfileForm from "./components/User/FrofileForm";
+import ProfileForm from "./components/User/ProfileForm";
 
 
 function App() {
