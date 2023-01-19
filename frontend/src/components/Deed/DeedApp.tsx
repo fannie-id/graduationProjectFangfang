@@ -2,7 +2,7 @@ import DeedsList from "./DeedsList";
 import {Box, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {AddCircle} from "@mui/icons-material";
-import {Deed} from "../model/Deed";
+import {Deed} from "../../model/Deed";
 
 type DeedAppProps = {
     deeds: Deed[]

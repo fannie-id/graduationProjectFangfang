@@ -1,9 +1,9 @@
 import {useNavigate, useParams} from "react-router-dom";
-import useDeed from "../hooks/useDeed";
+import useDeed from "../../hooks/useDeed";
 import {Box, Button} from "@mui/material";
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
-import {DeedStatus} from "../model/Deed";
+import {DeedStatus} from "../../model/Deed";
 
 export default function ViewDeed() {
 

@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
-import useDeed from "../hooks/useDeed";
+import useDeed from "../../hooks/useDeed";
 import DeedForm from "./DeedForm";
-import {Deed} from "../model/Deed";
+import {Deed} from "../../model/Deed";
 
 export default function EditDeed() {
     const navigate = useNavigate()

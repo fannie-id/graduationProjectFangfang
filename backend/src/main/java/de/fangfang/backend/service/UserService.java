@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.username(), user.password(), List.of());
     }
 
-    public UserInfo getUserPublic(String username) {
+    public UserInfo getUserInfo(String username) {
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(username)

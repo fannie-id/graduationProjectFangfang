@@ -30,11 +30,11 @@ export function logoutUser(): Promise<string> {
 }
 
 export function putUser(user: UserInfo): Promise<UserInfo> {
-    return axios.put(userEndPoint + "update", user)
+    return axios.put(userEndPoint + "/update", user)
         .then((response) => response.data)
 }
 
-export function deletLoggdeInUser(user: UserInfo): Promise<string> {
+export function deleteLoggedInUser(user: UserInfo): Promise<string> {
     return axios.delete(userEndPoint + "/" + user.username)
         .then((response) => response.data)
 }

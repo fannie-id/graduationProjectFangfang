@@ -1,5 +1,5 @@
 import {Box, IconButton, TextField} from "@mui/material";
-import {Deed} from "../model/Deed";
+import {Deed} from "../../model/Deed";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
