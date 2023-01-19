@@ -48,6 +48,7 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/api/users/me").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users/validate/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/admin-only").hasRole("ADMIN")

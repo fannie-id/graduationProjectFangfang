@@ -38,3 +38,8 @@ export function deleteLoggedInUser(user: UserInfo): Promise<string> {
     return axios.delete(userEndPoint + "/" + user.username)
         .then((response) => response.data)
 }
+
+export function putKP(points: number, username: string) {
+    axios.put(userEndPoint + "/validate/" + username, points)
+        .then((response) => response.data)
+}

@@ -16,7 +16,7 @@ export default function EditDeed() {
     function submitDeed(deed: Deed) {
 
         editDeed(deed)
-        navigate("/deeds")
+        navigate("/deeds/" + id)
 
     }
 
