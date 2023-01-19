@@ -11,20 +11,30 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    String timestamp = "timestamp";
+    String message = "message";
 
     @ExceptionHandler(DeedIdNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleIdNotFoundException(DeedIdNotFoundException exception) {
         Map<String, Object> responseBody = new LinkedHashMap<>();
-        responseBody.put("timestamp", LocalDateTime.now());
-        responseBody.put("message", exception.getMessage());
+        responseBody.put(timestamp, LocalDateTime.now());
+        responseBody.put(message, exception.getMessage());
+        return new ResponseEntity<>(responseBody, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleIdNotFoundException(UsernameNotFoundException exception) {
+        Map<String, Object> responseBody = new LinkedHashMap<>();
+        responseBody.put(timestamp, LocalDateTime.now());
+        responseBody.put(message, exception.getMessage());
         return new ResponseEntity<>(responseBody, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneralException() {
         Map<String, Object> responseBody = new LinkedHashMap<>();
-        responseBody.put("timestamp", LocalDateTime.now());
-        responseBody.put("message", "bad request");
+        responseBody.put(timestamp, LocalDateTime.now());
+        responseBody.put(message, "bad request");
         return new ResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
     }
 }

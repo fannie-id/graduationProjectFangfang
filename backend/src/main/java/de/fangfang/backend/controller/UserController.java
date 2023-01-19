@@ -4,6 +4,8 @@ import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.model.UserRegistration;
 import de.fangfang.backend.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +23,11 @@ public class UserController {
 
 
     @GetMapping("me")
-    public UserInfo helloMe(Principal principal) {
+    public ResponseEntity<UserInfo> helloMe(Principal principal) {
         if (principal != null) {
-            return userService.getUserInfo(principal.getName());
+            return new ResponseEntity<>(userService.getUserInfo(principal.getName()), HttpStatus.OK);
         }
-        return null;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -52,11 +54,10 @@ public class UserController {
     }
 
     @DeleteMapping("/{name}")
-    public String deleteUser(@PathVariable String name, HttpSession httpSession) {
+    public void deleteUser(@PathVariable String name, HttpSession httpSession) {
         userService.deleteUser(name);
         httpSession.invalidate();
         SecurityContextHolder.clearContext();
-        return "anonymousUser";
     }
 
 }
