@@ -5,7 +5,9 @@ export type Deed = {
     description: string,
     address: Address,
     karmaPoints: number,
-    deedStatus: DeedStatus
+    deedStatus: DeedStatus,
+    author: string,
+    maker: string,
 }
 
 export enum DeedStatus {

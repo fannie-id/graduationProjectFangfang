@@ -3,16 +3,20 @@ import {UserInfo} from "../../model/User";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
 import {useNavigate} from "react-router-dom";
+import DeedsList from "../Deed/DeedsList";
+import {Deed} from "../../model/Deed";
 
 type ProfileProps = {
     user: UserInfo | undefined
     deleteUser: (user: UserInfo) => Promise<any>
+    deeds: Deed[]
 }
 export default function Profile(props: ProfileProps) {
     const navigate = useNavigate()
 
     function toEditPage() {
         navigate("/profile/edit")
+
     }
 
     function handleDeleteUser() {
@@ -33,6 +37,8 @@ export default function Profile(props: ProfileProps) {
 
 
             {props.user !== undefined && props.user.username}
+
+            <DeedsList deeds={props.deeds}/>
             <IconButton onClick={toEditPage} type="submit">
                 <FaceRetouchingNaturalIcon color="success" fontSize={"large"}/>
             </IconButton>

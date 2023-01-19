@@ -43,6 +43,7 @@ export default function DeedForm(props: DeedFormProps) {
             display={"grid"}
             flexWrap={"wrap"}
             justifyContent={"center"}>
+            <p>{props.deed.author}</p>
 
             <form onSubmit={handleSubmit}>
                 <TextField
