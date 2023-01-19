@@ -17,6 +17,10 @@ export default function LoginPage(props: LoginPageProps) {
     const [loginUser, setLoginUser] = useState<UserLogin>(emptyLoginUser)
     const navigate = useNavigate()
 
+    if (props.getLoginUser !== undefined) {
+        navigate("/deeds")
+    }
+
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
