@@ -62,7 +62,7 @@ class UserControllerTest {
     @DirtiesContext
     void hello_me_test_withoutLogin() throws Exception {
         mvc.perform(get(userEndPoint + "/me"))
-                .andExpect(status().is(200));
+                .andExpect(status().is(404));
     }
 
     @Test
@@ -175,7 +175,7 @@ class UserControllerTest {
     @WithMockUser
     @DirtiesContext
     @Test
-    void delete_uer_get_200() throws Exception {
+    void delete_user_get_200() throws Exception {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
