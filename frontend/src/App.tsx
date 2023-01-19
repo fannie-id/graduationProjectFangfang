@@ -6,7 +6,7 @@ import EditDeed from "./components/Deed/EditDeed";
 import AddDeed from "./components/Deed/AddDeed";
 import LoginPage from "./components/User/LoginPage";
 import Register from "./components/User/Register"
-import NavigationBar from "./components/User/NavigationBar";
+import NavigationBar from "./components/NavigationBar";
 import useDeeds from "./hooks/useDeeds";
 import useUser from "./hooks/useUser";
 import ProtectedRoutes from "./components/ProtectedRoutes";
