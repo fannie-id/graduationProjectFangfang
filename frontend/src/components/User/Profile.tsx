@@ -38,7 +38,8 @@ export default function Profile(props: ProfileProps) {
 
             {props.user !== undefined && props.user.username}
 
-            <DeedsList deeds={props.deeds}/>
+            <DeedsList
+                deeds={props.deeds.filter((deed: Deed) => deed.author === (!!props.user && props.user.username))}/>
             <IconButton onClick={toEditPage} type="submit">
                 <FaceRetouchingNaturalIcon color="success" fontSize={"large"}/>
             </IconButton>
