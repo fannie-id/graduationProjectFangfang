@@ -38,9 +38,22 @@ class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    @WithMockUser
+    @WithMockUser(username = "max")
     @DirtiesContext
     void hello_me_test() throws Exception {
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+        userRepo.save(new User(
+                "1",
+                "max",
+                "password",
+                "email",
+                givenDeeds,
+                takenDeeds,
+                address,
+                0
+        ));
         mvc.perform(get(userEndPoint + "/me"))
                 .andExpect(status().isOk());
     }
@@ -78,10 +91,23 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser
+    @WithMockUser(username = "max")
     @DirtiesContext
     @Test
     void login_expect_200() throws Exception {
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+        userRepo.save(new User(
+                "1",
+                "max",
+                "password",
+                "email",
+                givenDeeds,
+                takenDeeds,
+                address,
+                0
+        ));
         mvc.perform(post(userEndPoint + "/login").with(csrf()))
                 .andExpect(status().isOk());
     }
