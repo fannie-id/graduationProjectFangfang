@@ -34,7 +34,7 @@ class UserServiceTest {
 
     @Test
     void register_user_expect_success() {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        Address address = new Address("", "", "", "", "");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         UserRegistration userRegistration = new UserRegistration(
