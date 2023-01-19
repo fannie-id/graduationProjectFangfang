@@ -3,59 +3,55 @@ import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FaceIcon from '@mui/icons-material/Face';
+import {UserInfo} from "../model/User";
 
 type NavigationBarProps = {
     logout: () => Promise<any>
+    user: UserInfo | undefined
 }
 export default function NavigationBar(props: NavigationBarProps) {
 
     const [path, setPath] = useState<string>()
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+    useEffect(() => {
+        console.log(props.user?.username)
+        if (props.user?.username !== undefined) {
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
 
-    let naviItems;
-    if (isLoggedIn) {
-        naviItems = <BottomNavigation
-            showLabels
-            value={path}
-            onChange={(event, newValue) => {
-                setPath(newValue);
-                if (path !== "/register" && path !== "/login") {
-                    setIsLoggedIn(true)
-                }
-            }}
-        >
-            <BottomNavigationAction component={Link} label="profile" to={"/profile"} icon={< FaceIcon/>}
-                                    value={"/profile"}/>
-            <BottomNavigationAction component={Link} onClick={props.logout} label="logout" to={""}
-                                    icon={< ExitToAppIcon/>} value={""}/>
-            <BottomNavigationAction component={Link} label="overview" to={"/deeds"} icon={< AllInclusiveIcon/>}
-                                    value={"/deeds"}/></BottomNavigation>
-    } else {
-        naviItems = <BottomNavigation
-            showLabels
-            value={path}
-            onChange={(event, newValue) => {
-                setPath(newValue);
-                if (path !== "/register" && path !== "/login") {
-                    setIsLoggedIn(true)
-                }
-            }}
-        >
-            <BottomNavigationAction component={Link} label="register" to={"/register"}
-                                    icon={< AddReactionIcon/>}
-                                    value={"/register"}/>
-            <BottomNavigationAction component={Link} label="login" to={"/login"} icon={< FaceIcon/>}
-                                    value={"/login"}/></BottomNavigation>
-
-    }
+    }, [props.user])
 
 
     return (
         <div>
             <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
-                {naviItems}
+                <BottomNavigation
+                    showLabels
+                    value={path}
+                    onChange={(event, newValue) => {
+                        setPath(newValue);
+                    }}
+                >
+                    {isLoggedIn &&
+                        <BottomNavigationAction component={Link} label="profile" to={"/profile"} icon={< FaceIcon/>}
+                                                value={"/profile"}/>}
+                    {isLoggedIn &&
+                        <BottomNavigationAction component={Link} onClick={props.logout} label="logout" to={""}
+                                                icon={< ExitToAppIcon/>} value={""}/>}
+                    {isLoggedIn && <BottomNavigationAction component={Link} label="overview" to={"/deeds"}
+                                                           icon={< AllInclusiveIcon/>}
+                                                           value={"/deeds"}/>}
+                    {!isLoggedIn && <BottomNavigationAction component={Link} label="register" to={"/register"}
+                                                            icon={< AddReactionIcon/>}
+                                                            value={"/register"}/>}
+                    {!isLoggedIn &&
+                        <BottomNavigationAction component={Link} label="login" to={"/login"} icon={< FaceIcon/>}
+                                                value={"/login"}/>}
+                </BottomNavigation>
             </Paper>
         </div>
     )

@@ -37,7 +37,7 @@ function App() {
                         <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
                     </Route>
                 </Routes>
-                <NavigationBar logout={logout}/>
+                <NavigationBar logout={logout} user={loggedInUser}/>
             </BrowserRouter>
         </div>
     );
