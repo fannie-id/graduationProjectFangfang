@@ -54,7 +54,7 @@ class DeedControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                "description":"max",
+                                "description":"do something",
                                 "address":{
                                     "street": "wallstreet",
                                     "houseNumber": "2",
@@ -81,13 +81,13 @@ class DeedControllerTest {
     @DirtiesContext
     void editDeed_expect_correct_Deed() throws Exception {
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
+        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED, "", "");
         deedRepo.save(deed);
         mvc.perform(put(DeepEndPoint + "/10")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                "description":"max",
+                                "description":"do something",
                                 "address":{
                                     "street": "wallstreet",
                                     "houseNumber": "2",
@@ -95,7 +95,9 @@ class DeedControllerTest {
                                     "city": "New York City",
                                     "name": "Fangfang"
                                 },
-                                "karmaPoints":2
+                                "karmaPoints":2,
+                                "author":"max",
+                                "maker": "fangfang"
                                 }
                                 """).with(csrf())
                 )
@@ -103,7 +105,7 @@ class DeedControllerTest {
                 .andExpect(content().json("""
                         {
                         "id": "10",
-                        "description":"max",
+                        "description":"do something",
                         "address":{
                             "street": "wallstreet",
                             "houseNumber": "2",
@@ -111,7 +113,9 @@ class DeedControllerTest {
                             "city": "New York City",
                             "name": "Fangfang"
                         },
-                        "karmaPoints":2
+                        "karmaPoints":2,
+                        "author":"max",
+                        "maker": "fangfang"
                         }
                         """))
                 .andReturn();
@@ -126,7 +130,7 @@ class DeedControllerTest {
     void findDeed_expect_correct_Deed() throws Exception {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
+        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED, "", "");
 
         deedRepo.save(deed);
         mvc.perform(get(DeepEndPoint + "/10"))
@@ -142,7 +146,9 @@ class DeedControllerTest {
                             "city": "New York City",
                             "name": "Fangfang"
                         },
-                        "karmaPoints":4
+                        "karmaPoints":4,
+                        "author":"",
+                        "maker": ""
                         }
                         """));
     }
@@ -171,7 +177,9 @@ class DeedControllerTest {
                                     "city": "New York City",
                                     "name": "Fangfang"
                                 },
-                                "karmaPoints":2
+                                "karmaPoints":2,
+                                "author":"",
+                                "maker": ""
                                 }
                                 """).with(csrf())
                 )
@@ -194,7 +202,7 @@ class DeedControllerTest {
     void deleteDeed_expect_correct_status() throws Exception {
 
         Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED);
+        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED, "", "");
 
         deedRepo.save(deed);
         mvc.perform(delete(DeepEndPoint + "/10").with(csrf()))

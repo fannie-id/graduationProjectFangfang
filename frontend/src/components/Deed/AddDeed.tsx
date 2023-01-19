@@ -3,9 +3,11 @@ import {Deed, DeedStatus} from "../../model/Deed";
 import {Address} from "../../model/Address";
 import DeedForm from "./DeedForm";
 import {useNavigate} from "react-router-dom";
+import {UserInfo} from "../../model/User";
 
 type AddDeedProps = {
     addNewDeed: (deed: Deed) => void
+    user: UserInfo
 }
 
 export default function AddDeed(props: AddDeedProps) {
@@ -22,7 +24,9 @@ export default function AddDeed(props: AddDeedProps) {
         "description": "",
         "address": address,
         "karmaPoints": 0,
-        "deedStatus": DeedStatus.CREATED
+        "deedStatus": DeedStatus.CREATED,
+        "author": props.user.username,
+        "maker": ""
     }
 
 
