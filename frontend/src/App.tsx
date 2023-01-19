@@ -1,17 +1,17 @@
 import React from 'react';
-import DeedApp from "./components/DeedApp";
-import ViewDeed from "./components/ViewDeed";
+import DeedApp from "./components/Deed/DeedApp";
+import ViewDeed from "./components/Deed/ViewDeed";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import EditDeed from "./components/EditDeed";
-import AddDeed from "./components/AddDeed";
-import LoginPage from "./components/LoginPage";
-import Register from "./components/Register"
-import NavigationBar from "./components/NavigationBar";
+import EditDeed from "./components/Deed/EditDeed";
+import AddDeed from "./components/Deed/AddDeed";
+import LoginPage from "./components/User/LoginPage";
+import Register from "./components/User/Register"
+import NavigationBar from "./components/User/NavigationBar";
 import useDeeds from "./hooks/useDeeds";
 import useUser from "./hooks/useUser";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import Profile from "./components/Profile";
-import ProfileForm from "./components/FrofileForm";
+import Profile from "./components/User/Profile";
+import ProfileForm from "./components/User/FrofileForm";
 
 
 function App() {

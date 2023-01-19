@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping("me")
     public UserInfo helloMe(Principal principal) {
         if (principal != null) {
-            return userService.getUserPublic(principal.getName());
+            return userService.getUserInfo(principal.getName());
         }
         return null;
     }
@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping("/login")
     public UserInfo login() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userService.getUserPublic(username);
+        return userService.getUserInfo(username);
     }
 
     @PostMapping("/logout")

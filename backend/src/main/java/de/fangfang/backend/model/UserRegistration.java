@@ -15,6 +15,7 @@ public record UserRegistration(
     public User createUserWithId(String id) {
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
-        return new User(id, username, password, email, givenDeeds, takenDeeds, address, 0);
+        Address emptyAddress = new Address("", "", "", "", "");
+        return new User(id, username, password, email, givenDeeds, takenDeeds, emptyAddress, 0);
     }
 }

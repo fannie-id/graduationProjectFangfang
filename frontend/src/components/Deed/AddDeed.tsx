@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
-import {Deed, DeedStatus} from "../model/Deed";
-import {Address} from "../model/Address";
+import {Deed, DeedStatus} from "../../model/Deed";
+import {Address} from "../../model/Address";
 import DeedForm from "./DeedForm";
 import {useNavigate} from "react-router-dom";
 

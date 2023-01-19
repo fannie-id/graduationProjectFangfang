@@ -1,37 +1,36 @@
 import {Box, IconButton, TextField} from "@mui/material";
+import FaceIcon from '@mui/icons-material/Face';
 import {ChangeEvent, FormEvent, useState} from "react";
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import {UserRegister} from "../model/User";
+import {UserInfo, UserLogin} from "../../model/User";
 import {useNavigate} from "react-router-dom";
 
-type RegisterProps = {
-    addUser: (user: UserRegister) => Promise<any>
+type LoginPageProps = {
+    getLoginUser: (user: UserLogin) => Promise<UserInfo>
 }
 
-export default function Register(props: RegisterProps) {
-    const emptyUser: UserRegister = {
+export default function LoginPage(props: LoginPageProps) {
+
+    const emptyLoginUser: UserLogin = {
         "username": "",
-        "email": "",
         "password": ""
     }
-    const [registerUser, setRegisterUser] = useState<UserRegister>(emptyUser)
-
-
+    const [loginUser, setLoginUser] = useState<UserLogin>(emptyLoginUser)
     const navigate = useNavigate()
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const inputValue = event.target.value
         const nameOfInput = event.target.name
-        setRegisterUser((prevState) => ({...prevState, [nameOfInput]: inputValue}))
+        setLoginUser((prevState) => ({...prevState, [nameOfInput]: inputValue}))
     }
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.addUser(registerUser).then(status => {
-            navigate("/login")
-        })
+        props.getLoginUser(loginUser).then(
+            user => {
+                navigate("/deeds")
+            }
+        )
     }
-
 
     return (<Box
         sx={{pb: 7}}
@@ -41,12 +40,12 @@ export default function Register(props: RegisterProps) {
         flexWrap={"wrap"}
         alignItems="center"
         justifyContent={"center"}>
-        <h2>Register</h2>
+        <h2>Login</h2>
         <form onSubmit={handleSubmit}>
             <TextField
                 required
                 name={"username"}
-                value={registerUser.username}
+                value={loginUser.username}
                 label="Username"
                 placeholder="Username"
                 onChange={handleFormChange}
@@ -55,28 +54,17 @@ export default function Register(props: RegisterProps) {
             <TextField
                 margin="normal"
                 required
-                name={"email"}
-                value={registerUser.email}
-                label="E-Mail"
-                placeholder="E-Mail"
-                onChange={handleFormChange}
-            />
-            <TextField
-                margin="normal"
-                required
                 name={"password"}
-                value={registerUser.password}
+                value={loginUser.password}
                 label="Password"
                 placeholder="Password"
                 onChange={handleFormChange}
             />
             <IconButton type="submit">
-                <PersonAddAlt1Icon color="success"/>
+                <FaceIcon color="success"/>
             </IconButton>
 
         </form>
 
-
     </Box>)
-
 }

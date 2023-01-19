@@ -1,5 +1,5 @@
 import DeedSpot from "./DeedSpot";
-import {Deed} from "../model/Deed";
+import {Deed} from "../../model/Deed";
 import {Box} from "@mui/material";
 
 type DeedsListProps ={

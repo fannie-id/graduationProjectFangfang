@@ -1,7 +1,7 @@
 import {Box, IconButton, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-import {UserInfo} from "../model/User";
+import {UserInfo} from "../../model/User";
 import {useNavigate} from "react-router-dom";
 
 type ProfileFormProps = {
@@ -42,7 +42,7 @@ export default function ProfileForm(props: ProfileFormProps) {
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.submitUser(changeUser)
-            .then(() => {
+            .then(user => {
                 navigate("/profile")
             })
     }
@@ -60,10 +60,10 @@ export default function ProfileForm(props: ProfileFormProps) {
                 <TextField
                     margin="normal"
                     fullWidth
-                    name={"description"}
+                    name={"username"}
                     value={changeUser.username}
-                    label="Description"
-                    placeholder="Description"
+                    label="Username"
+                    placeholder="username"
                     InputProps={{
                         readOnly: true,
                     }}
@@ -74,8 +74,8 @@ export default function ProfileForm(props: ProfileFormProps) {
                     fullWidth
                     name={"email"}
                     value={changeUser.email}
-                    label="Description"
-                    placeholder="Description"
+                    label="Email"
+                    placeholder="email"
                     onChange={handleFormChange}
                 />
 
