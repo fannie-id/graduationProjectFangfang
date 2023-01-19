@@ -27,7 +27,7 @@ public class UserController {
         if (principal != null) {
             return new ResponseEntity<>(userService.getUserInfo(principal.getName()), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(userService.returnAnonymousUser(), HttpStatus.OK);
     }
 
     @PostMapping
