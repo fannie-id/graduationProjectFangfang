@@ -97,7 +97,7 @@ public class UserService implements UserDetailsService {
         return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, emptyAddress, 0);
     }
 
-    public void gainPoints(String username, int points) {
+    public void gainPoints(int points, String username) {
         User foundUser = userRepo.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(username)

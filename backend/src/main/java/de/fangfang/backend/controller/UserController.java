@@ -61,8 +61,8 @@ public class UserController {
     }
 
     @PutMapping("/validate/{username}")
-    public void editUser(@PathVariable String username, @RequestBody int points) {
-        userService.gainPoints(username, points);
+    public void gainPoints(@RequestBody int points, @PathVariable String username) {
+        userService.gainPoints(points, username);
     }
 
 }

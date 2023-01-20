@@ -208,4 +208,29 @@ class UserControllerTest {
         mvc.perform(delete(userEndPoint + "/max").with(csrf()))
                 .andExpect(status().isOk());
     }
+
+
+    @WithMockUser
+    @DirtiesContext
+    @Test
+    void gain_points_get_200() throws Exception {
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+        userRepo.save(new User(
+                "1",
+                "max",
+                "password",
+                "email",
+                givenDeeds,
+                takenDeeds,
+                address,
+                0
+        ));
+        mvc.perform(put(userEndPoint + "/validate/max")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("5").with(csrf())
+                )
+                .andExpect(status().isOk());
+    }
 }
