@@ -3,11 +3,14 @@ import {Box, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {AddCircle} from "@mui/icons-material";
 import {Deed} from "../../model/Deed";
+import MapBG from "../Map/MapBG";
 
 type DeedAppProps = {
     deeds: Deed[]
     username: string | undefined
 }
+
+
 export default function DeedApp(props: DeedAppProps) {
 
     const navigate = useNavigate()
@@ -30,6 +33,8 @@ export default function DeedApp(props: DeedAppProps) {
             <IconButton onClick={handleDeedDetail} type={"submit"}>
                 <AddCircle color="success" fontSize="large"/>
             </IconButton>
+
+            <MapBG/>
 
         </Box>
     )
