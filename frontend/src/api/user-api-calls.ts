@@ -40,6 +40,6 @@ export function deleteLoggedInUser(user: UserInfo): Promise<string> {
 }
 
 export function putKP(points: number, username: string) {
-    axios.put(userEndPoint + "/validate/" + username, points)
+    axios.put(userEndPoint + "/validate/" + username, points, {headers: {"Content-Type": "application/json"}})
         .then((response) => response.data)
 }
