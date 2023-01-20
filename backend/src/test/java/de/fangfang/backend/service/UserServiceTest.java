@@ -138,4 +138,35 @@ class UserServiceTest {
 
     }
 
+    @Test
+    void gainPoints_expect_success() {
+        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+
+        User userOld = new User(
+                "1",
+                "max",
+                "encode",
+                "",
+                givenDeeds,
+                takenDeeds,
+                address,
+                0);
+        User expected = new User(
+                "1",
+                "max",
+                "encode",
+                "",
+                givenDeeds,
+                takenDeeds,
+                address,
+                5);
+
+        when(userRepo.findByUsername("max")).thenReturn(Optional.of(userOld));
+        userService.gainPoints(5, "max");
+        verify(userRepo).save(expected);
+
+    }
+
 }
