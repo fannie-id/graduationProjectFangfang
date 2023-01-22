@@ -83,38 +83,12 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"street"}
-                    value={changeUser.address ? changeUser.address.street : ""}
+                    value={changeUser.address ? changeUser.address.address : ""}
                     label="Street"
                     placeholder="Street"
                     onChange={handleFormAddressChange}
                 />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"houseNumber"}
-                    value={changeUser.address ? changeUser.address.houseNumber : ""}
-                    label="House Number"
-                    placeholder="House Number"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"zip"}
-                    value={changeUser.address ? changeUser.address.zip : ""}
-                    label="ZIP"
-                    placeholder="ZIP"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"city"}
-                    value={changeUser.address ? changeUser.address.city : ""}
-                    label="City"
-                    placeholder="City"
-                    onChange={handleFormAddressChange}
-                />
+
 
                 <TextField
                     margin="normal"

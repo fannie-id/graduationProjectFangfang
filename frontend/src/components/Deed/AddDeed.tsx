@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
 import {Deed, DeedStatus} from "../../model/Deed";
-import {Address} from "../../model/Address";
+import {Address, Coordinates} from "../../model/Address";
 import DeedForm from "./DeedForm";
 import {useNavigate} from "react-router-dom";
 import {UserInfo} from "../../model/User";
@@ -12,13 +12,15 @@ type AddDeedProps = {
 
 export default function AddDeed(props: AddDeedProps) {
     const navigate = useNavigate()
-
+    const coordinates: Coordinates = {
+        "lng": 0,
+        "lat": 0
+    }
     const address: Address = {
-        "street": "",
-        "houseNumber": "",
-        "zip": "",
-        "city": "",
-        "name": ""
+        "address": "",
+        name: "",
+        coordinates
+
     }
     const emptyDeed: Deed = {
         "description": "",
