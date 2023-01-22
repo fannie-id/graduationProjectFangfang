@@ -1,10 +1,13 @@
-export type Address ={
-    street: string
-    houseNumber: string
-    zip: string
-    city: string
+export type Address = {
+    address: string
     name: string
-    geometry: {
-        coordinates: [48.469873, 11.937110]
-    },
+    coordinates: Coordinates,
+
+}
+
+export type Coordinates = {
+
+    lng: number,
+    lat: number
+
 }

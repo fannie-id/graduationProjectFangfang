@@ -6,11 +6,12 @@ import {Address} from "../model/Address";
 
 export default function useUser() {
     const address: Address = {
-        "street": "",
-        "houseNumber": "",
-        "zip": "",
-        "city": "",
-        "name": ""
+        "address": "",
+        "name": "",
+        "coordinates": {
+            "lng": 0,
+            "lat": 0
+        }
     }
     const emptyUser: UserInfo = {
         "username": "anonymousUser",

@@ -85,7 +85,7 @@ export default function ViewDeed(props: ViewDeedProps) {
              justifyContent={"center"}>
 
             <p>Deed: {getDeed.description}</p>
-            <p>Ort: {getDeed.address.street} {getDeed.address.houseNumber}</p>
+            <p>Ort: {getDeed.address.address} {getDeed.address.address}</p>
             <p>KarmaPoints: {getDeed.karmaPoints}</p>
             <p>Status: {getDeed.deedStatus}</p>
 

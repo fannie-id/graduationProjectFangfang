@@ -61,49 +61,14 @@ export default function DeedForm(props: DeedFormProps) {
                 <TextField
                     margin="normal"
                     fullWidth
-                    name={"street"}
-                    value={deed.address.street}
-                    label="Street"
-                    placeholder="Street"
+                    name={"address"}
+                    value={deed.address.address}
+                    label="Address"
+                    placeholder="Address"
                     onChange={handleFormAddressChange}
+                    multiline
+                    rows={4}
 
-                />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"houseNumber"}
-                    value={deed.address.houseNumber}
-                    label="House Number"
-                    placeholder="House Number"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"zip"}
-                    value={deed.address.zip}
-                    label="ZIP"
-                    placeholder="ZIP"
-                    onChange={handleFormAddressChange}
-                />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"city"}
-                    value={deed.address.city}
-                    label="City"
-                    placeholder="City"
-                    onChange={handleFormAddressChange}
-                />
-
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"name"}
-                    value={deed.address.name}
-                    label="Name"
-                    placeholder="Name"
-                    onChange={handleFormAddressChange}
                 />
 
                 <TextField
