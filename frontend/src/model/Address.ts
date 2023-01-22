@@ -4,4 +4,7 @@ export type Address ={
     zip: string
     city: string
     name: string
+    geometry: {
+        coordinates: [48.469873, 11.937110]
+    },
 }
