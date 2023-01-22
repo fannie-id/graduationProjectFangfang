@@ -1,6 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import mapboxgl from 'mapbox-gl';
 import './MapBG.css';
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 
@@ -44,6 +47,7 @@ export default function App() {
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
+
         if (!mapContainer.current) return;
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
@@ -51,6 +55,14 @@ export default function App() {
             center: [11.9333, 48.4667],
             zoom: 13
         });
+        map.current.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
+
+
     });
 
     useEffect(() => {
@@ -80,7 +92,6 @@ export default function App() {
                     continue
                 }
                 if (map.current) {
-                    console.log("adding marker...")
 
                     new mapboxgl.Marker(el)
                         .setLngLat([feature.geometry.coordinates[1], feature.geometry.coordinates[0]])
@@ -96,19 +107,8 @@ export default function App() {
             }
         }
     }, [geoJson])
-    if (map.current) {
-        map.current.addControl(
-            new mapboxgl.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy: true
-                },
-// When active the map will receive updates to the device's location as it changes.
-                trackUserLocation: true,
-// Draw an arrow next to the location dot to indicate which direction the device is heading.
-                showUserHeading: true
-            })
-        )
-    }
+
+
     return (
         <div>
             <div ref={mapContainer} className="map-container"/>
