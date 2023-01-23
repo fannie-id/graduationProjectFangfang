@@ -2,10 +2,10 @@ import {UserInfo, UserLogin, UserRegister} from "../model/User";
 import {createUser, deleteLoggedInUser, getMe, loginUser, logoutUser, putUser} from "../api/user-api-calls";
 
 import {useEffect, useState} from "react";
-import {Address} from "../model/Address";
+import {AddressInfo} from "../model/AddressInfo";
 
 export default function useUser() {
-    const address: Address = {
+    const address: AddressInfo = {
         "address": "",
         "name": "",
         "lng": 0,

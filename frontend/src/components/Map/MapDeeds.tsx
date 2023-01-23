@@ -2,10 +2,16 @@ import React, {useEffect, useRef, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import './MapBG.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import {Deed} from "../../model/Deed";
+import {AddCircle} from "@mui/icons-material";
+import {IconButton} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
-
-export default function MapDeeds() {
+type MapDeedsProps = {
+    deeds: Deed[]
+}
+export default function MapDeeds(props: MapDeedsProps) {
 
 
     const mapContainer = useRef(null);
@@ -14,21 +20,21 @@ export default function MapDeeds() {
     const [lat, setLat] = useState(48.4667);
     const [zoom, setZoom] = useState(13);
     const [marks, setMarks] = useState<boolean>(false)
-
-    const geoJson = {
+    const navigate = useNavigate()
+    const geoJson = props.deeds
+    /*const geoJson = {
         type: 'DeedCollection',
         deeds: [
             {
                 type: 'Deed',
                 description: 'something',
-                address: {
-                    type: 'Address',//Point
-                    address: 'Freiwillige Feuerwehr',
-                    name: 'Freiwillige Feuerwehr',
-                    lng: 11.937110,
-                    lat: 48.469873
 
-                },
+                address: 'Freiwillige Feuerwehr',
+                name: 'Freiwillige Feuerwehr',
+                lng: 11.937110,
+                lat: 48.469873,
+
+
                 karmaPoints: '3',
                 deedStatus: "CREATED",
                 author: "",
@@ -38,14 +44,11 @@ export default function MapDeeds() {
             {
                 type: 'Deed',
                 description: 'something',
-                address: {
-                    type: 'Address',//Point
-                    address: 'Freiwillige Feuerwehr',
-                    name: 'Freiwillige Feuerwehr',
-                    lng: 11.943123,
-                    lat: 48.476020
 
-                },
+                address: 'Freiwillige Feuerwehr',
+                name: 'Freiwillige Feuerwehr',
+                lng: 11.943123,
+                lat: 48.476020,
                 karmaPoints: '10',
                 deedStatus: "CREATED",
                 author: "",
@@ -54,7 +57,8 @@ export default function MapDeeds() {
             }
 
         ]
-    }
+    }*/
+
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -86,7 +90,7 @@ export default function MapDeeds() {
         if (!marks) {
 
 
-            for (const deed of geoJson.deeds) {
+            for (const deed of geoJson) {
 
                 // create a HTML element for each feature
                 const el = document.createElement('div');
@@ -95,12 +99,15 @@ export default function MapDeeds() {
                 if (map.current) {
 
                     new mapboxgl.Marker(el)
-                        .setLngLat([deed.address.lng, deed.address.lat])
+                        .setLngLat([deed.lng, deed.lat])
                         .setPopup(
                             new mapboxgl.Popup({offset: 25}) // add popups
                                 .setHTML(
                                     `<h3>${deed.karmaPoints}</h3>
-                                        <p>${deed.description}</p>`
+                                        
+                                     <button onClick={()=>{navigate("/deeds/" + deed.id)}}>
+                                        ${deed.description}
+                                     </button>`
                                 )
                         )
                         .addTo(map.current)
@@ -110,13 +117,16 @@ export default function MapDeeds() {
         }
     }, [geoJson])
 
+    function handleDeedDetail() {
+        navigate("/deeds/add")
+    }
 
     return (
         <div>
             <div ref={mapContainer} className="map-container"/>
-            <div>
-
-            </div>
+            <IconButton onClick={handleDeedDetail} type={"submit"}>
+                <AddCircle color="success" fontSize="large"/>
+            </IconButton>
         </div>
     );
 }

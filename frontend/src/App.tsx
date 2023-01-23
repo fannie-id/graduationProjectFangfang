@@ -14,8 +14,6 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Profile from "./components/User/Profile";
 import ProfileForm from "./components/User/ProfileForm";
 
-import MapDeeds from "./components/Map/MapDeeds";
-
 function App() {
     const {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser} = useUser()
     const {deeds, addNewDeed} = useDeeds(loggedInUser)
@@ -26,7 +24,7 @@ function App() {
             </header>
             <BrowserRouter>
                 <Routes>
-                    <Route path="" element={<MapDeeds/>}></Route>
+                    <Route path="" element={<p>Welcome</p>}></Route>
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser} user={loggedInUser}/>}></Route>
                     <Route element={<ProtectedRoutes user={loggedInUser}/>}>

@@ -16,7 +16,10 @@ public record User(
         String email,
         List<String> givenDeeds,
         List<String> takenDeeds,
-        Address address,
+        String address,
+        String name,
+        float lng,
+        float lat,
         int karmaPoints
 ) {
 }

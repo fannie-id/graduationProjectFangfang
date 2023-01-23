@@ -9,13 +9,15 @@ public record UserRegistration(
         String email,
         List<String> givenDeeds,
         List<String> takenDeeds,
-        Address address,
+        String address,
+        String name,
+        float lng,
+        float lat,
         int karmaPoints
 ) {
     public User createUserWithId(String id) {
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
-        Address emptyAddress = new Address("", "", "", "", "");
-        return new User(id, username, password, email, givenDeeds, takenDeeds, emptyAddress, 0);
+        return new User(id, username, password, email, givenDeeds, takenDeeds, "", "", 0.0F, 0.0F, 0);
     }
 }

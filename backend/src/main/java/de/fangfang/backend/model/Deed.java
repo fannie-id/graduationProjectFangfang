@@ -8,7 +8,10 @@ public record Deed(
         @Id
         String id,
         String description,
-        Address address,
+        String address,
+        String name,
+        float lng,
+        float lat,
         int karmaPoints,
         DeedStatus deedStatus,
         String author,

@@ -1,7 +1,6 @@
 package de.fangfang.backend.service;
 
 
-import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.model.UserRegistration;
@@ -43,7 +42,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException(username)
                 );
-        return new UserInfo(user.username(), user.email(), user.givenDeeds(), user.takenDeeds(), user.address(), user.karmaPoints());
+        return new UserInfo(user.username(), user.email(), user.givenDeeds(), user.takenDeeds(), user.address(), user.name(), user.lng(), user.lat(), user.karmaPoints());
     }
 
     public void registerNewUser(UserRegistration newUser) {
@@ -55,6 +54,9 @@ public class UserService implements UserDetailsService {
                 newUser.givenDeeds(),
                 newUser.takenDeeds(),
                 newUser.address(),
+                newUser.name(),
+                newUser.lng(),
+                newUser.lat(),
                 newUser.karmaPoints());
 
         String id = idGeneratorService.generateUuid();
@@ -75,6 +77,9 @@ public class UserService implements UserDetailsService {
                 user.givenDeeds(),
                 user.takenDeeds(),
                 user.address(),
+                user.name(),
+                user.lng(),
+                user.lat(),
                 user.karmaPoints());
         userRepo.save(userToSave);
         return user;
@@ -93,8 +98,7 @@ public class UserService implements UserDetailsService {
     public UserInfo returnAnonymousUser() {
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
-        Address emptyAddress = new Address("", "", "", "", "");
-        return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, emptyAddress, 0);
+        return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, "", "", 0.0F, 0.0F, 0);
     }
 
     public void gainPoints(int points, String username) {
@@ -112,6 +116,9 @@ public class UserService implements UserDetailsService {
                 foundUser.givenDeeds(),
                 foundUser.takenDeeds(),
                 foundUser.address(),
+                foundUser.name(),
+                foundUser.lng(),
+                foundUser.lat(),
                 newKP);
         userRepo.save(userToSave);
     }
