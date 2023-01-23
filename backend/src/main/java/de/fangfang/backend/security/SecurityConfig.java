@@ -46,14 +46,15 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                         response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()))
                 .and()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("").permitAll()
+                        .requestMatchers(request -> !request.getRequestURI().contains("/api") &&
+                                request.getMethod().matches(HttpMethod.GET.name())).permitAll()
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/api/users/me").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/users/validate/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/admin-only").hasRole("ADMIN")
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .build();
 
