@@ -12,9 +12,9 @@ export default function App() {
 
     const mapContainer = useRef(null);
     const map = useRef<mapboxgl.Map | null>(null);
-    const [lng, setLng] = useState(-70.9);
-    const [lat, setLat] = useState(42.35);
-    const [zoom, setZoom] = useState(9);
+    const [lng, setLng] = useState(11.9333);
+    const [lat, setLat] = useState(48.4667);
+    const [zoom, setZoom] = useState(13);
     const [marks, setMarks] = useState<boolean>(false)
 
     const geoJson = {
@@ -22,26 +22,41 @@ export default function App() {
         deeds: [
             {
                 type: 'Deed',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [48.469873, 11.937110]
+                description: 'something',
+                address: {
+                    type: 'Address',//Point
+                    address: 'Freiwillige Feuerwehr',
+                    name: 'Freiwillige Feuerwehr',
+                    coordinates: {
+                        lng: 11.937110,
+                        lat: 48.469873
+                    }
                 },
-                properties: {
-                    karmaPoints: '2',
-                    description: 'Freiwillige Feuerwehr'
-                }
+                karmaPoints: '3',
+                deedStatus: "CREATED",
+                author: "",
+                maker: ""
+
             },
             {
                 type: 'Deed',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [48.476020, 11.943123]
+                description: 'something',
+                address: {
+                    type: 'Address',//Point
+                    address: 'Freiwillige Feuerwehr',
+                    name: 'Freiwillige Feuerwehr',
+                    coordinates: {
+                        lng: 11.943123,
+                        lat: 48.476020
+                    }
                 },
-                properties: {
-                    karmaPoints: '3',
-                    description: 'REWE'
-                }
+                karmaPoints: '10',
+                deedStatus: "CREATED",
+                author: "",
+                maker: ""
+
             }
+
         ]
     }
 
@@ -55,11 +70,14 @@ export default function App() {
             center: [11.9333, 48.4667],
             zoom: 13
         });
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        })
+
+
         map.current.addControl(
-            new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl
-            })
+            geocoder
         );
 
 
@@ -81,24 +99,21 @@ export default function App() {
         if (!marks) {
 
 
-            for (const feature of geoJson.deeds) {
+            for (const deed of geoJson.deeds) {
 
                 // create a HTML element for each feature
                 const el = document.createElement('div');
                 el.className = 'marker';
 
-                if (feature.geometry.coordinates.length !== 2) {
-                    console.error("Expected two coordinates for " + feature)
-                    continue
-                }
                 if (map.current) {
 
                     new mapboxgl.Marker(el)
-                        .setLngLat([feature.geometry.coordinates[1], feature.geometry.coordinates[0]])
+                        .setLngLat([deed.address.coordinates.lng, deed.address.coordinates.lat])
                         .setPopup(
                             new mapboxgl.Popup({offset: 25}) // add popups
                                 .setHTML(
-                                    `<h3>${feature.properties.karmaPoints}</h3><p>${feature.properties.description}</p>`
+                                    `<h3>${deed.karmaPoints}</h3>
+                                        <p>${deed.description}</p>`
                                 )
                         )
                         .addTo(map.current)
