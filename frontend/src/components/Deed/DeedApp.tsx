@@ -1,6 +1,6 @@
-import DeedsList from "./DeedsList";
 import {Box} from "@mui/material";
 import {Deed} from "../../model/Deed";
+import MapDeeds from "../Map/MapDeeds";
 
 type DeedAppProps = {
     deeds: Deed[]
@@ -19,10 +19,7 @@ export default function DeedApp(props: DeedAppProps) {
 
             <h2>Hallo {props.username !== undefined && props.username}!</h2>
 
-            <DeedsList deeds={props.deeds}/>
-
-
-
+            <MapDeeds deeds={props.deeds}/>
 
         </Box>
     )

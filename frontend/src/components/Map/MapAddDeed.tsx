@@ -33,7 +33,6 @@ export default function MapAddDeed(props: MapAddDeedProps) {
         })
 
         geocoder.on('result', (e) => {
-            console.log(e.result.center[1], e.result.center[0], e.result.text);
             props.addGeoCode(e.result.center[0], e.result.center[1], e.result.text)
 
         });
