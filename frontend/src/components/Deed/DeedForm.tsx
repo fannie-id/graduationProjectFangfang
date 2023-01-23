@@ -24,7 +24,6 @@ export default function DeedForm(props: DeedFormProps) {
     function handleFormGeoChange(lng: number, lat: number, address: string) {
         setDeed((prevState) => {
                 const newState = {...prevState}
-                // @ts-ignore nested object
                 newState.lng = lng
                 newState.lat = lat
                 newState.address = address

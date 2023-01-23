@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
-import './MapBG.css';
+import './MapDeeds.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import {Deed} from "../../model/Deed";
 import {AddCircle} from "@mui/icons-material";
@@ -16,49 +16,9 @@ export default function MapDeeds(props: MapDeedsProps) {
 
     const mapContainer = useRef(null);
     const map = useRef<mapboxgl.Map | null>(null);
-    const [lng, setLng] = useState(11.9333);
-    const [lat, setLat] = useState(48.4667);
-    const [zoom, setZoom] = useState(13);
     const [marks, setMarks] = useState<boolean>(false)
     const navigate = useNavigate()
     const geoJson = props.deeds
-    /*const geoJson = {
-        type: 'DeedCollection',
-        deeds: [
-            {
-                type: 'Deed',
-                description: 'something',
-
-                address: 'Freiwillige Feuerwehr',
-                name: 'Freiwillige Feuerwehr',
-                lng: 11.937110,
-                lat: 48.469873,
-
-
-                karmaPoints: '3',
-                deedStatus: "CREATED",
-                author: "",
-                maker: ""
-
-            },
-            {
-                type: 'Deed',
-                description: 'something',
-
-                address: 'Freiwillige Feuerwehr',
-                name: 'Freiwillige Feuerwehr',
-                lng: 11.943123,
-                lat: 48.476020,
-                karmaPoints: '10',
-                deedStatus: "CREATED",
-                author: "",
-                maker: ""
-
-            }
-
-        ]
-    }*/
-
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -74,17 +34,6 @@ export default function MapDeeds(props: MapDeedsProps) {
 
     });
 
-    useEffect(() => {
-        if (!map.current) return; // wait for map to initialize
-        map.current.on('move', () => {
-            if (!map.current) return;
-            setLng(parseFloat(map.current.getCenter().lng.toFixed(4)));
-            setLat(parseFloat(map.current.getCenter().lat.toFixed(4)));
-            setZoom(parseFloat(map.current.getZoom().toFixed(2)));
-        });
-
-
-    });
 
     useEffect(() => {
         if (!marks) {
@@ -104,10 +53,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                             new mapboxgl.Popup({offset: 25}) // add popups
                                 .setHTML(
                                     `<h3>${deed.karmaPoints}</h3>
-                                        
-                                     <button onClick={()=>{navigate("/deeds/" + deed.id)}}>
-                                        ${deed.description}
-                                     </button>`
+                                     <a href='/deeds/${deed.id}'> ${deed.description} </a>`
                                 )
                         )
                         .addTo(map.current)

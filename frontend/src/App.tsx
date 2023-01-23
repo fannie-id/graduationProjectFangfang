@@ -27,7 +27,7 @@ function App() {
                     <Route path="" element={<p>Welcome</p>}></Route>
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser} user={loggedInUser}/>}></Route>
-                    <Route element={<ProtectedRoutes user={loggedInUser}/>}>
+
                         <Route path="/profile"
                                element={<Profile deeds={deeds} user={loggedInUser} deleteUser={deleteUser}/>}></Route>
                         <Route path="/profile/edit"
@@ -39,7 +39,8 @@ function App() {
                                element={<AddDeed addNewDeed={addNewDeed} user={loggedInUser}/>}></Route>
                         <Route path="/deeds/:id"
                                element={<ViewDeed user={loggedInUser} userGainKP={userGainKP}/>}></Route>
-                        <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
+                    <Route path="/deeds/:id/edit" element={<EditDeed/>}></Route>
+                    <Route element={<ProtectedRoutes user={loggedInUser}/>}>
                     </Route>
                 </Routes>
                 <NavigationBar logout={logout} user={loggedInUser}/>

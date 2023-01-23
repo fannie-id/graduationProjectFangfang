@@ -7,7 +7,6 @@ type DeedsListProps ={
 }
 export default function DeedsList(props:DeedsListProps){
 
-    // const allDeeds = props.deeds.map(deed => <DeedSpot key={deed.id} deed={deed}/>)
 
 
     return(
