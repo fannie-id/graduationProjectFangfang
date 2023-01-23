@@ -3,7 +3,7 @@ import {Box, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {AddCircle} from "@mui/icons-material";
 import {Deed} from "../../model/Deed";
-import MapBG from "../Map/MapBG";
+import MapDeeds from "../Map/MapDeeds";
 
 type DeedAppProps = {
     deeds: Deed[]
@@ -34,7 +34,7 @@ export default function DeedApp(props: DeedAppProps) {
                 <AddCircle color="success" fontSize="large"/>
             </IconButton>
 
-            <MapBG/>
+            <MapDeeds/>
 
         </Box>
     )

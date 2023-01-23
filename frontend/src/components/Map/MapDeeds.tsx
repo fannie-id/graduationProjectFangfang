@@ -3,11 +3,9 @@ import mapboxgl from 'mapbox-gl';
 import './MapBG.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 
-export default function App() {
+export default function MapDeeds() {
 
 
     const mapContainer = useRef(null);
@@ -27,10 +25,9 @@ export default function App() {
                     type: 'Address',//Point
                     address: 'Freiwillige Feuerwehr',
                     name: 'Freiwillige Feuerwehr',
-                    coordinates: {
-                        lng: 11.937110,
-                        lat: 48.469873
-                    }
+                    lng: 11.937110,
+                    lat: 48.469873
+
                 },
                 karmaPoints: '3',
                 deedStatus: "CREATED",
@@ -45,10 +42,9 @@ export default function App() {
                     type: 'Address',//Point
                     address: 'Freiwillige Feuerwehr',
                     name: 'Freiwillige Feuerwehr',
-                    coordinates: {
-                        lng: 11.943123,
-                        lat: 48.476020
-                    }
+                    lng: 11.943123,
+                    lat: 48.476020
+
                 },
                 karmaPoints: '10',
                 deedStatus: "CREATED",
@@ -70,15 +66,6 @@ export default function App() {
             center: [11.9333, 48.4667],
             zoom: 13
         });
-        const geocoder = new MapboxGeocoder({
-            accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl
-        })
-
-
-        map.current.addControl(
-            geocoder
-        );
 
 
     });
@@ -108,7 +95,7 @@ export default function App() {
                 if (map.current) {
 
                     new mapboxgl.Marker(el)
-                        .setLngLat([deed.address.coordinates.lng, deed.address.coordinates.lat])
+                        .setLngLat([deed.address.lng, deed.address.lat])
                         .setPopup(
                             new mapboxgl.Popup({offset: 25}) // add popups
                                 .setHTML(
@@ -127,9 +114,6 @@ export default function App() {
     return (
         <div>
             <div ref={mapContainer} className="map-container"/>
-            <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>
             <div>
 
             </div>

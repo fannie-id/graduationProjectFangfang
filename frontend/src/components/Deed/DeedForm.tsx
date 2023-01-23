@@ -2,6 +2,7 @@ import {Box, IconButton, TextField} from "@mui/material";
 import {Deed} from "../../model/Deed";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
+import MapAddDeed from "../Map/MapAddDeed";
 
 type DeedFormProps = {
     deed: Deed
@@ -31,19 +32,31 @@ export default function DeedForm(props: DeedFormProps) {
         )
     }
 
+    function handleFormGeoChange(len: number, lat: number, address: string) {
+        setDeed((prevState) => {
+                const newState = {...prevState}
+                // @ts-ignore nested object
+                newState.address.len = len
+                newState.address.lat = lat
+                newState.address.address = address
+                return newState
+            }
+        )
+    }
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.submitDeed(deed)
     }
 
     return (<Box
-            sx={{pb: 7}}
+            sx={{pb: 3}}
             margin={"8px"}
             flexDirection={"column"}
             display={"grid"}
             flexWrap={"wrap"}
             justifyContent={"center"}>
-            <p>{props.deed.author}</p>
+            <h2>add {props.deed.author}'s new Deed</h2>
 
             <form onSubmit={handleSubmit}>
                 <TextField
@@ -55,21 +68,21 @@ export default function DeedForm(props: DeedFormProps) {
                     placeholder="Description"
                     onChange={handleFormChange}
                     multiline
-                    rows={4}
+                    rows={2}
                 />
-
+                <p>Address:</p>
                 <TextField
                     margin="normal"
                     fullWidth
-                    name={"address"}
-                    value={deed.address.address}
-                    label="Address"
-                    placeholder="Address"
+                    name={"name"}
+                    value={deed.address.name}
+                    label="Name"
+                    placeholder="Name"
                     onChange={handleFormAddressChange}
-                    multiline
-                    rows={4}
 
                 />
+
+                <MapAddDeed addGeoCode={handleFormGeoChange}/>
 
                 <TextField
                     margin="normal"

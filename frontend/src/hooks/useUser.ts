@@ -8,10 +8,8 @@ export default function useUser() {
     const address: Address = {
         "address": "",
         "name": "",
-        "coordinates": {
-            "lng": 0,
-            "lat": 0
-        }
+        "lng": 0,
+        "lat": 0
     }
     const emptyUser: UserInfo = {
         "username": "anonymousUser",
