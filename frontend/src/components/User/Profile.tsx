@@ -3,8 +3,8 @@ import {UserInfo} from "../../model/User";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
 import {useNavigate} from "react-router-dom";
-import DeedsList from "../Deed/DeedsList";
 import {Deed} from "../../model/Deed";
+import DeedSpots from "../Deed/DeedSpots";
 
 type ProfileProps = {
     user: UserInfo | undefined
@@ -26,6 +26,11 @@ export default function Profile(props: ProfileProps) {
             })
     }
 
+    const madeDeeds = props.deeds.filter((deed: Deed) => deed.author === (!!props.user && props.user.username)).map(deed =>
+        <DeedSpots key={deed.id} deed={deed}/>)
+
+    const takenDeeds = props.deeds.filter((deed: Deed) => deed.maker === (!!props.user && props.user.username)).map(deed =>
+        <DeedSpots key={deed.id} deed={deed}/>)
     return (<Box
             sx={{pb: 7}}
             margin={"8px"}
@@ -37,12 +42,10 @@ export default function Profile(props: ProfileProps) {
 
 
             <h2>{props.user !== undefined && props.user.username} 's Profile</h2>
-            <p>nice thing other help me:</p>
-            <DeedsList
-                deeds={props.deeds.filter((deed: Deed) => deed.author === (!!props.user && props.user.username))}/>
-            <p>nice thing i made:</p>
-            <DeedsList
-                deeds={props.deeds.filter((deed: Deed) => deed.maker === (!!props.user && props.user.username))}/>
+            {madeDeeds.length > 0 && <p>nice thing other help me:</p>}
+            {madeDeeds}
+            {takenDeeds.length > 0 && <p>nice thing i made:</p>}
+            {takenDeeds}
 
             <IconButton onClick={toEditPage} type="submit">
                 <FaceRetouchingNaturalIcon color="success" fontSize={"large"}/>
