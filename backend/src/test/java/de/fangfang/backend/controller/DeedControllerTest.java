@@ -1,7 +1,6 @@
 package de.fangfang.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.Deed;
 import de.fangfang.backend.model.DeedStatus;
 import de.fangfang.backend.repository.DeedRepo;
@@ -55,13 +54,10 @@ class DeedControllerTest {
                         .content("""
                                 {
                                 "description":"do something",
-                                "address":{
-                                    "street": "wallstreet",
-                                    "houseNumber": "2",
-                                    "zip": "48939",
-                                    "city": "New York City",
-                                    "name": "Fangfang"
-                                },
+                                "address": "wallstreet",
+                                "name": "Fangfang",
+                                "lng": 0.0,
+                                "lat": 0.0,
                                 "karmaPoints":2
                                 }
                                 """).with(csrf())
@@ -80,21 +76,17 @@ class DeedControllerTest {
     @WithMockUser
     @DirtiesContext
     void editDeed_expect_correct_Deed() throws Exception {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED, "", "");
+        Deed deed = new Deed("10", "description", "wallstreet", "Fangfang", 0.0F, 0.0F, 4, DeedStatus.CREATED, "", "");
         deedRepo.save(deed);
         mvc.perform(put(DeepEndPoint + "/10")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
                                 "description":"do something",
-                                "address":{
-                                    "street": "wallstreet",
-                                    "houseNumber": "2",
-                                    "zip": "48939",
-                                    "city": "New York City",
-                                    "name": "Fangfang"
-                                },
+                                "address": "wallstreet",
+                                "name": "Fangfang",
+                                "lng": 0.0,
+                                "lat": 0.0,
                                 "karmaPoints":2,
                                 "author":"max",
                                 "maker": "fangfang"
@@ -106,13 +98,10 @@ class DeedControllerTest {
                         {
                         "id": "10",
                         "description":"do something",
-                        "address":{
-                            "street": "wallstreet",
-                            "houseNumber": "2",
-                            "zip": "48939",
-                            "city": "New York City",
-                            "name": "Fangfang"
-                        },
+                        "address": "wallstreet",
+                        "name": "Fangfang",
+                        "lng": 0.0,
+                        "lat": 0.0,
                         "karmaPoints":2,
                         "author":"max",
                         "maker": "fangfang"
@@ -128,9 +117,7 @@ class DeedControllerTest {
     @WithMockUser
     @DirtiesContext
     void findDeed_expect_correct_Deed() throws Exception {
-
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED, "", "");
+        Deed deed = new Deed("10", "description", "wallstreet", "Fangfang", 0.0F, 0.0F, 4, DeedStatus.CREATED, "", "");
 
         deedRepo.save(deed);
         mvc.perform(get(DeepEndPoint + "/10"))
@@ -139,13 +126,10 @@ class DeedControllerTest {
                         {
                         "id": "10",
                         "description":"description",
-                        "address":{
-                            "street": "wallstreet",
-                            "houseNumber": "2",
-                            "zip": "48939",
-                            "city": "New York City",
-                            "name": "Fangfang"
-                        },
+                        "address": "wallstreet",
+                        "name": "Fangfang",
+                        "lng": 0.0,
+                        "lat": 0.0,
                         "karmaPoints":4,
                         "author":"",
                         "maker": ""
@@ -170,13 +154,10 @@ class DeedControllerTest {
                         .content("""
                                 {
                                 "description":"max",
-                                "address":{
-                                    "street": "wallstreet",
-                                    "houseNumber": "2",
-                                    "zip": "48939",
-                                    "city": "New York City",
-                                    "name": "Fangfang"
-                                },
+                                "address": "wallstreet",
+                                "name": "Fangfang",
+                                "lng": 0.0,
+                                "lat": 0.0,
                                 "karmaPoints":2,
                                 "author":"",
                                 "maker": ""
@@ -200,9 +181,7 @@ class DeedControllerTest {
     @WithMockUser
     @DirtiesContext
     void deleteDeed_expect_correct_status() throws Exception {
-
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
-        Deed deed = new Deed("10", "description", address, 4, DeedStatus.CREATED, "", "");
+        Deed deed = new Deed("10", "description", "wallstreet", "Fangfang", 0.0F, 0.0F, 4, DeedStatus.CREATED, "", "");
 
         deedRepo.save(deed);
         mvc.perform(delete(DeepEndPoint + "/10").with(csrf()))
