@@ -1,9 +1,10 @@
-import {Address} from "./Address";
-
 export type Deed = {
     id?: string,
     description: string,
-    address: Address,
+    address: string,
+    name: string,
+    lng: number,
+    lat: number,
     karmaPoints: number,
     deedStatus: DeedStatus,
     author: string,

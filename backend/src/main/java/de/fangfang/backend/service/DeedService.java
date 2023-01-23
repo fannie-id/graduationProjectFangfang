@@ -41,7 +41,7 @@ public class DeedService {
         if (deedRepo.findById(id).isEmpty()) {
             throw new DeedIdNotFoundException();
         }
-        Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.karmaPoints(), deed.deedStatus(), deed.author(), deed.maker());
+        Deed deedToChange = new Deed(id, deed.description(), deed.address(), deed.name(), deed.lng(), deed.lat(), deed.karmaPoints(), deed.deedStatus(), deed.author(), deed.maker());
         return deedRepo.save(deedToChange);
     }
 

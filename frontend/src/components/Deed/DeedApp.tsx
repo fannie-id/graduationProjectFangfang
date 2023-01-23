@@ -1,9 +1,6 @@
 import DeedsList from "./DeedsList";
-import {Box, IconButton} from "@mui/material";
-import {useNavigate} from "react-router-dom";
-import {AddCircle} from "@mui/icons-material";
+import {Box} from "@mui/material";
 import {Deed} from "../../model/Deed";
-import MapDeeds from "../Map/MapDeeds";
 
 type DeedAppProps = {
     deeds: Deed[]
@@ -13,12 +10,6 @@ type DeedAppProps = {
 
 export default function DeedApp(props: DeedAppProps) {
 
-    const navigate = useNavigate()
-
-    function handleDeedDetail() {
-        navigate("/deeds/add")
-    }
-
 
     return (<Box margin={"5px"}
                  flexDirection={"column"}
@@ -27,14 +18,11 @@ export default function DeedApp(props: DeedAppProps) {
                  justifyContent={"center"}>
 
             <h2>Hallo {props.username !== undefined && props.username}!</h2>
+
             <DeedsList deeds={props.deeds}/>
 
 
-            <IconButton onClick={handleDeedDetail} type={"submit"}>
-                <AddCircle color="success" fontSize="large"/>
-            </IconButton>
 
-            <MapDeeds/>
 
         </Box>
     )

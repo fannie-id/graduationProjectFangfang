@@ -1,4 +1,4 @@
-import {Address} from "./Address";
+import {AddressInfo} from "./AddressInfo";
 
 export type UserRegister = {
     username: string,
@@ -16,6 +16,6 @@ export type UserInfo = {
     email: string,
     givenDeeds: string[],
     takenDeeds: string[],
-    address?: Address,
+    address?: AddressInfo,
     karmaPoints: number
 }

@@ -1,5 +1,5 @@
 import {Deed} from "../../model/Deed";
-import {Box, Button} from "@mui/material";
+import {Box} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
 type DeedSpotProps = {
@@ -18,10 +18,7 @@ export default function DeedSpot(props: DeedSpotProps) {
              flexDirection={"row"}
              display={"grid"}
              flexWrap={"wrap"}>
-            <Button onClick={handleDeedDetail}>
-                {props.deed.karmaPoints}
-            </Button>
-            {"Address: " + props.deed.description}
+
         </Box>
     )
 

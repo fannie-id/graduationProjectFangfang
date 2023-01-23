@@ -32,13 +32,13 @@ export default function DeedForm(props: DeedFormProps) {
         )
     }
 
-    function handleFormGeoChange(len: number, lat: number, address: string) {
+    function handleFormGeoChange(lng: number, lat: number, address: string) {
         setDeed((prevState) => {
                 const newState = {...prevState}
                 // @ts-ignore nested object
-                newState.address.len = len
-                newState.address.lat = lat
-                newState.address.address = address
+                newState.lng = lng
+                newState.lat = lat
+                newState.address = address
                 return newState
             }
         )
@@ -75,7 +75,7 @@ export default function DeedForm(props: DeedFormProps) {
                     margin="normal"
                     fullWidth
                     name={"name"}
-                    value={deed.address.name}
+                    value={deed.name}
                     label="Name"
                     placeholder="Name"
                     onChange={handleFormAddressChange}
