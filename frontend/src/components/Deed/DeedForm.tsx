@@ -20,17 +20,6 @@ export default function DeedForm(props: DeedFormProps) {
     }
 
 
-    function handleFormAddressChange(event: ChangeEvent<HTMLInputElement>) {
-        const inputValue = event.target.value
-        const nameOfInput = event.target.name
-        setDeed((prevState) => {
-                const newState = {...prevState}
-                // @ts-ignore nested object
-                newState.address[nameOfInput] = inputValue
-                return newState
-            }
-        )
-    }
 
     function handleFormGeoChange(lng: number, lat: number, address: string) {
         setDeed((prevState) => {
@@ -78,7 +67,7 @@ export default function DeedForm(props: DeedFormProps) {
                     value={deed.name}
                     label="Name"
                     placeholder="Name"
-                    onChange={handleFormAddressChange}
+                    onChange={handleFormChange}
 
                 />
 
