@@ -14,7 +14,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Profile from "./components/User/Profile";
 import ProfileForm from "./components/User/ProfileForm";
 
-import MapBG from "./components/Map/MapBG";
+import MapDeeds from "./components/Map/MapDeeds";
 
 function App() {
     const {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser} = useUser()
@@ -26,7 +26,7 @@ function App() {
             </header>
             <BrowserRouter>
                 <Routes>
-                    <Route path="" element={<MapBG/>}></Route>
+                    <Route path="" element={<MapDeeds/>}></Route>
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser} user={loggedInUser}/>}></Route>
                     <Route element={<ProtectedRoutes user={loggedInUser}/>}>
