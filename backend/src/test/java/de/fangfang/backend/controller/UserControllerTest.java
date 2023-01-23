@@ -1,7 +1,6 @@
 package de.fangfang.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.repository.UserRepo;
@@ -41,7 +40,6 @@ class UserControllerTest {
     @WithMockUser(username = "max")
     @DirtiesContext
     void hello_me_test() throws Exception {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         userRepo.save(new User(
@@ -51,7 +49,10 @@ class UserControllerTest {
                 "email",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "wallstreet 3",
+                "Fangfang",
+                0.0F,
+                0.0F,
                 0
         ));
         mvc.perform(get(userEndPoint + "/me"))
@@ -61,7 +62,6 @@ class UserControllerTest {
     @Test
     @DirtiesContext
     void hello_me_test_withoutLogin() throws Exception {
-        Address address = new Address("", "", "", "", "");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         UserInfo expected = new UserInfo(
@@ -69,7 +69,10 @@ class UserControllerTest {
                 "",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0
         );
 
@@ -92,13 +95,10 @@ class UserControllerTest {
                                 "email": "max@max.de",
                                 "givenDeeds": [],
                                 "takenDeeds": [],
-                                "address":{
-                                    "street": "wallstreet",
-                                    "houseNumber": "2",
-                                    "zip": "48939",
-                                    "city": "New York City",
-                                    "name": "Fangfang"
-                                },
+                                "address": "wallstreet",
+                                "name": "Fangfang",
+                                "lng": 0.0,
+                                "lat": 0.0,
                                 "karmaPoints":0
                                 }
                                 """).with(csrf())
@@ -110,7 +110,6 @@ class UserControllerTest {
     @DirtiesContext
     @Test
     void login_expect_200() throws Exception {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         userRepo.save(new User(
@@ -120,7 +119,10 @@ class UserControllerTest {
                 "email",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "wallstreet 3",
+                "Fangfang",
+                0.0F,
+                0.0F,
                 0
         ));
         mvc.perform(post(userEndPoint + "/login").with(csrf()))
@@ -140,7 +142,6 @@ class UserControllerTest {
     @DirtiesContext
     @Test
     void edit_user_get_200() throws Exception {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         userRepo.save(new User(
@@ -150,7 +151,10 @@ class UserControllerTest {
                 "email",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "wallstreet 3",
+                "max",
+                0.0F,
+                0.0F,
                 0
         ));
 
@@ -162,13 +166,10 @@ class UserControllerTest {
                                 "email": "max@max.de",
                                 "givenDeeds": [],
                                 "takenDeeds": [],
-                                "address":{
-                                    "street": "wallstreet",
-                                    "houseNumber": "2",
-                                    "zip": "48939",
-                                    "city": "New York City",
-                                    "name": "Fangfang"
-                                },
+                                "address": "wallstreet 3",
+                                "name": "max",
+                                "lng": 0.0,
+                                "lat": 0.0,
                                 "karmaPoints":0
                                 }
                                 """).with(csrf())
@@ -180,7 +181,10 @@ class UserControllerTest {
                 "max@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "wallstreet 3",
+                "max",
+                0.0F,
+                0.0F,
                 0
         );
         UserInfo result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), UserInfo.class);
@@ -191,7 +195,6 @@ class UserControllerTest {
     @DirtiesContext
     @Test
     void delete_user_get_200() throws Exception {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         userRepo.save(new User(
@@ -201,7 +204,10 @@ class UserControllerTest {
                 "email",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "wallstreet 3",
+                "Fangfang",
+                0.0F,
+                0.0F,
                 0
         ));
 
@@ -214,7 +220,6 @@ class UserControllerTest {
     @DirtiesContext
     @Test
     void gain_points_get_200() throws Exception {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         userRepo.save(new User(
@@ -224,7 +229,10 @@ class UserControllerTest {
                 "email",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "wallstreet 3",
+                "Fangfang",
+                0.0F,
+                0.0F,
                 0
         ));
         mvc.perform(put(userEndPoint + "/validate/max")

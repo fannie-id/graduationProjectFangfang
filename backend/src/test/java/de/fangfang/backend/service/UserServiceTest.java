@@ -1,7 +1,6 @@
 package de.fangfang.backend.service;
 
 import de.fangfang.backend.exception.UsernameNotFoundException;
-import de.fangfang.backend.model.Address;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.model.UserRegistration;
@@ -34,7 +33,6 @@ class UserServiceTest {
 
     @Test
     void register_user_expect_success() {
-        Address address = new Address("", "", "", "", "");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         UserRegistration userRegistration = new UserRegistration(
@@ -43,7 +41,10 @@ class UserServiceTest {
                 "max@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
         when(idGeneratorService.generateUuid()).thenReturn("1");
         when(argon2PasswordEncoder.encode(userRegistration.password())).thenReturn("encode");
@@ -55,7 +56,10 @@ class UserServiceTest {
                 "max@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
         when(userRepo.save(expected)).thenReturn(expected);
         userService.registerNewUser(userRegistration);
@@ -64,7 +68,6 @@ class UserServiceTest {
 
     @Test
     void edit_user_expect_success() {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         User userToSave = new User(
@@ -74,7 +77,10 @@ class UserServiceTest {
                 "max123@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
 
         UserInfo expected = new UserInfo(
@@ -82,7 +88,10 @@ class UserServiceTest {
                 "max123@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
 
         when(userRepo.findByUsername("max")).thenReturn(Optional.of(userToSave));
@@ -93,7 +102,6 @@ class UserServiceTest {
 
     @Test
     void edit_user_throw_exception() {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
 
@@ -102,7 +110,10 @@ class UserServiceTest {
                 "max123@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
 
         when(userRepo.findByUsername("max")).thenThrow(UsernameNotFoundException.class);
@@ -111,7 +122,6 @@ class UserServiceTest {
 
     @Test
     void delete_user_expect_success() {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
         UserInfo userToDelete = new UserInfo(
@@ -119,7 +129,10 @@ class UserServiceTest {
                 "max123@max.de",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
         User userToDeleteWID = new User(
                 "1",
@@ -129,6 +142,9 @@ class UserServiceTest {
                 userToDelete.givenDeeds(),
                 userToDelete.takenDeeds(),
                 userToDelete.address(),
+                userToDelete.name(),
+                userToDelete.lng(),
+                userToDelete.lat(),
                 userToDelete.karmaPoints());
 
 
@@ -140,7 +156,6 @@ class UserServiceTest {
 
     @Test
     void gainPoints_expect_success() {
-        Address address = new Address("wallstreet", "2", "48939", "New York City", "Fangfang");
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
 
@@ -151,7 +166,10 @@ class UserServiceTest {
                 "",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 0);
         User expected = new User(
                 "1",
@@ -160,7 +178,10 @@ class UserServiceTest {
                 "",
                 givenDeeds,
                 takenDeeds,
-                address,
+                "",
+                "",
+                0.0F,
+                0.0F,
                 5);
 
         when(userRepo.findByUsername("max")).thenReturn(Optional.of(userOld));
