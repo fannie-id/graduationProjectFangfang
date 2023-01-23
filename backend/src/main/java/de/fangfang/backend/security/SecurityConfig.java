@@ -46,6 +46,7 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                         response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()))
                 .and()
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/").permitAll()
                         .requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/api/users/me").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/users/validate/**").permitAll()
