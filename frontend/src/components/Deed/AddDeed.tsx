@@ -18,7 +18,7 @@ export default function AddDeed(props: AddDeedProps) {
     }
     const address: Address = {
         "address": "",
-        name: "",
+        "name": "",
         coordinates
 
     }
