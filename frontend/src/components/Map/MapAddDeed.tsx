@@ -7,7 +7,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 type MapAddDeedProps = {
-    addGeoCode(len: number, lat: number, address: string): void
+    addGeoCode: (lng: number, lat: number, address: string) => void
 }
 export default function MapAddDeed(props: MapAddDeedProps) {
 
@@ -33,8 +33,8 @@ export default function MapAddDeed(props: MapAddDeedProps) {
         })
 
         geocoder.on('result', (e) => {
-            console.log(e.center[0], e.center[1], e.text);
-            props.addGeoCode(e.center[0], e.center[1], e.text)
+            console.log(e.result.center[1], e.result.center[0], e.result.text);
+            props.addGeoCode(e.result.center[0], e.result.center[1], e.result.text)
 
         });
 
