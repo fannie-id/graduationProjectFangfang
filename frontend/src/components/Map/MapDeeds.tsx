@@ -60,7 +60,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 }
             }
         }
-    })
+    }, [marks, props.deeds])
 
     function handleDeedDetail() {
         navigate("/deeds/add")
