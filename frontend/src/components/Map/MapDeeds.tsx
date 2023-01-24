@@ -35,60 +35,11 @@ export default function MapDeeds(props: MapDeedsProps) {
                     <Pin/>
                 </Marker>
             )),
-        []
+        [props.deeds]
     );
 
 
     const navigate = useNavigate()
-
-
-    /*  const mapContainer = useRef(null);
-      const map = useRef<mapboxgl.Map | null>(null);
-      const [marks, setMarks] = useState<boolean>(false)
-
-
-      useEffect(() => {
-          if (map.current) return; // initialize map only once
-
-          if (!mapContainer.current) return;
-          map.current = new mapboxgl.Map({
-              container: mapContainer.current,
-              style: 'mapbox://styles/mapbox/streets-v12',
-              center: [11.9333, 48.4667],
-              zoom: 13
-          });
-
-
-      });*/
-
-
-    /*    useEffect(() => {
-            if (!marks) {
-
-
-                for (const deed of props.deeds) {
-
-                    // create a HTML element for each feature
-                    const el = document.createElement('div');
-                    el.className = 'marker';
-
-                    if (map.current) {
-
-                        new mapboxgl.Marker(el)
-                            .setLngLat([deed.lng, deed.lat])
-                            .setPopup(
-                                new mapboxgl.Popup({offset: 25}) // add popups
-                                    .setHTML(
-                                        `<h3>${deed.karmaPoints}</h3>
-                                         <a href='/deeds/${deed.id}'> ${deed.description} </a>`
-                                    )
-                            )
-                            .addTo(map.current)
-                        setMarks(true)
-                    }
-                }
-            }
-        }, [marks, props.deeds])*/
 
     function handleDeedDetail() {
         navigate("/deeds/add")
@@ -135,9 +86,9 @@ export default function MapDeeds(props: MapDeedsProps) {
                     </Popup>
                 )}
             </Map>
-
-            <IconButton onClick={handleDeedDetail} type={"submit"}>
-                <AddCircle color="success" fontSize="large"/>
+            <IconButton onClick={handleDeedDetail} type={"submit"}
+                        style={{position: "absolute", bottom: "80px", left: "43%"}}>
+                <AddCircle color="success" sx={{fontSize: 50}}/>
             </IconButton>
         </>
     );
