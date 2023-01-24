@@ -19,7 +19,7 @@ export default function LoginPage(props: LoginPageProps) {
     const navigate = useNavigate()
 
     if (!!props.user && props.user.username !== "anonymousUser") {
-        navigate("/deeds")
+        navigate(-1)
     }
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
