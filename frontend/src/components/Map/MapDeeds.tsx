@@ -1,6 +1,4 @@
 import React, {useMemo, useState} from 'react';
-//import './MapDeeds.css';
-//import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import {Deed} from "../../model/Deed";
 import {AddCircle} from "@mui/icons-material";
 import {IconButton} from "@mui/material";
@@ -11,7 +9,6 @@ import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Pop
 import Pin from './Pin';
 
 const TOKEN = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
-// mapboxgl.accessToken = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 type MapDeedsProps = {
     deeds: Deed[]
 }
@@ -32,6 +29,12 @@ export default function MapDeeds(props: MapDeedsProps) {
                         setPopupInfo(deed);
                     }}
                 >
+                    <h2 style={{
+                        position: "absolute",
+                        bottom: "0px",
+                        left: "35%",
+                        color: "white"
+                    }}>{deed.karmaPoints} </h2>
                     <Pin/>
                 </Marker>
             )),
@@ -57,7 +60,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v12"
                 mapboxAccessToken={TOKEN}
-                style={{width: "360px", height: "540px"}}
+                style={{width: "360px", height: "740px"}}
 
             >
                 <GeolocateControl position="top-left"/>
@@ -75,12 +78,11 @@ export default function MapDeeds(props: MapDeedsProps) {
                         onClose={() => setPopupInfo(null)}
                     >
                         <div>
-                            {popupInfo.karmaPoints} |{' '}
+                            <h2>{popupInfo.karmaPoints} </h2>
                             <a
-                                target="_new"
                                 href={`/deeds/${popupInfo.id}`}
                             >
-                                ${popupInfo.description}
+                                {popupInfo.description}
                             </a>
                         </div>
                     </Popup>
