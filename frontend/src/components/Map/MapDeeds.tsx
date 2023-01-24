@@ -18,7 +18,6 @@ export default function MapDeeds(props: MapDeedsProps) {
     const map = useRef<mapboxgl.Map | null>(null);
     const [marks, setMarks] = useState<boolean>(false)
     const navigate = useNavigate()
-    const geoJson = props.deeds
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -39,7 +38,7 @@ export default function MapDeeds(props: MapDeedsProps) {
         if (!marks) {
 
 
-            for (const deed of geoJson) {
+            for (const deed of props.deeds) {
 
                 // create a HTML element for each feature
                 const el = document.createElement('div');
@@ -61,7 +60,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 }
             }
         }
-    }, [geoJson])
+    }, [])
 
     function handleDeedDetail() {
         navigate("/deeds/add")
