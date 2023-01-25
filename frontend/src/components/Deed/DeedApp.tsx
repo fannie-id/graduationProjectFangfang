@@ -19,7 +19,7 @@ export default function DeedApp(props: DeedAppProps) {
 
             <h2>Hallo {props.username !== undefined && props.username}!</h2>
 
-            <DeedsList deeds={props.deeds}/>
+            <DeedsList deeds={props.deeds} username={props.username}/>
 
         </Box>
     )

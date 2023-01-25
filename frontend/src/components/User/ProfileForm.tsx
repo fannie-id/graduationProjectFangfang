@@ -137,7 +137,6 @@ export default function ProfileForm(props: ProfileFormProps) {
 
                 <Button color="success" variant="contained" type="submit" startIcon={<PublishedWithChangesIcon/>}>
                     save
-                    <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
                 </Button>
 
             </form>

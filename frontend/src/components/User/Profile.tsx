@@ -38,16 +38,17 @@ export default function Profile(props: ProfileProps) {
             {/*{changeUser.img ? <Avatar alt="username" src={URL.createObjectURL(props.user.img)}
                                       sx={{width: 100, height: 100}}/> : <Avatar>{props.user.name.charAt(0).toUpperCase()}</Avatar>}
 */}
-            {madeDeeds.length > 0 && <p>nice thing other help me:</p>}
-            {madeDeeds}
-            {takenDeeds.length > 0 && <p>nice thing i made:</p>}
-            {takenDeeds}
-
             <Button color="success" onClick={toEditPage} variant="contained"
-                    component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 7}}>
+                    component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 2}}>
                 edit Profile
             </Button>
 
+            <Box boxShadow={1} sx={{p: 4}}>
+                {madeDeeds.length > 0 && <h4>nice thing other help me:</h4>}
+                {madeDeeds}
+                {takenDeeds.length > 0 && <h4>nice thing i made:</h4>}
+                {takenDeeds}
+            </Box>
 
 
         </Box>

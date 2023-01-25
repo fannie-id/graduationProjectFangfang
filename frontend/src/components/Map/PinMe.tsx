@@ -10,18 +10,13 @@ const pinStyleMe = {
     stroke: 'none'
 };
 
-const pinStyle = {
-    cursor: 'pointer',
-    fill: '#a7af35',
-    stroke: 'none'
-};
 
-function Pin({size = 30}) {
+function PinMe({size = 30}) {
     return (
-        <svg height={size} viewBox="0 0 24 24" style={pinStyle}>
+        <svg height={size} viewBox="0 0 24 24" style={pinStyleMe}>
             <path d={ICON}/>
         </svg>
     );
 }
 
-export default React.memo(Pin);
+export default React.memo(PinMe);
