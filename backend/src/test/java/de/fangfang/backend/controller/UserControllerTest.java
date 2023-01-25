@@ -53,7 +53,8 @@ class UserControllerTest {
                 "Fangfang",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         ));
         mvc.perform(get(userEndPoint + "/me"))
                 .andExpect(status().isOk());
@@ -73,7 +74,8 @@ class UserControllerTest {
                 "",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         );
 
         MvcResult mvcResult = mvc.perform(get(userEndPoint + "/me"))
@@ -99,7 +101,8 @@ class UserControllerTest {
                                 "name": "Fangfang",
                                 "lng": 0.0,
                                 "lat": 0.0,
-                                "karmaPoints":0
+                                "karmaPoints":0,
+                                "img": ""
                                 }
                                 """).with(csrf())
                 )
@@ -123,7 +126,8 @@ class UserControllerTest {
                 "Fangfang",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         ));
         mvc.perform(post(userEndPoint + "/login").with(csrf()))
                 .andExpect(status().isOk());
@@ -155,7 +159,8 @@ class UserControllerTest {
                 "max",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         ));
 
         MvcResult mvcResult = mvc.perform(put(userEndPoint + "/update")
@@ -170,7 +175,8 @@ class UserControllerTest {
                                 "name": "max",
                                 "lng": 0.0,
                                 "lat": 0.0,
-                                "karmaPoints":0
+                                "karmaPoints":0,
+                                "img": ""
                                 }
                                 """).with(csrf())
                 )
@@ -185,7 +191,8 @@ class UserControllerTest {
                 "max",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         );
         UserInfo result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), UserInfo.class);
         assertEquals(expected, result);
@@ -208,7 +215,8 @@ class UserControllerTest {
                 "Fangfang",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         ));
 
         mvc.perform(delete(userEndPoint + "/max").with(csrf()))
@@ -233,7 +241,8 @@ class UserControllerTest {
                 "Fangfang",
                 0.0F,
                 0.0F,
-                0
+                0,
+                ""
         ));
         mvc.perform(put(userEndPoint + "/validate/max")
                         .contentType(MediaType.APPLICATION_JSON)

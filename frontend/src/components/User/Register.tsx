@@ -68,6 +68,7 @@ export default function Register(props: RegisterProps) {
                 margin="normal"
                 required
                 name={"password"}
+                type="password"
                 value={registerUser.password}
                 label="Password"
                 placeholder="Password"

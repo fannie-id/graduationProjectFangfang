@@ -10,12 +10,15 @@ type ProfileFormProps = {
     user: UserInfo
     submitUser: (changUser: UserInfo) => Promise<UserInfo>
     deleteUser: (user: UserInfo) => Promise<any>
+    uploadImg: (img: File) => Promise<any>
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
 
 
     const [changeUser, setChangeUser] = useState<UserInfo>(props.user)
+
+    const [image, setImage] = useState<File | null>(null)
 
     const navigate = useNavigate()
 
@@ -30,18 +33,6 @@ export default function ProfileForm(props: ProfileFormProps) {
     }
 
 
-    function handleFormAddressChange(event: ChangeEvent<HTMLInputElement>) {
-        const inputValue = event.target.value
-        const nameOfInput = event.target.name
-        setChangeUser((prevState) => {
-                const newState = {...prevState}
-                // @ts-ignore nested object
-                newState.address[nameOfInput] = inputValue
-                return newState
-            }
-        )
-    }
-
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.submitUser(changeUser)
@@ -51,9 +42,20 @@ export default function ProfileForm(props: ProfileFormProps) {
     }
 
     function onChangeImg(event: ChangeEvent<HTMLInputElement>) {
-        if (event.target.files !== undefined) {
-            setChangeUser((prevState) => ({...prevState, "img": event.target.files[0]}))
+        if (event.target.files !== null) {
+            setImage(event.target.files[0])
         }
+    }
+
+    function onUploadImg() {
+        console.log(image)
+        if (image) {
+            props.uploadImg(image).then(data => {
+                console.log(data)
+                setChangeUser((prevState) => ({...prevState, img: data.secure_url}))
+            })
+        }
+
     }
 
     function removeImg() {
@@ -78,9 +80,9 @@ export default function ProfileForm(props: ProfileFormProps) {
 
             <form onSubmit={handleSubmit}>
 
-                {changeUser.img && (
+                {image && (
                     <div>
-                        <Avatar alt="username" src={URL.createObjectURL(changeUser.img)}
+                        <Avatar alt="username" src={URL.createObjectURL(image)}
                                 sx={{width: 100, height: 100}}/>
                         <Button onClick={removeImg}>Remove</Button>
                     </div>
@@ -88,6 +90,11 @@ export default function ProfileForm(props: ProfileFormProps) {
                 <Button color="success" variant="contained" component="label" startIcon={<PhotoCamera/>}>
                     Upload
                     <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
+                </Button>
+
+                <Button onClick={onUploadImg} color="success" variant="contained" component="label"
+                        startIcon={<PublishedWithChangesIcon/>}>
+                    save as profile foto
                 </Button>
 
 
@@ -108,7 +115,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     value={changeUser.address ? changeUser.address : ""}
                     label="Address"
                     placeholder="Address"
-                    onChange={handleFormAddressChange}
+                    onChange={handleFormChange}
                 />
 
 
@@ -119,7 +126,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     value={changeUser.name ? changeUser.name : ""}
                     label="Name"
                     placeholder="Name"
-                    onChange={handleFormAddressChange}
+                    onChange={handleFormChange}
                 />
 
                 <TextField

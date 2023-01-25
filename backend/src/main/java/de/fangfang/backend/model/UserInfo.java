@@ -11,6 +11,7 @@ public record UserInfo(
         String name,
         float lng,
         float lat,
-        int karmaPoints
+        int karmaPoints,
+        String img
 ) {
 }

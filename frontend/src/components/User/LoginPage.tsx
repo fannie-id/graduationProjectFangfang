@@ -62,6 +62,7 @@ export default function LoginPage(props: LoginPageProps) {
                 margin="normal"
                 required
                 name={"password"}
+                type="password"
                 value={loginUser.password}
                 label="Password"
                 placeholder="Password"
