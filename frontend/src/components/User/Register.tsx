@@ -73,7 +73,12 @@ export default function Register(props: RegisterProps) {
                 placeholder="Password"
                 onChange={handleFormChange}
             />
-            <Button variant="contained" type="submit" color="success" startIcon={<PersonAddAlt1Icon/>}>
+            <Button sx={{mt: 4, left: "30%", frontSize: "20px"}}
+                    variant="contained"
+                    type="submit"
+                    color="success"
+                    size="large"
+                    startIcon={<PersonAddAlt1Icon sx={{width: 30, height: 30}}/>}>
                 register
             </Button>
 
