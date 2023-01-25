@@ -1,4 +1,4 @@
-import {Box, IconButton, TextField} from "@mui/material";
+import {Box, Button, TextField} from "@mui/material";
 import {Deed} from "../../model/Deed";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
@@ -39,7 +39,7 @@ export default function DeedForm(props: DeedFormProps) {
 
     return (<Box
             sx={{pb: 3}}
-            margin={"8px"}
+            margin={"35px"}
             flexDirection={"column"}
             display={"grid"}
             flexWrap={"wrap"}
@@ -81,10 +81,9 @@ export default function DeedForm(props: DeedFormProps) {
                     placeholder="Karma Points"
                     onChange={handleFormChange}
                 />
-
-                <IconButton type="submit">
-                    <PublishedWithChangesIcon color="success" fontSize={"large"}/>
-                </IconButton>
+                <Button color="success" variant="contained" type="submit" startIcon={<PublishedWithChangesIcon/>}>
+                    save
+                </Button>
 
             </form>
         </Box>

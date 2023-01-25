@@ -10,6 +10,7 @@ import Pin from './Pin';
 
 const TOKEN = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 type MapDeedsProps = {
+    username: string | undefined
     deeds: Deed[]
 }
 export default function MapDeeds(props: MapDeedsProps) {
