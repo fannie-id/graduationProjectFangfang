@@ -2,22 +2,17 @@ import {UserInfo, UserLogin, UserRegister} from "../model/User";
 import {createUser, deleteLoggedInUser, getMe, loginUser, logoutUser, putUser} from "../api/user-api-calls";
 
 import {useEffect, useState} from "react";
-import {AddressInfo} from "../model/AddressInfo";
 
 export default function useUser() {
-    const address: AddressInfo = {
-        "address": "",
-        "name": "",
-        "lng": 0,
-        "lat": 0
-    }
+
     const emptyUser: UserInfo = {
         "username": "anonymousUser",
         "email": "",
         "givenDeeds": [],
         "takenDeeds": [],
-        "address": address,
-        "karmaPoints": 0
+        "address": "",
+        "karmaPoints": 0,
+        "img": ""
     }
     const [loggedInUser, setLoggedInUser] = useState<UserInfo>(emptyUser)
     useEffect(() => {

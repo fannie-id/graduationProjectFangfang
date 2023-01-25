@@ -1,4 +1,4 @@
-import {Box, IconButton, TextField} from "@mui/material";
+import {Box, Button, TextField} from "@mui/material";
 import FaceIcon from '@mui/icons-material/Face';
 import {ChangeEvent, FormEvent, useState} from "react";
 import {UserInfo, UserLogin} from "../../model/User";
@@ -39,7 +39,7 @@ export default function LoginPage(props: LoginPageProps) {
 
     return (<Box
         sx={{pb: 7}}
-        margin={"8px"}
+        margin={"35px"}
         flexDirection={"column"}
         display={"flex"}
         flexWrap={"wrap"}
@@ -48,6 +48,7 @@ export default function LoginPage(props: LoginPageProps) {
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
             <TextField
+                fullWidth
                 required
                 name={"username"}
                 value={loginUser.username}
@@ -57,6 +58,7 @@ export default function LoginPage(props: LoginPageProps) {
             />
 
             <TextField
+                fullWidth
                 margin="normal"
                 required
                 name={"password"}
@@ -65,10 +67,10 @@ export default function LoginPage(props: LoginPageProps) {
                 placeholder="Password"
                 onChange={handleFormChange}
             />
-            <IconButton type="submit">
-                <FaceIcon color="success"/>
-            </IconButton>
 
+            <Button variant="contained" type="submit" color="success" startIcon={<FaceIcon/>}>
+                login
+            </Button>
         </form>
 
     </Box>)

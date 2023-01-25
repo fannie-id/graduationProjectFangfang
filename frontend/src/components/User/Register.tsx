@@ -1,4 +1,4 @@
-import {Box, IconButton, TextField} from "@mui/material";
+import {Box, Button, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import {UserRegister} from "../../model/User";
@@ -35,7 +35,7 @@ export default function Register(props: RegisterProps) {
 
     return (<Box
         sx={{pb: 7}}
-        margin={"8px"}
+        margin={"35px"}
         flexDirection={"column"}
         display={"flex"}
         flexWrap={"wrap"}
@@ -44,6 +44,7 @@ export default function Register(props: RegisterProps) {
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
             <TextField
+                fullWidth
                 required
                 name={"username"}
                 value={registerUser.username}
@@ -53,6 +54,7 @@ export default function Register(props: RegisterProps) {
             />
 
             <TextField
+                fullWidth
                 margin="normal"
                 required
                 name={"email"}
@@ -62,6 +64,7 @@ export default function Register(props: RegisterProps) {
                 onChange={handleFormChange}
             />
             <TextField
+                fullWidth
                 margin="normal"
                 required
                 name={"password"}
@@ -70,9 +73,9 @@ export default function Register(props: RegisterProps) {
                 placeholder="Password"
                 onChange={handleFormChange}
             />
-            <IconButton type="submit">
-                <PersonAddAlt1Icon color="success"/>
-            </IconButton>
+            <Button variant="contained" type="submit" color="success" startIcon={<PersonAddAlt1Icon/>}>
+                register
+            </Button>
 
         </form>
 
