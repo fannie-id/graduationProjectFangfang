@@ -1,14 +1,12 @@
 import {Avatar, Box, Button} from "@mui/material";
 import {UserInfo} from "../../model/User";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
-import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
 import {useNavigate} from "react-router-dom";
 import {Deed} from "../../model/Deed";
 import DeedSpots from "../Deed/DeedSpots";
 
 type ProfileProps = {
     user: UserInfo | undefined
-    deleteUser: (user: UserInfo) => Promise<any>
     deeds: Deed[]
 }
 export default function Profile(props: ProfileProps) {
@@ -19,12 +17,6 @@ export default function Profile(props: ProfileProps) {
 
     }
 
-    function handleDeleteUser() {
-        props.user && props.deleteUser(props.user)
-            .then(user => {
-                navigate("/login")
-            })
-    }
 
     const madeDeeds = props.deeds.filter((deed: Deed) => deed.author === (!!props.user && props.user.username)).map(deed =>
         <DeedSpots key={deed.id} deed={deed}/>)
@@ -50,15 +42,12 @@ export default function Profile(props: ProfileProps) {
             {madeDeeds}
             {takenDeeds.length > 0 && <p>nice thing i made:</p>}
             {takenDeeds}
+
             <Button color="success" onClick={toEditPage} variant="contained"
                     component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 7}}>
                 edit Profile
             </Button>
 
-            <Button color="success" onClick={handleDeleteUser} variant="contained" component="label"
-                    startIcon={<FaceRetouchingOffIcon/>}>
-                delete profile
-            </Button>
 
 
         </Box>

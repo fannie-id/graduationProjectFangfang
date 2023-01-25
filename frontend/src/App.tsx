@@ -29,12 +29,12 @@ function App() {
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser} user={loggedInUser}/>}></Route>
 
                         <Route path="/profile"
-                               element={<Profile deeds={deeds} user={loggedInUser} deleteUser={deleteUser}/>}></Route>
-                        <Route path="/profile/edit"
-                               element={<ProfileForm user={loggedInUser} submitUser={editUser}/>}></Route>
-                        <Route path="/deeds"
-                               element={<DeedApp deeds={deeds}
-                                                 username={loggedInUser && loggedInUser.username}/>}></Route>
+                               element={<Profile deeds={deeds} user={loggedInUser}/>}></Route>
+                    <Route path="/profile/edit"
+                           element={<ProfileForm user={loggedInUser} submitUser={editUser}/>}></Route>
+                    <Route path="/deeds"
+                           element={<DeedApp deeds={deeds}
+                                             username={loggedInUser && loggedInUser.username}/>}></Route>
                         <Route path="/deeds/add"
                                element={<AddDeed addNewDeed={addNewDeed} user={loggedInUser}/>}></Route>
                         <Route path="/deeds/:id"
