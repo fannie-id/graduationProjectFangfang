@@ -17,5 +17,6 @@ export type UserInfo = {
     givenDeeds: string[],
     takenDeeds: string[],
     address?: AddressInfo,
-    karmaPoints: number
+    karmaPoints: number,
+    img?: FormData
 }
