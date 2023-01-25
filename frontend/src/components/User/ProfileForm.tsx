@@ -59,7 +59,7 @@ export default function ProfileForm(props: ProfileFormProps) {
     }
 
     function removeImg() {
-        setChangeUser((prevState) => ({...prevState, "img": ""}))
+        setImage(null)
     }
 
     function handleDeleteUser() {
@@ -80,22 +80,26 @@ export default function ProfileForm(props: ProfileFormProps) {
 
             <form onSubmit={handleSubmit}>
 
+                {(!image && props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
+                                                                    sx={{width: 100, height: 100, ml: "33%"}}/> :
+                    !image && <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100,}}/>}
+
                 {image && (
                     <div>
                         <Avatar alt="username" src={URL.createObjectURL(image)}
-                                sx={{width: 100, height: 100}}/>
+                                sx={{width: 100, height: 100, ml: "33%"}}/>
                         <Button onClick={removeImg}>Remove</Button>
                     </div>
                 )}
-                <Button color="success" variant="contained" component="label" startIcon={<PhotoCamera/>}>
+                {!image && < Button color="success" variant="contained" component="label" startIcon={<PhotoCamera/>}>
                     Upload
                     <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
-                </Button>
+                </Button>}
 
-                <Button onClick={onUploadImg} color="success" variant="contained" component="label"
-                        startIcon={<PublishedWithChangesIcon/>}>
+                {image && <Button onClick={onUploadImg} color="success" variant="contained" component="label"
+                                  startIcon={<PublishedWithChangesIcon/>}>
                     save as profile foto
-                </Button>
+                </Button>}
 
 
                 <TextField
