@@ -1,8 +1,9 @@
-import {Box, IconButton, TextField} from "@mui/material";
+import {Avatar, Box, Button, IconButton, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {UserInfo} from "../../model/User";
 import {useNavigate} from "react-router-dom";
+import {PhotoCamera} from "@mui/icons-material";
 
 type ProfileFormProps = {
     user: UserInfo
@@ -47,6 +48,16 @@ export default function ProfileForm(props: ProfileFormProps) {
             })
     }
 
+    function onChangeImg(event: ChangeEvent<HTMLInputElement>) {
+        if (event.target.files !== null) {
+            setChangeUser((prevState) => ({...prevState, "img": event.target.files[0]}))
+        }
+    }
+
+    function removeImg() {
+        setChangeUser((prevState) => ({...prevState, "img": undefined}))
+    }
+
 
     return (<Box
             sx={{pb: 7}}
@@ -55,19 +66,22 @@ export default function ProfileForm(props: ProfileFormProps) {
             display={"grid"}
             flexWrap={"wrap"}
             justifyContent={"center"}>
+            <h2>Hi, {changeUser.username}</h2>
 
             <form onSubmit={handleSubmit}>
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    name={"username"}
-                    value={changeUser.username}
-                    label="Username"
-                    placeholder="username"
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
+
+                {changeUser.img && (
+                    <div>
+                        <Avatar alt="username" src={URL.createObjectURL(changeUser.img)}
+                                sx={{width: 100, height: 100}}/>
+                        <Button onClick={removeImg}>Remove</Button>
+                    </div>
+                )}
+                <Button variant="contained" component="label" startIcon={<PhotoCamera/>}>
+                    Upload
+                    <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
+                </Button>
+
 
                 <TextField
                     margin="normal"
