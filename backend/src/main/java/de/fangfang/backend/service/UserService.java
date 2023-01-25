@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException(username)
                 );
-        return new UserInfo(user.username(), user.email(), user.givenDeeds(), user.takenDeeds(), user.address(), user.name(), user.lng(), user.lat(), user.karmaPoints());
+        return new UserInfo(user.username(), user.email(), user.givenDeeds(), user.takenDeeds(), user.address(), user.name(), user.lng(), user.lat(), user.karmaPoints(), user.img());
     }
 
     public void registerNewUser(UserRegistration newUser) {
@@ -57,7 +57,8 @@ public class UserService implements UserDetailsService {
                 newUser.name(),
                 newUser.lng(),
                 newUser.lat(),
-                newUser.karmaPoints());
+                newUser.karmaPoints(),
+                newUser.img());
 
         String id = idGeneratorService.generateUuid();
         User userToSave = userEncode.createUserWithId(id);
@@ -80,7 +81,8 @@ public class UserService implements UserDetailsService {
                 user.name(),
                 user.lng(),
                 user.lat(),
-                user.karmaPoints());
+                user.karmaPoints(),
+                user.img());
         userRepo.save(userToSave);
         return user;
     }
@@ -98,7 +100,7 @@ public class UserService implements UserDetailsService {
     public UserInfo returnAnonymousUser() {
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
-        return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, "", "", 0.0F, 0.0F, 0);
+        return new UserInfo("anonymousUser", "", givenDeeds, takenDeeds, "", "", 0.0F, 0.0F, 0, "");
     }
 
     public void gainPoints(int points, String username) {
@@ -119,7 +121,8 @@ public class UserService implements UserDetailsService {
                 foundUser.name(),
                 foundUser.lng(),
                 foundUser.lat(),
-                newKP);
+                newKP,
+                foundUser.img());
         userRepo.save(userToSave);
     }
 }

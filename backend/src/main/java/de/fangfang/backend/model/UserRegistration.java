@@ -13,11 +13,12 @@ public record UserRegistration(
         String name,
         float lng,
         float lat,
-        int karmaPoints
+        int karmaPoints,
+        String img
 ) {
     public User createUserWithId(String id) {
         List<String> givenDeeds = new ArrayList<>();
         List<String> takenDeeds = new ArrayList<>();
-        return new User(id, username, password, email, givenDeeds, takenDeeds, "", "", 0.0F, 0.0F, 0);
+        return new User(id, username, password, email, givenDeeds, takenDeeds, "", "", 0.0F, 0.0F, 0, "");
     }
 }

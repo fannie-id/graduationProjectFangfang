@@ -20,6 +20,7 @@ public record User(
         String name,
         float lng,
         float lat,
-        int karmaPoints
+        int karmaPoints,
+        String img
 ) {
 }

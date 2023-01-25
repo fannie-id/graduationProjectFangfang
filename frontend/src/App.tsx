@@ -15,7 +15,7 @@ import Profile from "./components/User/Profile";
 import ProfileForm from "./components/User/ProfileForm";
 
 function App() {
-    const {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser} = useUser()
+    const {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser, uploadImg} = useUser()
     const {deeds, addNewDeed} = useDeeds(loggedInUser)
     const {userGainKP} = useAnotherUser()
     return (
@@ -28,11 +28,11 @@ function App() {
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser} user={loggedInUser}/>}></Route>
 
-                        <Route path="/profile"
-                               element={<Profile deeds={deeds} user={loggedInUser}/>}></Route>
+                    <Route path="/profile"
+                           element={<Profile deeds={deeds} user={loggedInUser}/>}></Route>
                     <Route path="/profile/edit"
                            element={<ProfileForm user={loggedInUser} submitUser={editUser}
-                                                 deleteUser={deleteUser}/>}></Route>
+                                                 deleteUser={deleteUser} uploadImg={uploadImg}/>}></Route>
                     <Route path="/deeds"
                            element={<DeedApp deeds={deeds}
                                              username={loggedInUser && loggedInUser.username}/>}></Route>

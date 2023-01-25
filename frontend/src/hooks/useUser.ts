@@ -1,5 +1,13 @@
 import {UserInfo, UserLogin, UserRegister} from "../model/User";
-import {createUser, deleteLoggedInUser, getMe, loginUser, logoutUser, putUser} from "../api/user-api-calls";
+import {
+    createUser,
+    deleteLoggedInUser,
+    getMe,
+    loginUser,
+    logoutUser,
+    putUser,
+    uploadCloudinary
+} from "../api/user-api-calls";
 
 import {useEffect, useState} from "react";
 
@@ -56,5 +64,12 @@ export default function useUser() {
             }).catch(console.error)
     }
 
-    return {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser}
+    function uploadImg(img: File): Promise<any> {
+        return uploadCloudinary(img)
+            .then(data => {
+                return data
+            })
+    }
+
+    return {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser, uploadImg}
 }

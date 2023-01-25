@@ -45,7 +45,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
         when(idGeneratorService.generateUuid()).thenReturn("1");
         when(argon2PasswordEncoder.encode(userRegistration.password())).thenReturn("encode");
 
@@ -60,7 +61,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
         when(userRepo.save(expected)).thenReturn(expected);
         userService.registerNewUser(userRegistration);
         verify(userRepo).save(expected);
@@ -81,7 +83,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
 
         UserInfo expected = new UserInfo(
                 "max",
@@ -92,7 +95,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
 
         when(userRepo.findByUsername("max")).thenReturn(Optional.of(userToSave));
         when(userRepo.save(userToSave)).thenReturn(userToSave);
@@ -114,7 +118,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
 
         when(userRepo.findByUsername("max")).thenThrow(UsernameNotFoundException.class);
         assertThrows(UsernameNotFoundException.class, () -> userService.editUser(expected));
@@ -133,7 +138,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
         User userToDeleteWID = new User(
                 "1",
                 userToDelete.username(),
@@ -145,7 +151,8 @@ class UserServiceTest {
                 userToDelete.name(),
                 userToDelete.lng(),
                 userToDelete.lat(),
-                userToDelete.karmaPoints());
+                userToDelete.karmaPoints(),
+                "");
 
 
         when(userRepo.findByUsername("max")).thenReturn(Optional.of(userToDeleteWID));
@@ -170,7 +177,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                0);
+                0,
+                "");
         User expected = new User(
                 "1",
                 "max",
@@ -182,7 +190,8 @@ class UserServiceTest {
                 "",
                 0.0F,
                 0.0F,
-                5);
+                5,
+                "");
 
         when(userRepo.findByUsername("max")).thenReturn(Optional.of(userOld));
         userService.gainPoints(5, "max");
