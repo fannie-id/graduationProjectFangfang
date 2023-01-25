@@ -4,10 +4,12 @@ import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {UserInfo} from "../../model/User";
 import {useNavigate} from "react-router-dom";
 import {PhotoCamera} from "@mui/icons-material";
+import FaceRetouchingOffIcon from "@mui/icons-material/FaceRetouchingOff";
 
 type ProfileFormProps = {
     user: UserInfo
     submitUser: (changUser: UserInfo) => Promise<UserInfo>
+    deleteUser: (user: UserInfo) => Promise<any>
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
@@ -58,10 +60,16 @@ export default function ProfileForm(props: ProfileFormProps) {
         setChangeUser((prevState) => ({...prevState, "img": ""}))
     }
 
+    function handleDeleteUser() {
+        props.user && props.deleteUser(props.user)
+            .then(user => {
+                navigate("/login")
+            })
+    }
 
     return (<Box
             sx={{pb: 7}}
-            margin={"8px"}
+            margin={"35px"}
             flexDirection={"column"}
             display={"grid"}
             flexWrap={"wrap"}
@@ -77,7 +85,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                         <Button onClick={removeImg}>Remove</Button>
                     </div>
                 )}
-                <Button variant="contained" component="label" startIcon={<PhotoCamera/>}>
+                <Button color="success" variant="contained" component="label" startIcon={<PhotoCamera/>}>
                     Upload
                     <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
                 </Button>
@@ -127,12 +135,17 @@ export default function ProfileForm(props: ProfileFormProps) {
                 />
 
 
-                <Button type="submit" startIcon={<PublishedWithChangesIcon/>}>
+                <Button color="success" variant="contained" type="submit" startIcon={<PublishedWithChangesIcon/>}>
                     save
                     <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
                 </Button>
 
             </form>
+
+            <Button sx={{mt: 4}} variant="outlined" onClick={handleDeleteUser} component="label"
+                    startIcon={<FaceRetouchingOffIcon/>}>
+                delete profile
+            </Button>
         </Box>
     )
 }
