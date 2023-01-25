@@ -68,7 +68,12 @@ export default function LoginPage(props: LoginPageProps) {
                 onChange={handleFormChange}
             />
 
-            <Button variant="contained" type="submit" color="success" startIcon={<FaceIcon/>}>
+            <Button sx={{mt: 4, left: "30%",}}
+                    variant="contained"
+                    type="submit"
+                    color="success"
+                    size="large"
+                    startIcon={<FaceIcon sx={{width: 30, height: 30}}/>}>
                 login
             </Button>
         </form>
