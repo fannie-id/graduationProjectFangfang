@@ -1,4 +1,4 @@
-import {Box, IconButton} from "@mui/material";
+import {Avatar, Box, Button} from "@mui/material";
 import {UserInfo} from "../../model/User";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
@@ -42,18 +42,24 @@ export default function Profile(props: ProfileProps) {
 
 
             <h2>{props.user !== undefined && props.user.username} 's Profile</h2>
+            <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100}}/>
+            {/*{changeUser.img ? <Avatar alt="username" src={URL.createObjectURL(props.user.img)}
+                                      sx={{width: 100, height: 100}}/> : <Avatar>{props.user.name.charAt(0).toUpperCase()}</Avatar>}
+*/}
             {madeDeeds.length > 0 && <p>nice thing other help me:</p>}
             {madeDeeds}
             {takenDeeds.length > 0 && <p>nice thing i made:</p>}
             {takenDeeds}
+            <Button color="success" onClick={toEditPage} variant="contained"
+                    component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 7}}>
+                edit Profile
+            </Button>
 
-            <IconButton onClick={toEditPage} type="submit">
-                <FaceRetouchingNaturalIcon color="success" fontSize={"large"}/>
-            </IconButton>
+            <Button color="success" onClick={handleDeleteUser} variant="contained" component="label"
+                    startIcon={<FaceRetouchingOffIcon/>}>
+                delete profile
+            </Button>
 
-            <IconButton onClick={handleDeleteUser} type="submit">
-                <FaceRetouchingOffIcon color="success" fontSize={"large"}/>
-            </IconButton>
 
         </Box>
     )

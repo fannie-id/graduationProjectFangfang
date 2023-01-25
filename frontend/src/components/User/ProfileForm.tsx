@@ -1,4 +1,4 @@
-import {Avatar, Box, Button, IconButton, TextField} from "@mui/material";
+import {Avatar, Box, Button, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {UserInfo} from "../../model/User";
@@ -49,13 +49,13 @@ export default function ProfileForm(props: ProfileFormProps) {
     }
 
     function onChangeImg(event: ChangeEvent<HTMLInputElement>) {
-        if (event.target.files !== null) {
+        if (event.target.files !== undefined) {
             setChangeUser((prevState) => ({...prevState, "img": event.target.files[0]}))
         }
     }
 
     function removeImg() {
-        setChangeUser((prevState) => ({...prevState, "img": undefined}))
+        setChangeUser((prevState) => ({...prevState, "img": ""}))
     }
 
 
@@ -96,10 +96,10 @@ export default function ProfileForm(props: ProfileFormProps) {
                 <TextField
                     margin="normal"
                     fullWidth
-                    name={"street"}
-                    value={changeUser.address ? changeUser.address.address : ""}
-                    label="Street"
-                    placeholder="Street"
+                    name={"address"}
+                    value={changeUser.address ? changeUser.address : ""}
+                    label="Address"
+                    placeholder="Address"
                     onChange={handleFormAddressChange}
                 />
 
@@ -108,7 +108,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                     margin="normal"
                     fullWidth
                     name={"name"}
-                    value={changeUser.address ? changeUser.address.name : ""}
+                    value={changeUser.name ? changeUser.name : ""}
                     label="Name"
                     placeholder="Name"
                     onChange={handleFormAddressChange}
@@ -126,9 +126,11 @@ export default function ProfileForm(props: ProfileFormProps) {
                     }}
                 />
 
-                <IconButton type="submit">
-                    <PublishedWithChangesIcon color="success" fontSize={"large"}/>
-                </IconButton>
+
+                <Button type="submit" startIcon={<PublishedWithChangesIcon/>}>
+                    save
+                    <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
+                </Button>
 
             </form>
         </Box>
