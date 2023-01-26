@@ -1,4 +1,4 @@
-import {Avatar, Box, Button} from "@mui/material";
+import {Avatar, Badge, Box, Button} from "@mui/material";
 import {UserInfo} from "../../model/User";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import {useNavigate} from "react-router-dom";
@@ -35,10 +35,14 @@ export default function Profile(props: ProfileProps) {
 
 
             <h2>{props.user !== undefined && props.user.username} 's Profile</h2>
-            {(props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
-                                                      sx={{width: 100, height: 100}}/> :
-                <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, mt: 4}}/>}
-
+            <Badge badgeContent={props.user?.karmaPoints}
+                   anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                   color="success"
+                   overlap="circular">
+                {(props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
+                                                          sx={{width: 100, height: 100}}/> :
+                    <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, mt: 4}}/>}
+            </Badge>
             <Button color="success" onClick={toEditPage} variant="contained"
                     component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 2}}>
                 edit Profile
