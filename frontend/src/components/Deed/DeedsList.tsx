@@ -18,6 +18,8 @@ export default function DeedsList(props: DeedsListProps) {
     }
 
     return (<>
+
+
             <MapDeeds deeds={props.deeds} username={props.username} width={"360px"} height={"780px"}/>
 
             <IconButton onClick={handleDeedDetail} type={"submit"}

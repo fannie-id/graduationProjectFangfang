@@ -80,38 +80,49 @@ export default function ViewDeed(props: ViewDeedProps) {
 
     const deeds = [getDeed]
 
-
     return (
         <Box margin={"5px"}
              flexDirection={"column"}
              display={"grid"}
              flexWrap={"wrap"}
              justifyContent={"center"}>
-            <h2>{getDeed.author}'s Deed</h2>
+            <Box sx={{mt: 4}}>
 
 
-            <p>Ort: {getDeed.address} {getDeed.address}</p>
-            <MapDeeds deeds={deeds} username={props.user.username} width={"300px"} height={"300px"}/>
-            <p>Deed: {getDeed.description}</p>
+                <h2>{getDeed.author}'s Deed</h2>
 
-            <p>KarmaPoints: {getDeed.karmaPoints}</p>
-            <p>Status: {getDeed.deedStatus}</p>
+                <Box sx={{mt: 4}}>
+                    <p>Ort: {getDeed.address}</p>
+                    <MapDeeds deeds={deeds} username={props.user.username} width={"300px"} height={"300px"}/>
+
+                    <Box sx={{mt: 4}}>
+                        <p>Deed: {getDeed.description}</p>
+
+                        <p>KarmaPoints: {getDeed.karmaPoints}</p>
+                        <p>Status: {getDeed.deedStatus}</p>
+                    </Box>
+                </Box>
+            </Box>
 
             {getDeed.deedStatus === DeedStatus.CREATED && getDeed.author === props.user.username &&
-                <Button onClick={handleEditDeed}>
-                    <EditLocationAltIcon color="success"/>
+                <Button sx={{mt: 4}} onClick={handleEditDeed} color="success" variant="contained" type="submit"
+                        startIcon={<EditLocationAltIcon/>}>
+                    edit Deed
                 </Button>
             }
             {getDeed.deedStatus === DeedStatus.CREATED && getDeed.author === props.user.username &&
-                <Button onClick={handleDeleteDeed}>
-                    <DeleteSweepIcon color="success"/>
+
+                <Button sx={{mt: 4}} onClick={handleDeleteDeed} color="success" variant="outlined" type="submit"
+                        startIcon={<DeleteSweepIcon color="success"/>}>
+                    delete Deed
                 </Button>
             }
 
             {((getDeed.deedStatus !== DeedStatus.DONE && getDeed.author !== props.user.username)
                     || (getDeed.deedStatus === DeedStatus.DONE && getDeed.author === props.user.username)) &&
-                <Button onClick={handleStatusChange}>
-                    <HandshakeIcon color="success"/>
+                <Button sx={{mt: 4}} onClick={handleStatusChange} color="success" variant="contained" type="submit"
+                        startIcon=<HandshakeIcon/>>
+                    processing Deed
                 </Button>}
         </Box>
     )
