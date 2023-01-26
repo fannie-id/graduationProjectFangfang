@@ -1,4 +1,4 @@
-import {Deed} from "../../model/Deed";
+import {Deed, DeedStatus} from "../../model/Deed";
 import MapDeeds from "../Map/MapDeeds";
 import {AddCircle} from "@mui/icons-material";
 import {Box, IconButton, Tab} from "@mui/material";
@@ -28,7 +28,15 @@ export default function DeedsList(props: DeedsListProps) {
         setValue(newValue);
     };
 
-    const deedsList = props.deeds.map(deed =>
+    const aktiveDeeds = props.deeds.filter((deed: Deed) => deed.deedStatus !== DeedStatus.ACCEPTED)
+
+    const madeDeeds = aktiveDeeds.filter((deed: Deed) => deed.author === (!!props.username && props.username)).map(deed =>
+        <DeedSpots key={deed.id} deed={deed}/>)
+
+    const takenDeeds = aktiveDeeds.filter((deed: Deed) => deed.maker === (!!props.username && props.username)).map(deed =>
+        <DeedSpots key={deed.id} deed={deed}/>)
+
+    const otherDeeds = aktiveDeeds.filter((deed: Deed) => deed.author !== (!!props.username && props.username)).filter((deed: Deed) => deed.deedStatus === DeedStatus.CREATED).map(deed =>
         <DeedSpots key={deed.id} deed={deed}/>)
 
     return (<>
@@ -43,9 +51,12 @@ export default function DeedsList(props: DeedsListProps) {
                     </Box>
                     <TabPanel value="1">
                         <Box ml={-6}>
-                            <MapDeeds deeds={props.deeds} username={props.username} width={"380px"}
-                                      height={"780px"}/></Box></TabPanel>
-                    <TabPanel value="2">{deedsList}</TabPanel>
+                            <MapDeeds deeds={aktiveDeeds} username={props.username} width={"380px"}
+                                      height={"700px"}/></Box></TabPanel>
+                    <TabPanel value="2">
+                        <div><h4>taken:</h4><Box>{takenDeeds}</Box><Box><h4>available: </h4>{otherDeeds}</Box><Box>
+                            <h4>myDeeds:</h4>{madeDeeds}</Box></div>
+                    </TabPanel>
                 </TabContext>
             </Box>
 

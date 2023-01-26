@@ -9,6 +9,7 @@ export default function WelcomeScreen() {
     return (<div>
             <div className="context">
                 <Box sx={{pb: 7}}
+                     mt={"6"}
                      margin={"35px"}
                      flexDirection={"column"}
                      display={"flex"}

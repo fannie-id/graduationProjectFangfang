@@ -13,6 +13,7 @@ const Item = styled(Paper)(({theme}) => ({
     height: 60,
     lineHeight: '60px',
     width: '80%',
+    backgroundColor: '#e6eee6'
 }));
 export default function DeedSpots(props: DeedSpotsProps) {
     const navigate = useNavigate()
@@ -28,7 +29,7 @@ export default function DeedSpots(props: DeedSpotsProps) {
              flexWrap={"wrap"}>
 
 
-            <Item sx={{m: 1, pl: 2, pr: 2}}>
+            <Item sx={{width: 300, m: 1, pl: 2, pr: 2}}>
                 <Button onClick={handleDeedDetail}>
                     {props.deed.description} {props.deed.karmaPoints}
                 </Button>
