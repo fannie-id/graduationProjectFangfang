@@ -6,6 +6,12 @@ import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import {DeedStatus} from "../../model/Deed";
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import {UserInfo} from "../../model/User";
+import React, {useMemo} from "react";
+import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, ScaleControl} from 'react-map-gl';
+
+import PinMe from "../Map/PinMe";
+
+const TOKEN = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 
 type ViewDeedProps = {
     user: UserInfo
@@ -76,6 +82,27 @@ export default function ViewDeed(props: ViewDeedProps) {
         }
     }
 
+    const deeds = [getDeed]
+    const pins = useMemo(
+        () =>
+            deeds.map((deed, index) => (
+                <Marker
+                    key={`marker-${index}`}
+                    longitude={deed.lng}
+                    latitude={deed.lat}
+                    anchor="bottom"
+                >
+                    <h2 style={{
+                        position: "absolute",
+                        bottom: "12px",
+                        left: "35%",
+                        color: "white"
+                    }}>{deed.karmaPoints} </h2>
+                    <PinMe/>
+                </Marker>
+            )),
+        [deeds]
+    );
 
     return (
         <Box margin={"5px"}
@@ -83,9 +110,32 @@ export default function ViewDeed(props: ViewDeedProps) {
              display={"grid"}
              flexWrap={"wrap"}
              justifyContent={"center"}>
+            <h2>{props.user.username}'s Deed</h2>
 
             <p>Deed: {getDeed.description}</p>
             <p>Ort: {getDeed.address} {getDeed.address}</p>
+            <Map
+                initialViewState={{
+                    latitude: 48.4667,
+                    longitude: 11.9333,
+                    zoom: 13,
+                    bearing: 0,
+                    pitch: 0
+                }}
+                mapStyle="mapbox://styles/mapbox/streets-v12"
+                mapboxAccessToken={TOKEN}
+                style={{width: "360px", height: "780px"}}
+
+            >
+                <GeolocateControl position="top-left"/>
+                <FullscreenControl position="top-left"/>
+                <NavigationControl position="top-left"/>
+                <ScaleControl/>
+
+                {pins}
+            </Map>
+
+
             <p>KarmaPoints: {getDeed.karmaPoints}</p>
             <p>Status: {getDeed.deedStatus}</p>
 
