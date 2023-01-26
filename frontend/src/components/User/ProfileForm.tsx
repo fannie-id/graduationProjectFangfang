@@ -80,25 +80,36 @@ export default function ProfileForm(props: ProfileFormProps) {
 
             <form onSubmit={handleSubmit}>
 
-                {(!image && props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
-                                                                    sx={{width: 100, height: 100, ml: "33%"}}/> :
-                    !image && <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, ml: "33%"}}/>}
+                {(!image && props.user && props.user.img) ?
+                    <Avatar alt="username"
+                            src={props.user.img}
+                            sx={{width: 100, height: 100, ml: "33%"}}/> :
+                    !image && <Avatar src="/broken-image.jpg"
+                                      sx={{width: 100, height: 100, ml: "33%"}}/>}
 
                 {image && (
                     <div>
-                        <Avatar alt="username" src={URL.createObjectURL(image)}
+                        <Avatar alt="username"
+                                src={URL.createObjectURL(image)}
                                 sx={{width: 100, height: 100, ml: "33%"}}/>
                         <Button onClick={removeImg}>Remove</Button>
                     </div>
                 )}
-                {!image && < Button sx={{mt: 2}} color="success" variant="contained" component="label"
+                {!image && < Button sx={{mt: 2}}
+                                    color="success"
+                                    variant="contained"
+                                    component="label"
                                     startIcon={<PhotoCamera/>}>
                     Upload
                     <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
                 </Button>}
 
                 {image &&
-                    <Button sx={{mt: 2}} onClick={onUploadImg} color="success" variant="contained" component="label"
+                    <Button sx={{mt: 2}}
+                            onClick={onUploadImg}
+                            color="success"
+                            variant="contained"
+                            component="label"
                             startIcon={<PublishedWithChangesIcon/>}>
                         save as profile foto
                     </Button>}
