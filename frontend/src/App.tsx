@@ -13,6 +13,7 @@ import useAnotherUser from "./hooks/useAnotherUser";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Profile from "./components/User/Profile";
 import ProfileForm from "./components/User/ProfileForm";
+import WelcomeScreen from "./components/WelcomeScreen";
 
 function App() {
     const {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser, uploadImg} = useUser()
@@ -24,7 +25,7 @@ function App() {
             </header>
             <BrowserRouter>
                 <Routes>
-                    <Route path="" element={<p>welcome!</p>}></Route>
+                    <Route path="" element={<WelcomeScreen/>}></Route>
                     <Route path="/register" element={<Register addUser={addUser}/>}></Route>
                     <Route path="/login" element={<LoginPage getLoginUser={getLoginUser} user={loggedInUser}/>}></Route>
 
