@@ -11,7 +11,8 @@ type DeedAppProps = {
 export default function DeedApp(props: DeedAppProps) {
 
 
-    return (<Box margin={"5px"}
+    return (<Box mt={3}
+                 ml={6}
                  flexDirection={"column"}
                  display={"grid"}
                  flexWrap={"wrap"}

@@ -33,7 +33,7 @@ export default function DeedsList(props: DeedsListProps) {
 
     return (<>
 
-            <Box sx={{width: '80%', typography: 'body1'}}>
+            <Box sx={{width: '100%', typography: 'body1'}}>
                 <TabContext value={value}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -42,8 +42,9 @@ export default function DeedsList(props: DeedsListProps) {
                         </TabList>
                     </Box>
                     <TabPanel value="1">
-                        <MapDeeds deeds={props.deeds} username={props.username} width={"380px"}
-                                  height={"780px"}/></TabPanel>
+                        <Box ml={-6}>
+                            <MapDeeds deeds={props.deeds} username={props.username} width={"380px"}
+                                      height={"780px"}/></Box></TabPanel>
                     <TabPanel value="2">{deedsList}</TabPanel>
                 </TabContext>
             </Box>
