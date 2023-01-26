@@ -92,13 +92,14 @@ export default function ViewDeed(props: ViewDeedProps) {
                 <h2>{getDeed.author}'s Deed</h2>
 
                 <Box sx={{mt: 4}}>
-                    <p>Ort: {getDeed.address}</p>
+                    <p>Location: {getDeed.address}</p>
                     <MapDeeds deeds={deeds} username={props.user.username} width={"300px"} height={"300px"}/>
 
                     <Box sx={{mt: 4}}>
-                        <p>Deed: {getDeed.description}</p>
-
-                        <p>KarmaPoints: {getDeed.karmaPoints}</p>
+                        <p>What {getDeed.author} needed: {getDeed.description}</p>
+                        <br/>
+                        <p>You will get {getDeed.karmaPoints} KarmaPoints</p>
+                        <br/>
                         <p>Status: {getDeed.deedStatus}</p>
                     </Box>
                 </Box>

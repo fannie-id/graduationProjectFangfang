@@ -44,7 +44,9 @@ export default function DeedForm(props: DeedFormProps) {
             display={"grid"}
             flexWrap={"wrap"}
             justifyContent={"center"}>
-            <h2>add {props.deed.author}'s new Deed</h2>
+            {deed.id ? <h2>Edit {props.deed.author}'s Deed</h2>
+                : <h2>Create a {props.deed.author}'s new deed</h2>
+            }
 
             <form onSubmit={handleSubmit}>
                 <TextField
