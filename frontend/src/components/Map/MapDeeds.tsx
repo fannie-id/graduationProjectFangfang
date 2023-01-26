@@ -43,14 +43,14 @@ export default function MapDeeds(props: MapDeedsProps) {
     );
 
 
-
-
+    const lat = props.deeds[0].lat
+    const lng = props.deeds[0].lng
     return (
         <>
             <Map
                 initialViewState={{
-                    latitude: 48.4667,
-                    longitude: 11.9333,
+                    latitude: lat,
+                    longitude: lng,
                     zoom: 13,
                     bearing: 0,
                     pitch: 0
