@@ -1,17 +1,17 @@
 import React, {useMemo, useState} from 'react';
 import {Deed} from "../../model/Deed";
-import {AddCircle} from "@mui/icons-material";
-import {IconButton} from "@mui/material";
-import {useNavigate} from "react-router-dom";
 
 import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup, ScaleControl} from 'react-map-gl';
 
 import Pin from './Pin';
+import PinMe from "./PinMe";
 
 const TOKEN = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
 type MapDeedsProps = {
     username: string | undefined
     deeds: Deed[]
+    width: string
+    height: string
 }
 export default function MapDeeds(props: MapDeedsProps) {
     const [popupInfo, setPopupInfo] = useState<Deed | null>(null);
@@ -36,18 +36,14 @@ export default function MapDeeds(props: MapDeedsProps) {
                         left: "35%",
                         color: "white"
                     }}>{deed.karmaPoints} </h2>
-                    <Pin/>
+                    {deed.author === props.username ? <PinMe/> : <Pin/>}
                 </Marker>
             )),
         [props.deeds]
     );
 
 
-    const navigate = useNavigate()
 
-    function handleDeedDetail() {
-        navigate("/deeds/add")
-    }
 
     return (
         <>
@@ -61,7 +57,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v12"
                 mapboxAccessToken={TOKEN}
-                style={{width: "360px", height: "780px"}}
+                style={{width: props.width, height: props.height}}
 
             >
                 <GeolocateControl position="top-left"/>
@@ -89,10 +85,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                     </Popup>
                 )}
             </Map>
-            <IconButton onClick={handleDeedDetail} type={"submit"}
-                        style={{position: "absolute", bottom: "80px", left: "43%"}}>
-                <AddCircle color="success" sx={{fontSize: 50}}/>
-            </IconButton>
+
         </>
     );
 }
