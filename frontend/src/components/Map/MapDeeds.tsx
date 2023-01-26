@@ -15,6 +15,14 @@ type MapDeedsProps = {
 }
 export default function MapDeeds(props: MapDeedsProps) {
     const [popupInfo, setPopupInfo] = useState<Deed | null>(null);
+    let lat = 48.4667
+    let lng = 11.9333
+
+    if (props.deeds.length === 1 && props.deeds[0]) {
+        lat = props.deeds[0].lat
+        lng = props.deeds[0].lng
+    }
+
     const pins = useMemo(
         () =>
             props.deeds.map((deed, index) => (
@@ -41,10 +49,6 @@ export default function MapDeeds(props: MapDeedsProps) {
             )),
         [props.deeds]
     );
-
-    const lat = props.deeds.length > 1 ? 48.4667 : props.deeds[0] && props.deeds[0].lat
-    const lng = props.deeds.length > 1 ? 11.9333 : props.deeds[0] && props.deeds[0].lng
-
 
     return (
         <>
