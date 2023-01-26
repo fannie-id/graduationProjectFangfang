@@ -26,6 +26,7 @@ export default function Profile(props: ProfileProps) {
     return (<Box
             sx={{pb: 7}}
             margin={"8px"}
+            mt={"20px"}
             flexDirection={"column"}
             display={"flex"}
             flexWrap={"wrap"}
@@ -36,7 +37,7 @@ export default function Profile(props: ProfileProps) {
             <h2>{props.user !== undefined && props.user.username} 's Profile</h2>
             {(props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
                                                       sx={{width: 100, height: 100}}/> :
-                <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100}}/>}
+                <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, mt: 4}}/>}
 
             <Button color="success" onClick={toEditPage} variant="contained"
                     component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 2}}>

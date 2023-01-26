@@ -32,7 +32,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 >
                     <h2 style={{
                         position: "absolute",
-                        bottom: "0px",
+                        bottom: "12px",
                         left: "35%",
                         color: "white"
                     }}>{deed.karmaPoints} </h2>
@@ -61,7 +61,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v12"
                 mapboxAccessToken={TOKEN}
-                style={{width: "360px", height: "740px"}}
+                style={{width: "360px", height: "780px"}}
 
             >
                 <GeolocateControl position="top-left"/>
