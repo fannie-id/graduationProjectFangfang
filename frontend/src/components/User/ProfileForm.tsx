@@ -82,7 +82,7 @@ export default function ProfileForm(props: ProfileFormProps) {
 
                 {(!image && props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
                                                                     sx={{width: 100, height: 100, ml: "33%"}}/> :
-                    !image && <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100,}}/>}
+                    !image && <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, ml: "33%"}}/>}
 
                 {image && (
                     <div>
@@ -91,15 +91,17 @@ export default function ProfileForm(props: ProfileFormProps) {
                         <Button onClick={removeImg}>Remove</Button>
                     </div>
                 )}
-                {!image && < Button color="success" variant="contained" component="label" startIcon={<PhotoCamera/>}>
+                {!image && < Button sx={{mt: 2}} color="success" variant="contained" component="label"
+                                    startIcon={<PhotoCamera/>}>
                     Upload
                     <input hidden accept="image/*" multiple type="file" onChange={onChangeImg}/>
                 </Button>}
 
-                {image && <Button onClick={onUploadImg} color="success" variant="contained" component="label"
-                                  startIcon={<PublishedWithChangesIcon/>}>
-                    save as profile foto
-                </Button>}
+                {image &&
+                    <Button sx={{mt: 2}} onClick={onUploadImg} color="success" variant="contained" component="label"
+                            startIcon={<PublishedWithChangesIcon/>}>
+                        save as profile foto
+                    </Button>}
 
 
                 <TextField
