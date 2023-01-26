@@ -42,9 +42,10 @@ export default function MapDeeds(props: MapDeedsProps) {
         [props.deeds]
     );
 
+    const lat = props.deeds.length > 1 ? 48.4667 : props.deeds[0] && props.deeds[0].lat
+    const lng = props.deeds.length > 1 ? 11.9333 : props.deeds[0] && props.deeds[0].lng
 
-    const lat = props.deeds[0].lat
-    const lng = props.deeds[0].lng
+
     return (
         <>
             <Map
