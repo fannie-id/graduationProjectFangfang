@@ -47,7 +47,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                     {deed.author === props.username ? <PinMe/> : <Pin/>}
                 </Marker>
             )),
-        [props.deeds]
+        [props.deeds, props.username]
     );
 
     return (

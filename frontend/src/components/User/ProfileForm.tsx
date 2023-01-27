@@ -76,7 +76,7 @@ export default function ProfileForm(props: ProfileFormProps) {
             display={"grid"}
             flexWrap={"wrap"}
             justifyContent={"center"}>
-            <h2>Hi, {changeUser.username}</h2>
+            <h2>edit {changeUser.username}'s profile</h2>
 
             <form onSubmit={handleSubmit}>
 

@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import {BottomNavigation, BottomNavigationAction, Box, Paper} from "@mui/material";
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -26,8 +26,9 @@ export default function NavigationBar(props: NavigationBarProps) {
 
 
     return (
-        <div>
-            <Paper sx={{position: 'fixed', bottom: 20, left: 0, right: 0}} elevation={3}>
+
+        <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+            <Box>
                 <BottomNavigation
                     showLabels
                     value={path}
@@ -51,7 +52,8 @@ export default function NavigationBar(props: NavigationBarProps) {
                         <BottomNavigationAction component={Link} label="login" to={"/login"} icon={< FaceIcon/>}
                                                 value={"/login"}/>}
                 </BottomNavigation>
+            </Box>
             </Paper>
-        </div>
+
     )
 }
