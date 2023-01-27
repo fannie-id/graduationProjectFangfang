@@ -50,7 +50,7 @@ export default function DeedsList(props: DeedsListProps) {
                 </Box>
                 <TabPanel value="1">
                     <Box>
-                        <MapDeeds deeds={aktiveDeeds} username={props.username} width={"380px"} height={"700px"}/>
+                        <MapDeeds deeds={aktiveDeeds} username={props.username} width={"366px"} height={"700px"}/>
                     </Box>
                 </TabPanel>
                 <TabPanel value="2">
@@ -70,16 +70,20 @@ export default function DeedsList(props: DeedsListProps) {
                     </Box>
                 </TabPanel>
 
+                <Box display="flex"
+                     justifyContent="center"
+                     alignItems="center">
+                    <Fab color="success"
+                         sx={{fontSize: 50}}
+                         style={{position: "absolute", bottom: "80px"}}
+                         aria-label="add"
+                         onClick={handleDeedDetail}>
+                        <AddCircle/>
+                    </Fab>
+                </Box>
 
-                <Fab color="success"
-                     sx={{fontSize: 50}}
-                     style={{position: "absolute", bottom: "80px", left: "43%"}}
-                     aria-label="add"
-                     onClick={handleDeedDetail}>
-                    <AddCircle/>
-                </Fab>
             </TabContext>
-            </Box>
+        </Box>
 
     )
 }
