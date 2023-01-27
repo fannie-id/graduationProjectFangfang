@@ -24,9 +24,6 @@ export default function Profile(props: ProfileProps) {
     const takenDeeds = props.deeds.filter((deed: Deed) => deed.maker === (!!props.user && props.user.username)).map(deed =>
         <DeedSpots key={deed.id} deed={deed}/>)
     return (<Box
-            sx={{pb: 7}}
-            margin={"8px"}
-            mt={"20px"}
             flexDirection={"column"}
             display={"flex"}
             flexWrap={"wrap"}
@@ -34,7 +31,7 @@ export default function Profile(props: ProfileProps) {
             justifyContent={"center"}>
 
 
-            <h2>{props.user !== undefined && props.user.username} 's Profile</h2>
+            <Box mt={"20px"}><h2>{props.user !== undefined && props.user.username} 's Profile</h2></Box>
             <Badge badgeContent={props.user?.karmaPoints}
                    anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                    color="success"
