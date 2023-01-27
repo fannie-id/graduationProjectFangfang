@@ -1,7 +1,7 @@
 import {Deed, DeedStatus} from "../../model/Deed";
 import MapDeeds from "../Map/MapDeeds";
 import {AddCircle} from "@mui/icons-material";
-import {Box, IconButton, Tab} from "@mui/material";
+import {Box, Fab, Tab} from "@mui/material";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -69,10 +69,15 @@ export default function DeedsList(props: DeedsListProps) {
                         </Box>
                     </Box>
                 </TabPanel>
-                <IconButton onClick={handleDeedDetail} type={"submit"}
-                            style={{position: "absolute", bottom: "80px", left: "43%"}}>
-                    <AddCircle color="success" sx={{fontSize: 50}}/>
-                </IconButton>
+
+
+                <Fab color="success"
+                     sx={{fontSize: 50}}
+                     style={{position: "absolute", bottom: "80px", left: "43%"}}
+                     aria-label="add"
+                     onClick={handleDeedDetail}>
+                    <AddCircle/>
+                </Fab>
             </TabContext>
             </Box>
 
