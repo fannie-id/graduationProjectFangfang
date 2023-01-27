@@ -16,7 +16,7 @@ export default function DeedApp(props: DeedAppProps) {
                  display={"flex"}
                  flexWrap={"wrap"}
                  justifyContent={"center"}>
-            <Box ml={6}>
+            <Box ml={4}>
                 <h2>Hallo {props.username !== undefined && props.username}!</h2></Box>
 
             <DeedsList deeds={props.deeds} username={props.username}/>
