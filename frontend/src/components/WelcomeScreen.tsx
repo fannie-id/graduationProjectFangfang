@@ -36,7 +36,7 @@ export default function WelcomeScreen() {
                          aria-label="add"
                          onClick={login}
                          variant="extended">
-                        <FaceIcon/>
+                        <FaceIcon sx={{mr: 1}}/>
                         login
                     </Fab>
 
@@ -45,7 +45,7 @@ export default function WelcomeScreen() {
                          aria-label="add"
                          onClick={register}
                          variant="extended">
-                        <PersonAddAlt1Icon/>
+                        <PersonAddAlt1Icon sx={{mr: 1}}/>
                         register
                     </Fab>
 
