@@ -29,7 +29,7 @@ export default function DeedSpots(props: DeedSpotsProps) {
              flexWrap={"wrap"}>
 
 
-            <Item sx={{width: 300, m: 1, pl: 2, pr: 2}}>
+            <Item sx={{width: "100%", m: 1}}>
                 <Button onClick={handleDeedDetail}>
                     {props.deed.description} {props.deed.karmaPoints}
                 </Button>
