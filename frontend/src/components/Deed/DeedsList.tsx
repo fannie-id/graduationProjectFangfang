@@ -39,32 +39,42 @@ export default function DeedsList(props: DeedsListProps) {
     const otherDeeds = aktiveDeeds.filter((deed: Deed) => deed.author !== (!!props.username && props.username)).filter((deed: Deed) => deed.deedStatus === DeedStatus.CREATED).map(deed =>
         <DeedSpots key={deed.id} deed={deed}/>)
 
-    return (<>
-
-            <Box sx={{width: '50%', typography: 'body1'}}>
-                <TabContext value={value}>
-                    <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                        <TabList onChange={handleChange} aria-label="lab API tabs example">
-                            <Tab label="Map" value="1"/>
-                            <Tab label="List" value="2"/>
-                        </TabList>
+    return (
+        <Box sx={{width: '100%', typography: 'body1'}}>
+            <TabContext value={value}>
+                <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+                    <TabList onChange={handleChange} aria-label="lab API tabs example">
+                        <Tab label="Map" value="1"/>
+                        <Tab label="List" value="2"/>
+                    </TabList>
+                </Box>
+                <TabPanel value="1">
+                    <Box>
+                        <MapDeeds deeds={aktiveDeeds} username={props.username} width={"380px"} height={"700px"}/>
                     </Box>
-                    <TabPanel value="1">
-                        <Box ml={-6}>
-                            <MapDeeds deeds={aktiveDeeds} username={props.username} width={"380px"}
-                                      height={"700px"}/></Box></TabPanel>
-                    <TabPanel value="2">
-                        <div><h4>taken:</h4><Box>{takenDeeds}</Box><Box><h4>available: </h4>{otherDeeds}</Box><Box>
-                            <h4>myDeeds:</h4>{madeDeeds}</Box></div>
-                    </TabPanel>
-                </TabContext>
+                </TabPanel>
+                <TabPanel value="2">
+                    <Box>
+                        <Box>
+                            <h4>taken:</h4>
+                            {takenDeeds}
+                        </Box>
+                        <Box>
+                            <h4>available: </h4>
+                            {otherDeeds}
+                        </Box>
+                        <Box>
+                            <h4>myDeeds:</h4>
+                            {madeDeeds}
+                        </Box>
+                    </Box>
+                </TabPanel>
+                <IconButton onClick={handleDeedDetail} type={"submit"}
+                            style={{position: "absolute", bottom: "80px", left: "43%"}}>
+                    <AddCircle color="success" sx={{fontSize: 50}}/>
+                </IconButton>
+            </TabContext>
             </Box>
-
-            <IconButton onClick={handleDeedDetail} type={"submit"}
-                        style={{position: "absolute", bottom: "80px", left: "43%"}}>
-                <AddCircle color="success" sx={{fontSize: 50}}/>
-            </IconButton>
-        </>
 
     )
 }

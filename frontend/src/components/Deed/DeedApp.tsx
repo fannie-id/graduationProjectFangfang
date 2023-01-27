@@ -12,13 +12,12 @@ export default function DeedApp(props: DeedAppProps) {
 
 
     return (<Box mt={3}
-                 ml={6}
                  flexDirection={"column"}
-                 display={"grid"}
+                 display={"flex"}
                  flexWrap={"wrap"}
                  justifyContent={"center"}>
-
-            <h2>Hallo {props.username !== undefined && props.username}!</h2>
+            <Box ml={6}>
+                <h2>Hallo {props.username !== undefined && props.username}!</h2></Box>
 
             <DeedsList deeds={props.deeds} username={props.username}/>
 
