@@ -4,9 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.repository.UserRepo;
-import de.fangfang.backend.service.UserService;
+import de.fangfang.backend.service.ImgUrlService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -38,8 +38,10 @@ class UserControllerTest {
     private MockMvc mvc;
     @Autowired
     private UserRepo userRepo;
+
     @MockBean
-    private UserService userService;
+    ImgUrlService imgUrlService;
+
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -286,12 +288,10 @@ class UserControllerTest {
                 0,
                 ""
         ));
-
-        String expected = "foto";
-        Mockito.when(userService.uploadImg("max", mockMultipartFile)).thenReturn(expected);
-
+        
+        when(imgUrlService.urlGenerator(mockMultipartFile)).thenReturn("./image.png");
         mvc.perform(MockMvcRequestBuilders.multipart(userEndPoint + "/max")
-                        .file(mockMultipartFile))
+                        .file(mockMultipartFile).with(csrf()))
                 .andExpect(status().isOk())
                 .andReturn();
 
