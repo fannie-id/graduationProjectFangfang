@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @RestController
@@ -53,9 +55,9 @@ public class UserController {
         return userService.editUser(user);
     }
 
-    @DeleteMapping("/{name}")
-    public void deleteUser(@PathVariable String name, HttpSession httpSession) {
-        userService.deleteUser(name);
+    @DeleteMapping("/{username}")
+    public void deleteUser(@PathVariable String username, HttpSession httpSession) {
+        userService.deleteUser(username);
         httpSession.invalidate();
         SecurityContextHolder.clearContext();
     }
@@ -63,6 +65,11 @@ public class UserController {
     @PutMapping("/validate/{username}")
     public void gainPoints(@RequestBody int points, @PathVariable String username) {
         userService.gainPoints(points, username);
+    }
+
+    @PostMapping("/{username}")
+    public String uploadImg(@PathVariable String username, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+        return userService.uploadImg(username, file);
     }
 
 }

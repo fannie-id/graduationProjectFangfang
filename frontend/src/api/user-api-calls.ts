@@ -3,8 +3,6 @@ import {UserInfo, UserLogin, UserRegister} from "../model/User";
 
 const userEndPoint: string = "/api/users";
 
-const cloudinaryEndPoint: string = "https://api.cloudinary.com/v1_1/dknplivln/image/upload"
-
 export function getMe() {
     return axios.get(userEndPoint + "/me")
         .then(response => response.data)
@@ -46,11 +44,12 @@ export function putKP(points: number, username: string) {
         .then((response) => response.data)
 }
 
-export function uploadCloudinary(img: File): Promise<any> {
-    const data = new FormData()
-    data.append("file", img);
-    data.append("upload_preset", "karmaApp");
-    data.append("cloud_name", "dknplivln");
-    return axios.post(cloudinaryEndPoint, data)
+export function uploadCloudinary(username: string, img: File): Promise<string> {
+    const formData = new FormData()
+    if (img !== undefined) {
+        formData.append("file", img)
+        formData.append("upload_preset", "karmaApp");
+    }
+    return axios.post(userEndPoint + "/" + username, formData)
         .then((response) => response.data)
 }

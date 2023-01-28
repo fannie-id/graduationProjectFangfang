@@ -4,15 +4,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fangfang.backend.model.User;
 import de.fangfang.backend.model.UserInfo;
 import de.fangfang.backend.repository.UserRepo;
+import de.fangfang.backend.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +38,11 @@ class UserControllerTest {
     private MockMvc mvc;
     @Autowired
     private UserRepo userRepo;
+    @MockBean
+    private UserService userService;
     @Autowired
     private ObjectMapper objectMapper;
+
 
     @Test
     @WithMockUser(username = "max")
@@ -249,5 +257,42 @@ class UserControllerTest {
                         .content("5").with(csrf())
                 )
                 .andExpect(status().isOk());
+    }
+
+    @WithMockUser("max")
+    @DirtiesContext
+    @Test
+    void upload_img_get_200() throws Exception {
+
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+
+        String fileName = "file.jpg";
+        byte[] fileBytes = "file content".getBytes();
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("file", fileName, "application/json", fileBytes);
+
+
+        userRepo.save(new User(
+                "1",
+                "max",
+                "password",
+                "email",
+                givenDeeds,
+                takenDeeds,
+                "wallstreet 3",
+                "max",
+                0.0F,
+                0.0F,
+                0,
+                ""
+        ));
+        String expected = "foto";
+        Mockito.when(userService.uploadImg("max", mockMultipartFile)).thenReturn(expected);
+
+        mvc.perform(MockMvcRequestBuilders.multipart(userEndPoint + "/max")
+                        .file(mockMultipartFile))
+                .andExpect(status().isOk())
+                .andReturn();
+
     }
 }
