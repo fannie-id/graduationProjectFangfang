@@ -1,12 +1,15 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {Deed} from "../../model/Deed";
 
-import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup, ScaleControl} from 'react-map-gl';
+import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, ScaleControl} from 'react-map-gl';
 
 import Pin from './Pin';
 import PinMe from "./PinMe";
+import {useNavigate} from "react-router-dom";
 
 const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
+
+
 type MapDeedsProps = {
     username: string | undefined
     deeds: Deed[]
@@ -14,12 +17,18 @@ type MapDeedsProps = {
     height: string
 }
 export default function MapDeeds(props: MapDeedsProps) {
-    const [popupInfo, setPopupInfo] = useState<Deed | null>(null);
     let lat = 48.4667
     let lng = 11.9333
     if (props.deeds.length === 1 && props.deeds[0]) {
         lat = props.deeds[0].lat
         lng = props.deeds[0].lng
+    }
+    const navigate = useNavigate()
+
+    function detail(id: string | undefined) {
+        if (id) {
+            navigate("/deeds/" + id)
+        }
     }
 
     const pins = useMemo(
@@ -34,12 +43,13 @@ export default function MapDeeds(props: MapDeedsProps) {
                         // If we let the click event propagates to the map, it will immediately close the popup
                         // with `closeOnClick: true`
                         e.originalEvent.stopPropagation();
-                        setPopupInfo(deed);
+
+                        detail(deed.id)
                     }}
                 >
                     <h2 style={{
                         position: "absolute",
-                        bottom: "12px",
+                        bottom: "18px",
                         left: "35%",
                         color: "white"
                     }}>{deed.karmaPoints} </h2>
@@ -48,6 +58,7 @@ export default function MapDeeds(props: MapDeedsProps) {
             )),
         [props.deeds, props.username]
     );
+
 
     return (
         <>
@@ -71,23 +82,7 @@ export default function MapDeeds(props: MapDeedsProps) {
 
                 {pins}
 
-                {popupInfo && (
-                    <Popup
-                        anchor="bottom"
-                        longitude={Number(popupInfo.lng)}
-                        latitude={Number(popupInfo.lat)}
-                        onClose={() => setPopupInfo(null)}
-                    >
-                        <div>
-                            <h2>{popupInfo.karmaPoints} </h2>
-                            <a
-                                href={`/deeds/${popupInfo.id}`}
-                            >
-                                {popupInfo.description}
-                            </a>
-                        </div>
-                    </Popup>
-                )}
+
             </Map>
 
         </>
