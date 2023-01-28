@@ -26,7 +26,7 @@ export default function useUser() {
     useEffect(() => {
         getMe()
             .then(setLoggedInUser)
-    }, [])
+    }, [loggedInUser])
 
     function getLoginUser(user: UserLogin): Promise<UserInfo> {
         return loginUser(user)

@@ -17,7 +17,6 @@ export default function Profile(props: ProfileProps) {
 
     }
 
-
     const madeDeeds = props.deeds.filter((deed: Deed) => deed.author === (!!props.user && props.user.username)).map(deed =>
         <DeedSpots key={deed.id} deed={deed}/>)
 

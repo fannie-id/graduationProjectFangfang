@@ -259,7 +259,7 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser("max")
+    @WithMockUser(username = "max")
     @DirtiesContext
     @Test
     void upload_img_get_200() throws Exception {
@@ -269,7 +269,7 @@ class UserControllerTest {
 
         String fileName = "file.jpg";
         byte[] fileBytes = "file content".getBytes();
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("file", fileName, "application/json", fileBytes);
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("file", fileName, MediaType.IMAGE_JPEG_VALUE, fileBytes);
 
 
         userRepo.save(new User(
@@ -286,6 +286,7 @@ class UserControllerTest {
                 0,
                 ""
         ));
+
         String expected = "foto";
         Mockito.when(userService.uploadImg("max", mockMultipartFile)).thenReturn(expected);
 

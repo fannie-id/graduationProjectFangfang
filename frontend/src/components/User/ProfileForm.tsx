@@ -48,10 +48,10 @@ export default function ProfileForm(props: ProfileFormProps) {
     }
 
     function onUploadImg() {
-        console.log(image)
+
         if (image) {
             props.uploadImg(props.user.username, image).then(data => {
-                console.log(data)
+
                 setChangeUser((prevState) => ({...prevState, img: data.secure_url}))
             })
         }
