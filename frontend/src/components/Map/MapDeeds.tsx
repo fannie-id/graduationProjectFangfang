@@ -6,7 +6,7 @@ import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, Pop
 import Pin from './Pin';
 import PinMe from "./PinMe";
 
-const TOKEN = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
+const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
 type MapDeedsProps = {
     username: string | undefined
     deeds: Deed[]
@@ -17,7 +17,6 @@ export default function MapDeeds(props: MapDeedsProps) {
     const [popupInfo, setPopupInfo] = useState<Deed | null>(null);
     let lat = 48.4667
     let lng = 11.9333
-
     if (props.deeds.length === 1 && props.deeds[0]) {
         lat = props.deeds[0].lat
         lng = props.deeds[0].lng
