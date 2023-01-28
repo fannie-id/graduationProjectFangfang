@@ -25,7 +25,7 @@ export default function MapDeeds(props: MapDeedsProps) {
     }
     const navigate = useNavigate()
 
-    function detail(id: string | undefined) {
+    function getDetail(id: string | undefined) {
         if (id) {
             navigate("/deeds/" + id)
         }
@@ -44,7 +44,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                         // with `closeOnClick: true`
                         e.originalEvent.stopPropagation();
 
-                        detail(deed.id)
+                        getDetail(deed.id)
                     }}
                 >
                     <h2 style={{
@@ -61,30 +61,25 @@ export default function MapDeeds(props: MapDeedsProps) {
 
 
     return (
-        <>
-            <Map
-                initialViewState={{
-                    latitude: lat,
-                    longitude: lng,
-                    zoom: 13,
-                    bearing: 0,
-                    pitch: 0
-                }}
-                mapStyle="mapbox://styles/mapbox/streets-v12"
-                mapboxAccessToken={TOKEN}
-                style={{width: props.width, height: props.height}}
+        <Map
+            initialViewState={{
+                latitude: lat,
+                longitude: lng,
+                zoom: 13,
+                bearing: 0,
+                pitch: 0
+            }}
+            mapStyle="mapbox://styles/mapbox/streets-v12"
+            mapboxAccessToken={TOKEN}
+            style={{width: props.width, height: props.height}}>
 
-            >
-                <GeolocateControl position="top-left"/>
-                <FullscreenControl position="top-left"/>
-                <NavigationControl position="top-left"/>
-                <ScaleControl/>
+            <GeolocateControl position="top-left"/>
+            <FullscreenControl position="top-left"/>
+            <NavigationControl position="top-left"/>
+            <ScaleControl/>
 
-                {pins}
+            {pins}
 
-
-            </Map>
-
-        </>
+        </Map>
     );
 }
