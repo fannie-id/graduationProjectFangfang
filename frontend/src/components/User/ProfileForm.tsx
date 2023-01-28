@@ -10,7 +10,7 @@ type ProfileFormProps = {
     user: UserInfo
     submitUser: (changUser: UserInfo) => Promise<UserInfo>
     deleteUser: (user: UserInfo) => Promise<any>
-    uploadImg: (img: File) => Promise<any>
+    uploadImg: (username: string, img: File) => Promise<any>
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
@@ -50,7 +50,7 @@ export default function ProfileForm(props: ProfileFormProps) {
     function onUploadImg() {
         console.log(image)
         if (image) {
-            props.uploadImg(image).then(data => {
+            props.uploadImg(props.user.username, image).then(data => {
                 console.log(data)
                 setChangeUser((prevState) => ({...prevState, img: data.secure_url}))
             })

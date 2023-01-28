@@ -10,7 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +22,13 @@ public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
     private final IdGeneratorService idGeneratorService;
     private final Argon2PasswordEncoder passwordEncoder;
+    private final ImgUrlService imgUrlService;
 
-
-    public UserService(UserRepo userRepo, IdGeneratorService idGeneratorService, Argon2PasswordEncoder passwordEncoder) {
+    public UserService(UserRepo userRepo, IdGeneratorService idGeneratorService, Argon2PasswordEncoder passwordEncoder, ImgUrlService imgUrlService) {
         this.userRepo = userRepo;
         this.idGeneratorService = idGeneratorService;
         this.passwordEncoder = passwordEncoder;
+        this.imgUrlService = imgUrlService;
     }
 
     @Override
@@ -85,6 +88,33 @@ public class UserService implements UserDetailsService {
                 user.img());
         userRepo.save(userToSave);
         return user;
+    }
+
+    public String uploadImg(String username, MultipartFile file) throws IOException {
+        String imageUrl = "";
+        if (file != null) {
+            imageUrl = imgUrlService.urlGenerator(file);
+        }
+        User foundUser = userRepo.findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(username)
+                );
+        User userToSave = new User(
+                foundUser.id(),
+                foundUser.username(),
+                foundUser.password(),
+                foundUser.email(),
+                foundUser.givenDeeds(),
+                foundUser.takenDeeds(),
+                foundUser.address(),
+                foundUser.name(),
+                foundUser.lng(),
+                foundUser.lat(),
+                foundUser.karmaPoints(),
+                imageUrl);
+
+        userRepo.save(userToSave);
+        return imageUrl;
     }
 
 

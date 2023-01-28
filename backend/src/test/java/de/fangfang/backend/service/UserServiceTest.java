@@ -7,7 +7,11 @@ import de.fangfang.backend.model.UserRegistration;
 import de.fangfang.backend.repository.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +25,9 @@ class UserServiceTest {
     IdGeneratorService idGeneratorService = mock(IdGeneratorService.class);
     Argon2PasswordEncoder argon2PasswordEncoder = mock(Argon2PasswordEncoder.class);
 
-    UserService userService = new UserService(userRepo, idGeneratorService, argon2PasswordEncoder);
+    ImgUrlService imgUrlService = mock(ImgUrlService.class);
+
+    UserService userService = new UserService(userRepo, idGeneratorService, argon2PasswordEncoder, imgUrlService);
 
     @Test
     void loadUserByUsername_expect_MyUsernameNotFoundException() {
@@ -196,6 +202,80 @@ class UserServiceTest {
         when(userRepo.findByUsername("max")).thenReturn(Optional.of(userOld));
         userService.gainPoints(5, "max");
         verify(userRepo).save(expected);
+
+    }
+
+    @Test
+    void upload_img_expect_success() throws IOException {
+
+        MultipartFile file = new MultipartFile() {
+            @Override
+            public String getName() {
+                return null;
+            }
+
+            @Override
+            public String getOriginalFilename() {
+                return null;
+            }
+
+            @Override
+            public String getContentType() {
+                return null;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public long getSize() {
+                return 0;
+            }
+
+            @Override
+            public byte[] getBytes() {
+                return new byte[0];
+            }
+
+            @Override
+            public InputStream getInputStream() {
+                return null;
+            }
+
+            @Override
+            public void transferTo(File dest) throws IllegalStateException {
+
+            }
+        };
+
+        List<String> givenDeeds = new ArrayList<>();
+        List<String> takenDeeds = new ArrayList<>();
+
+        User foundUser = new User(
+                "1",
+                "max",
+                "encode",
+                "max123@max.de",
+                givenDeeds,
+                takenDeeds,
+                "",
+                "",
+                0.0F,
+                0.0F,
+                0,
+                "");
+
+
+        when(userRepo.findByUsername("max")).thenReturn(Optional.of(foundUser));
+        String expected = "foto";
+        when(imgUrlService.urlGenerator(file)).thenReturn(expected);
+
+        when(userRepo.save(foundUser)).thenReturn(foundUser);
+        String result = userService.uploadImg("max", file);
+        assertEquals(expected, result);
+
 
     }
 

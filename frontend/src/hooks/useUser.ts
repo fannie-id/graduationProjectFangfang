@@ -64,8 +64,8 @@ export default function useUser() {
             }).catch(console.error)
     }
 
-    function uploadImg(img: File): Promise<any> {
-        return uploadCloudinary(img)
+    function uploadImg(username: string, img: File): Promise<string> {
+        return uploadCloudinary(username, img)
             .then(data => {
                 return data
             })
