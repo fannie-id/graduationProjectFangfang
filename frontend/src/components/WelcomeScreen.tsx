@@ -28,11 +28,12 @@ export default function WelcomeScreen() {
                     justifyContent={"center"}>
 
 
-                    <h2>welcome!</h2>
+                    <h2>shape your karma,</h2>
+                    <h2>shape your future!</h2>
 
 
                     <Fab color="success"
-                         style={{position: "absolute", top: 80}}
+                         style={{position: "absolute", top: 90}}
                          aria-label="add"
                          onClick={login}
                          variant="extended">

@@ -23,6 +23,7 @@ export default function useUser() {
         "img": ""
     }
     const [loggedInUser, setLoggedInUser] = useState<UserInfo>(emptyUser)
+
     useEffect(() => {
         if (loggedInUser.username !== "anonymousUser") {
             getMe()
@@ -70,9 +71,11 @@ export default function useUser() {
     function uploadImg(username: string, img: File): Promise<string> {
         return uploadCloudinary(username, img)
             .then(data => {
+                setLoggedInUser((prevState) => ({...prevState, img: data}))
                 return data
             })
     }
+
 
     return {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser, uploadImg}
 }
