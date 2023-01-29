@@ -29,7 +29,7 @@ export default function MapDeeds(props: MapDeedsProps) {
         if (id) {
             navigate("/deeds/" + id)
         }
-    }, []);
+    }, [navigate]);
     const pins = useMemo(
         () =>
             props.deeds.map((deed, index) => (
