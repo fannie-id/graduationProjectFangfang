@@ -36,8 +36,8 @@ export default function Profile(props: ProfileProps) {
                    color="success"
                    overlap="circular">
                 {(props.user && props.user.img) ? <Avatar alt="username" src={props.user.img}
-                                                          sx={{width: 100, height: 100}}/> :
-                    <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, mt: 4}}/>}
+                                                          sx={{width: 100, height: 100, mt: 3}}/> :
+                    <Avatar src="/broken-image.jpg" sx={{width: 100, height: 100, mt: 3}}/>}
             </Badge>
             <Button color="success" onClick={toEditPage} variant="contained"
                     component="label" startIcon={<FaceRetouchingNaturalIcon/>} sx={{m: 2}}>
