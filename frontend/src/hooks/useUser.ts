@@ -29,7 +29,7 @@ export default function useUser() {
                 .then(setLoggedInUser)
         }
 
-    }, [loggedInUser])
+    }, [])
 
     function getLoginUser(user: UserLogin): Promise<UserInfo> {
         return loginUser(user)
