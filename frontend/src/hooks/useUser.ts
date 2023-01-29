@@ -71,6 +71,7 @@ export default function useUser() {
     function uploadImg(username: string, img: File): Promise<string> {
         return uploadCloudinary(username, img)
             .then(data => {
+                setLoggedInUser((prevState) => ({...prevState, img: data}))
                 return data
             })
     }
