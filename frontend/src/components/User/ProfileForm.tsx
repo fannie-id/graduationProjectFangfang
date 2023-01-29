@@ -5,6 +5,7 @@ import {UserInfo} from "../../model/User";
 import {useNavigate} from "react-router-dom";
 import {PhotoCamera} from "@mui/icons-material";
 import FaceRetouchingOffIcon from "@mui/icons-material/FaceRetouchingOff";
+import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 
 type ProfileFormProps = {
     user: UserInfo
@@ -87,17 +88,22 @@ export default function ProfileForm(props: ProfileFormProps) {
                     {(!image && props.user && props.user.img) ?
                         <Avatar alt="username"
                                 src={props.user.img}
-                                sx={{width: 100, height: 100, mt: 4}}/> :
+                                sx={{width: 100, height: 100, mt: 3}}/> :
                         !image && <Avatar src="/broken-image.jpg"
                                           sx={{width: 100, height: 100, mt: 3}}/>}
 
                     {image && (
-                        <div>
+                        <Box flexDirection={"column"}
+                             display={"flex"}
+                             flexWrap={"wrap"}
+                             alignItems="center"
+                             justifyContent={"center"}>
                             <Avatar alt="username"
                                     src={URL.createObjectURL(image)}
-                                    sx={{width: 100, height: 100, ml: "33%", mt: 3}}/>
-                            <Button onClick={removeImg}>Remove</Button>
-                        </div>
+                                    sx={{width: 100, height: 100, mt: 3}}/>
+                            <Button sx={{mt: 2}} variant="outlined" onClick={removeImg}
+                                    startIcon={<NoPhotographyIcon/>}>Remove</Button>
+                        </Box>
                     )}
                     {!image && < Button sx={{mt: 2}}
                                         color="success"
@@ -119,7 +125,7 @@ export default function ProfileForm(props: ProfileFormProps) {
                         </Button>}
 
                 </Box>
-                <Box sx={{ml: 2, mr: 2}}>
+                <Box sx={{ml: 2, mr: 2, mt: 2}}>
 
 
                     <TextField
@@ -166,7 +172,8 @@ export default function ProfileForm(props: ProfileFormProps) {
                     />
 
 
-                    <Button color="success" variant="contained" type="submit" startIcon={<PublishedWithChangesIcon/>}>
+                    <Button sx={{mt: 1}} color="success" variant="contained" type="submit"
+                            startIcon={<PublishedWithChangesIcon/>}>
                         save
                     </Button>
                     <Box flexDirection={"column"}
