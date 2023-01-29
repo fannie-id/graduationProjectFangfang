@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {Deed} from "../../model/Deed";
 
 import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl, ScaleControl} from 'react-map-gl';
@@ -25,12 +25,11 @@ export default function MapDeeds(props: MapDeedsProps) {
     }
     const navigate = useNavigate()
 
-    function getDetail(id: string | undefined) {
+    const getDetail = useCallback((id: string | undefined) => {
         if (id) {
             navigate("/deeds/" + id)
         }
-    }
-
+    }, []);
     const pins = useMemo(
         () =>
             props.deeds.map((deed, index) => (
