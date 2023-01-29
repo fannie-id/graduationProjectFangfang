@@ -23,13 +23,14 @@ export default function useUser() {
         "img": ""
     }
     const [loggedInUser, setLoggedInUser] = useState<UserInfo>(emptyUser)
+
     useEffect(() => {
         if (loggedInUser.username !== "anonymousUser") {
             getMe()
                 .then(setLoggedInUser)
         }
 
-    }, [loggedInUser])
+    }, [])
 
     function getLoginUser(user: UserLogin): Promise<UserInfo> {
         return loginUser(user)
@@ -73,6 +74,7 @@ export default function useUser() {
                 return data
             })
     }
+
 
     return {getLoginUser, addUser, loggedInUser, logout, editUser, deleteUser, uploadImg}
 }

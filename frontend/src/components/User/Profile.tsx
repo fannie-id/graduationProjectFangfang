@@ -10,6 +10,7 @@ type ProfileProps = {
     deeds: Deed[]
 }
 export default function Profile(props: ProfileProps) {
+
     const navigate = useNavigate()
 
     function toEditPage() {
