@@ -10,7 +10,6 @@ export default function WelcomeScreen() {
 
     function login() {
         navigate("/login")
-        console.log("login")
     }
 
     function register() {
