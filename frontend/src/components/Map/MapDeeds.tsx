@@ -25,6 +25,10 @@ export default function MapDeeds(props: MapDeedsProps) {
     }
     const navigate = useNavigate()
 
+    function handleMarkerClick(deed: Deed) {
+        getDetail(deed.id);
+    }
+
     function getDetail(id: string | undefined) {
         if (id) {
             navigate("/deeds/" + id)
@@ -43,8 +47,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                         // If we let the click event propagates to the map, it will immediately close the popup
                         // with `closeOnClick: true`
                         e.originalEvent.stopPropagation();
-
-                        getDetail(deed.id)
+                        handleMarkerClick(deed)
                     }}
                 >
                     <h2 style={{
