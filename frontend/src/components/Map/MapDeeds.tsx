@@ -25,10 +25,6 @@ export default function MapDeeds(props: MapDeedsProps) {
     }
     const navigate = useNavigate()
 
-    function handleMarkerClick(deed: Deed) {
-        getDetail(deed.id);
-    }
-
     function getDetail(id: string | undefined) {
         if (id) {
             navigate("/deeds/" + id)
@@ -47,19 +43,23 @@ export default function MapDeeds(props: MapDeedsProps) {
                         // If we let the click event propagates to the map, it will immediately close the popup
                         // with `closeOnClick: true`
                         e.originalEvent.stopPropagation();
-                        handleMarkerClick(deed)
-                    }}
-                >
+                        getDetail(deed.id)
+                    }}>
+
                     <h2 style={{
                         position: "absolute",
                         bottom: "18px",
                         left: "35%",
                         color: "white"
-                    }}>{deed.karmaPoints} </h2>
+                    }}>
+                        {deed.karmaPoints}
+                    </h2>
+
                     {deed.author === props.username ? <PinMe/> : <Pin/>}
+
                 </Marker>
             )),
-        [props.deeds, props.username]
+        [props.deeds, props.username, getDetail]
     );
 
 

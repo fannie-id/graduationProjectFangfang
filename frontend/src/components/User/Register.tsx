@@ -42,49 +42,50 @@ export default function Register(props: RegisterProps) {
         alignItems="center"
         justifyContent={"center"}>
         <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-            <TextField
-                fullWidth
-                required
-                name={"username"}
-                value={registerUser.username}
-                label="Username"
-                placeholder="Username"
-                onChange={handleFormChange}
-            />
+        <Box sx={{m: 4}} textAlign='center'>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    fullWidth
+                    required
+                    name={"username"}
+                    value={registerUser.username}
+                    label="Username"
+                    placeholder="Username"
+                    onChange={handleFormChange}
+                />
 
-            <TextField
-                fullWidth
-                margin="normal"
-                required
-                name={"email"}
-                value={registerUser.email}
-                label="E-Mail"
-                placeholder="E-Mail"
-                onChange={handleFormChange}
-            />
-            <TextField
-                fullWidth
-                margin="normal"
-                required
-                name={"password"}
-                type="password"
-                value={registerUser.password}
-                label="Password"
-                placeholder="Password"
-                onChange={handleFormChange}
-            />
-            <Button sx={{mt: 4, left: "30%", frontSize: "20px"}}
-                    variant="contained"
-                    type="submit"
-                    color="success"
-                    size="large"
-                    startIcon={<PersonAddAlt1Icon sx={{width: 30, height: 30}}/>}>
-                register
-            </Button>
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    required
+                    name={"email"}
+                    value={registerUser.email}
+                    label="E-Mail"
+                    placeholder="E-Mail"
+                    onChange={handleFormChange}
+                />
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    required
+                    name={"password"}
+                    type="password"
+                    value={registerUser.password}
+                    label="Password"
+                    placeholder="Password"
+                    onChange={handleFormChange}
+                />
+                <Button sx={{mt: 4}}
+                        variant="contained"
+                        type="submit"
+                        color="success"
+                        size="large"
+                        startIcon={<PersonAddAlt1Icon sx={{width: 30, height: 30}}/>}>
+                    register
+                </Button>
 
-        </form>
-
+            </form>
+        </Box>
 
     </Box>)
 

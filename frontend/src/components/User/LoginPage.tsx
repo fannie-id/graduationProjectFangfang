@@ -45,39 +45,42 @@ export default function LoginPage(props: LoginPageProps) {
         flexWrap={"wrap"}
         alignItems="center"
         justifyContent={"center"}>
+
         <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-            <TextField
-                fullWidth
-                required
-                name={"username"}
-                value={loginUser.username}
-                label="Username"
-                placeholder="Username"
-                onChange={handleFormChange}
-            />
+        <Box sx={{m: 4}} textAlign='center'>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    fullWidth
+                    required
+                    name={"username"}
+                    value={loginUser.username}
+                    label="Username"
+                    placeholder="Username"
+                    onChange={handleFormChange}
+                />
 
-            <TextField
-                fullWidth
-                margin="normal"
-                required
-                name={"password"}
-                type="password"
-                value={loginUser.password}
-                label="Password"
-                placeholder="Password"
-                onChange={handleFormChange}
-            />
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    required
+                    name={"password"}
+                    type="password"
+                    value={loginUser.password}
+                    label="Password"
+                    placeholder="Password"
+                    onChange={handleFormChange}
+                />
 
-            <Button sx={{mt: 4, left: "30%",}}
-                    variant="contained"
-                    type="submit"
-                    color="success"
-                    size="large"
-                    startIcon={<FaceIcon sx={{width: 30, height: 30}}/>}>
-                login
-            </Button>
-        </form>
+                <Button sx={{mt: 4}}
+                        variant="contained"
+                        type="submit"
+                        color="success"
+                        size="large"
+                        startIcon={<FaceIcon sx={{width: 30, height: 30}}/>}>
+                    login
+                </Button>
+            </form>
+        </Box>
 
     </Box>)
 }
