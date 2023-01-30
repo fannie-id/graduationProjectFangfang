@@ -25,10 +25,8 @@ export default function useUser() {
     const [loggedInUser, setLoggedInUser] = useState<UserInfo>(emptyUser)
 
     useEffect(() => {
-        if (loggedInUser.username !== "anonymousUser") {
             getMe()
                 .then(setLoggedInUser)
-        }
 
     }, [loggedInUser.username])
 
