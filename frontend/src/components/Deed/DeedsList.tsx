@@ -75,7 +75,7 @@ export default function DeedsList(props: DeedsListProps) {
                      alignItems="center">
                     <Fab color="success"
                          sx={{fontSize: 50}}
-                         style={{position: "absolute", bottom: "80px"}}
+                         style={{position: "absolute", bottom: "140px"}}
                          aria-label="add"
                          onClick={handleDeedDetail}>
                         <AddCircle/>
