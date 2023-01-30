@@ -39,12 +39,13 @@ export default function NavigationBar(props: NavigationBarProps) {
                     {isLoggedIn &&
                         <BottomNavigationAction component={Link} label="profile" to={"/profile"} icon={< FaceIcon/>}
                                                 value={"/profile"}/>}
-                    {isLoggedIn &&
-                        <BottomNavigationAction component={Link} onClick={props.logout} label="logout" to={""}
-                                                icon={< ExitToAppIcon/>} value={""}/>}
                     {isLoggedIn && <BottomNavigationAction component={Link} label="overview" to={"/deeds"}
                                                            icon={< AllInclusiveIcon/>}
                                                            value={"/deeds"}/>}
+                    {isLoggedIn &&
+                        <BottomNavigationAction component={Link} onClick={props.logout} label="logout" to={""}
+                                                icon={< ExitToAppIcon/>} value={""}/>}
+
                     {!isLoggedIn && <BottomNavigationAction component={Link} label="register" to={"/register"}
                                                             icon={< AddReactionIcon/>}
                                                             value={"/register"}/>}
