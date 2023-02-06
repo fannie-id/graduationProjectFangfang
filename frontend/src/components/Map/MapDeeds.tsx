@@ -17,8 +17,9 @@ type MapDeedsProps = {
     height: string
 }
 export default function MapDeeds(props: MapDeedsProps) {
-    let lat = 48.4667
-    let lng = 11.9333
+    let lat = 50.9419
+    let lng = 9.5508
+    let zm = 4.5
     if (props.deeds.length === 1 && props.deeds[0]) {
         lat = props.deeds[0].lat
         lng = props.deeds[0].lng
@@ -67,7 +68,7 @@ export default function MapDeeds(props: MapDeedsProps) {
             initialViewState={{
                 latitude: lat,
                 longitude: lng,
-                zoom: 13,
+                zoom: zm,
                 bearing: 0,
                 pitch: 0
             }}
