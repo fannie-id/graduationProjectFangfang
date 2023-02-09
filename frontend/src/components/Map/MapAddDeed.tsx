@@ -26,8 +26,8 @@ export default function MapAddDeed(props: MapAddDeedProps) {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [11.9333, 48.4667],
-            zoom: 13
+            center: [9.5508, 50.9419],
+            zoom: 4.5
         });
 
         const geocoder = new MapboxGeocoder({
