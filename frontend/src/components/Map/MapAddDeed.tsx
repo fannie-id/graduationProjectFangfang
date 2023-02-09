@@ -5,7 +5,10 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ';
+const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
+
+// @ts-ignore
+mapboxgl.accessToken = TOKEN;
 type MapAddDeedProps = {
     addGeoCode: (lng: number, lat: number, address: string) => void
 }
