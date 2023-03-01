@@ -30,7 +30,7 @@ export default function MapAddDeed(props: MapAddDeedProps) {
         });
 
         const geocoder = new MapboxGeocoder({
-            accessToken: TOKEN,
+            accessToken: TOKEN||'',
             mapboxgl: mapboxgl
         })
 
