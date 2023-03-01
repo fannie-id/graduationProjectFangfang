@@ -7,7 +7,7 @@ import Pin from './Pin';
 import PinMe from "./PinMe";
 import {useNavigate} from "react-router-dom";
 
-const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
+// hotfix: const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
 
 
 type MapDeedsProps = {
