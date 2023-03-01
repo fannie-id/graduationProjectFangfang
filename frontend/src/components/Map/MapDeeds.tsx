@@ -73,7 +73,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 pitch: 0
             }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
-            mapboxAccessToken={TOKEN}
+            mapboxAccessToken={"pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ"}
             style={{width: props.width, height: props.height}}>
 
             <GeolocateControl position="top-left"/>
