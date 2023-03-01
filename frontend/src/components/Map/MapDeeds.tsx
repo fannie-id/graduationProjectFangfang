@@ -7,8 +7,7 @@ import Pin from './Pin';
 import PinMe from "./PinMe";
 import {useNavigate} from "react-router-dom";
 
-// hotfix: const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
-
+const TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
 
 type MapDeedsProps = {
     username: string | undefined
@@ -73,7 +72,7 @@ export default function MapDeeds(props: MapDeedsProps) {
                 pitch: 0
             }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
-            mapboxAccessToken={"pk.eyJ1IjoiZmFuZ2Zhbmd3IiwiYSI6ImNsZDRpODFpazBzd2kzcHByY2NsbTM4a2YifQ.HwaQPqclw2a40Vn0t1iNMQ"}
+            mapboxAccessToken={TOKEN}
             style={{width: props.width, height: props.height}}>
 
             <GeolocateControl position="top-left"/>
